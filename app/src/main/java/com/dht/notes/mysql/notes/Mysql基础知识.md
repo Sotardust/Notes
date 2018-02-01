@@ -32,6 +32,7 @@
         MySQL提供两个通配符，用于与LIKE运算符一起使用，它们分别是：百分比符号 - %和下划线 - _。
         百分比(%)：通配符允许匹配任何字符串的零个或多个字符。
         下划线(_)：通配符允许匹配任何单个字符。
+        通过复制tasks表的结构，创建一个名为tasks_bak的新表：CREATE TABLE tasks_bak LIKE tasks;
     IN：指定值是否匹配列表中的任何值。
     LIMIT子句 :来限制SELECT语句返回记录的行数
     IS NULL ：检查该值是否为NULL。
@@ -107,9 +108,17 @@
                     table_1) derived_table_name;
             WHERE derived_table_name.c1 > 0;
     
-    
-    
-    
+    MySQL通用表表达式 - 解释通用表表达式概念，展示如何使用CTE查询表中的数据。
+        公用表表达式是一个命名的临时结果集，仅在单个SQL语句(例如SELECT，INSERT，UPDATE或DELETE)的执行范围内存在。
+        与派生表类似，CTE不作为对象存储，仅在查询执行期间持续。 与派生表不同，CTE可以是自引用(递归CTE)，
+        也可以在同一查询中多次引用。 此外，与派生表相比，CTE提供了更好的可读性和性能。
+        CTE的结构包括名称，可选列列表和定义CTE的查询。 定义CTE后，
+        可以像SELECT，INSERT，UPDATE，DELETE或CREATE VIEW语句中的视图一样使用它。
+    CTE的基本语法：语句只能在 MySQL8.0 以上版本才支持。
+        WITH cte_name (column_list) AS (
+            query
+        ) 
+        SELECT * FROM cte_name;   
     
     
     
