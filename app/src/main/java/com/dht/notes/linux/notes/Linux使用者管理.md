@@ -49,6 +49,142 @@
         语法：userdel [-r] username
         -r: 连同用户的主文件夹也一起删除
 ### 用户功能
+    finger ：查询用户相关信息
+        语法：finger [-sm] username
+        -s: 仅列出用户的账号、全名、终端机代号与登录时间
+        -m： 列出与后面接的账号相同者，而不是利用部分对比（包括全名部分）
+    chfn ：change finger 
+        语法：chfn [-foph] 账号名
+    chsh ： change shell 简写
+        语法： chsh [-ls]
+        -l:列出目前系统上面可用的shell 其实就是/etc/shell的内容
+    id ：查询某人或者自己相关的UID/GID等相关信息
+        也可用与查看系统上是否有dht这个账号
+### 新增与删除用户组
+    用户组的内容与 ：/etc/group,/etc/gshadow有关
+    groupadd,groupmod,groupdel 与useradd,usermod,userdel 类似
+    gpasswd：用户组管理员功能
+        语法：
+            gpasswd groupname
+            gpasswd [-A user1,...] [-M user3,...] groupname
+            gpasswd [-rR] groupname
+            
+                若没有任何参数时，表示给予groupname一个密码（/etc/gshadow）
+            -A ：将groupname的主控权交由后面的用户管理（该用户组的管理员）
+            -M : 将某些账号加入这个用户组中
+            -r ：将groupname的密码删除
+            -R ：将groupname的密码栏失效
+            
+            gpasswd [-ad] user groupname
+            
+            -a ：将某位用户加入到groupname这个用户组中
+            -d ：将某位用户删除出groupname这个用户组中
+### 主机的具体权限规划：ACL的使用
+    ACL是Access Control List的缩写，主要目的是提供传统的owner、group、others
+    和read、write、execute权限之外的具体权限设置。
+    ACL可以针对单一用户、文件或目录来进行r、w、x的权限设置
+    
+    ACL：针对用户（user）、用户组（group）设置权限，
+        默认属性（mask）：还可以在该目录下在新建新文件/目录时设置新数据的默认权限
+        
+    ACl的设置机巧 ：getfacl ，setfacl
+    
+    
+### 用户身份切换
+    su [-lm] [-c命令] [username]
+    -,-l :代表使用login-shell的变量文件读取方式来登录系统
+    
+    sudo ：仅有/etc/sudoers内的用户才能够执行sudo这个命令
+    
+    
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+    
+        
+            
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     
                         
                   
