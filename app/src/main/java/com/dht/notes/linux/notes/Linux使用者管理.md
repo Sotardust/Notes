@@ -96,6 +96,16 @@
     
     sudo ：仅有/etc/sudoers内的用户才能够执行sudo这个命令
     
+    sudo 默认仅有root能使用
+    visudo ：只是利用vi 将/etc/sudoers文件调出来修改而已
+### PAM 模块简介
+    PAM 可以说是一套应用程序编程接口（Application Programming Interface API）
+        它提供一连串的验证机制，只要用户将验证阶段的需求告知PAM后，PAM就能够回报用户验证的结果
+        （成功或失败）
+        
+### Linux主机上的用户信息传递
+    查看用户：w、who、last、lastlog
+            也可以使用id、finger
     
             
             
