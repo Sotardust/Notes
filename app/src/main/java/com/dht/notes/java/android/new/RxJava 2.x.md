@@ -119,7 +119,18 @@
        事件的参数类型也由 String 转为了 Bitmap。这种直接变换对象并返回的，是最常见的也最容易理解的变换。
        不过 RxJava 的变换远不止这样，它不仅可以针对事件对象，还可以针对整个事件队列，这使得 RxJava 变得非常灵活。
 ### flatMap（）操作符    
-    
+    flatMap（）和map()相同点：把传入的参数转化之后返回另一个对象
+    flatMap（）中返回的是个Observable对象，并且这个Observable对象并不是
+               被直接发送到Subscriber的回调方法。
+    flatMap（）原理：
+        1、使用传入的事件对象创建一个Observable对象
+        2、并不发送这个Observable，而是将它激活，于是它开始发送事件
+        3、每一个创建出来的Observable发送的事件都被汇入同一个Observable，而这个Observable负责将这些事件
+           统一交给Subscriber的回调方法
+           
+### 变换的原理：lift（）
+### compose: 对 Observable 整体的变换
+### 线程控制：Scheduler
            
     
     
