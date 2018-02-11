@@ -17,4 +17,14 @@
         com.android.bluetooth
 ### adb 启动/停止 应用程序
     adb shell am start -n [packageName/StartActivity]
+    adb shell am force-stop [packageName]
+    
+### 端口映射
+    adb forward -list
+    
+    # 查看进程列表
+    adb shell ps
+    # 查看指定进程状态
+    adb shell ps -x [PID]
+    
 
