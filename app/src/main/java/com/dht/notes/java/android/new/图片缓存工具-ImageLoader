@@ -1,0 +1,6 @@
+缓存策略在Android中有着广泛的使用场景，尤其在图片加载的场景中。
+### 缓存算法LRU
+    LRU （Least Recently Used）
+    采用这种算法思想的缓存有两种：LRUCache 和DiskLruCache
+    LruCache用于实现内存缓存，
+    DiskLruCache则充当了存储设备缓存
