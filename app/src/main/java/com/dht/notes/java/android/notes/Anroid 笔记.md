@@ -44,7 +44,13 @@
         5、java线程池
     多线程的本质异步处理，直观上说是为了不让用户感到卡顿
     
-    多线程实现方法：implement Runable 或 extend Thread
+    多线程创建实现方法：implement Runable 或 extend Thread
+    
+    常见线程创建方式有两种：
+        1、继承Thread类，重写Thread的run()方法
+        2、实现Runnable接口，重写Runnable的run()方法，并将其作为参数实例化Thread
+    以上两者的联系：
+        1、Thread类实现了Runnable接口
     
     多线程的核心机制：Handler
     
@@ -82,8 +88,68 @@
         IntentService（一次性服务） 当请求处理完成后自动停止service
     前台Service
         前台service 用于动态通知消息，如天气预报播放音乐
+### 性能优化
+    一、内存优化
+        1、尽量在使用service时才让其处于运行状态，尽量使用IntentService能节省系统资源
+          （IntentService在内部都是用过线程和Handler来实现的，当有新的Intent到来时，会创建线程
+           并处理这个Intent处理完之后自动销毁自身）
         
-           
+        2、内存紧张时释放资源（例如UI隐藏时释放资源）
+        
+        3、避免Bitmap的浪费，应尽量去适配屏幕设备，尽量使用成熟的图片框架。比如Picasso，fresco，glide等
+        
+        4、使用优化的容器 例如sparseArray
+        
+        5、避免内存泄漏（本应被回收的对象未被回收）一旦App的内部短时间内快速增长或者GC非常频繁的时候
+           就应该考虑是否是内存泄漏导致的
+    二、布局优化
+        1、使用include标签 复用相同布局
+        2、尽量使用Relativelayout 减少视图层级 
+        
+    什么情况下会导致内存泄漏：
+        1、资源释放问题：
+            长期保持某些资源，如content，cursor，IO流的引用资源得不到释放造成内存泄漏
+        2、对象内存过大问题：
+            保存了多个耗用内存过大的对象（如Bitmap，xml文件）造成内存超出限制
+        3、static关键字的使用：
+            使用static修饰的变量生命周期比较长
+        4、线程导致内存溢出：
+             线程产生内存泄漏的主要原因在于线程生命周期的不可控
+    避免OOM的常见方法：
+        1、App资源中尽量少使用大图 使用bitmap时要注意按照比例缩小图片并注意bitmap回收
+        
+        2、结合生命周期去释放资源
+        
+        3、I/O流，数据库游标，使用完成后应及时释放掉
+        
+        4、listview中使用viewHolder缓存convertview
+        
+        5、页面切换尽量去传递（复用一些对象）
+             
+             
+             
+             
+             
+             
+             
+             
+             
+             
+             
+             
+             
+             
+             
+             
+             
+             
+             
+             
+             
+             
+             
+             
+    
         
     
     
