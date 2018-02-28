@@ -1,9 +1,9 @@
-package com.dht.notes.java;
+package com.dht.notes.testcode.ontouch;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
-import android.util.AttributeSet;
 import android.support.v7.widget.AppCompatTextView;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 

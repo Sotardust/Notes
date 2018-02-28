@@ -1,4 +1,4 @@
-package com.dht.notes.java;
+package com.dht.notes.testcode.ontouch;
 
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutCompat;
