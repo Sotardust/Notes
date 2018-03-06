@@ -38,7 +38,7 @@
     
     getMeasureWidth()/getMeasureHeight()：获得View的测量的宽/高
     
-![二者的区别](https://github.com/Sotardust/Notes/blob/master/app/assests/view/%E4%BA%8C%E8%80%85%E7%9A%84%E5%8C%BA%E5%88%AB.png)    
+![二者的区别](https://github.com/Sotardust/Notes/blob/master/app/assests/view/%E4%BA%8C%E8%80%85%E7%9A%84%E5%8C%BA%E5%88%AB.png)
 
 ### Draw过程
     作用：绘制View视图
