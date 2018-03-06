@@ -3,6 +3,7 @@
         1、使得布局，布局组件自适应屏幕尺寸
         2、根据屏幕的配置来加载相应的UI布局、用户界面流程
     使得 图片资源匹配不同的屏幕密度
+    
 ![屏幕尺寸适配解决方案](https://upload-images.jianshu.io/upload_images/944365-ced9745859537daf.png?imageMogr2/auto-orient/)    
 
 ### 布局匹配
