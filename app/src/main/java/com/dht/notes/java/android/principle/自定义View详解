@@ -17,7 +17,7 @@
                                        （如 match_parent） 具体数值（如100dp或100px）        View的最终大小即Spec指定的值 ，父控件可以通过MeasureSpec.getSize()直接得到子控件的尺寸
             AT_MOST at_most            自适应大小（wrap_content）                           该模式 = 自定义视图需实现测量逻辑的情况
             
-![ViewGroup的measure过程](https://upload-images.jianshu.io/upload_images/944365-c9ea47e8b5e325bf.png?imageMogr2/auto-orient/)
+![ViewGroup的measure过程](https://github.com/Sotardust/Notes/blob/master/app/assests/view/ViewGroup%E7%9A%84measure%E8%BF%87%E7%A8%8B.png)
 
 ### Layout过程
 
@@ -30,7 +30,7 @@
         
     ViewGroup的layout过程 ： 
     
-![ViewGroup的Layout过程](https://upload-images.jianshu.io/upload_images/944365-6e27d40b50081d60.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/647)       
+![ViewGroup的Layout过程](https://github.com/Sotardust/Notes/blob/master/app/assests/view/ViewGroup%E7%9A%84Layout%E8%BF%87%E7%A8%8B.png)       
        
 ### getWidth() （ getHeight()）与 getMeasuredWidth() （getMeasuredHeight()）获取的宽 （高）有什么区别？
     
@@ -38,7 +38,7 @@
     
     getMeasureWidth()/getMeasureHeight()：获得View的测量的宽/高
     
-![二者的区别](https://upload-images.jianshu.io/upload_images/944365-6b27b9835d927e04.png?imageMogr2/auto-orient/)    
+![二者的区别](https://github.com/Sotardust/Notes/blob/master/app/assests/view/%E4%BA%8C%E8%80%85%E7%9A%84%E5%8C%BA%E5%88%AB.png)    
 
 ### Draw过程
     作用：绘制View视图
@@ -49,7 +49,7 @@
              绘制自身VIew  绘制自身View的背景  绘制自身View的内容  空实现（因为没有子View） 绘制装饰
 
 
-![ViewGroup的Draw过程](https://upload-images.jianshu.io/upload_images/944365-c9d3cd1d746be319.png?imageMogr2/auto-orient/)
+![ViewGroup的Draw过程](https://github.com/Sotardust/Notes/blob/master/app/assests/view/ViewGroup%E7%9A%84%E7%BB%98%E5%88%B6%E6%B5%81%E7%A8%8B.png)
 
 
 
