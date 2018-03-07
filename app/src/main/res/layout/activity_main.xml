@@ -5,13 +5,14 @@
     android:orientation="vertical">
 
 
-    <com.dht.notes.java.MyLinearLayout
+    <com.dht.notes.testcode.ontouch.MyLinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
+        android:orientation="vertical"
         android:layout_height="match_parent"
         android:background="@color/colorAccent">
 
-        <com.dht.notes.java.MyTextView
+        <com.dht.notes.testcode.ontouch.MyTextView
             android:id="@+id/notes"
             android:layout_width="100dp"
             android:layout_height="50dp"
@@ -20,6 +21,6 @@
             android:gravity="center"
             android:text="notes" />
 
-    </com.dht.notes.java.MyLinearLayout>
+    </com.dht.notes.testcode.ontouch.MyLinearLayout>
 
 </LinearLayout>
