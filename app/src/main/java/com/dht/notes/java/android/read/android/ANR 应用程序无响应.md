@@ -1,4 +1,4 @@
-    在android中Activity的执行时间为5秒，BroadCastReceiver 最长执行时间为10秒
+在android中Activity的执行时间为5秒，BroadCastReceiver 最长执行时间为10秒
 ### 引发ANR的原因
     1、在五秒内没有响应输入事件（按键按下，屏幕触摸）
     2、BroadCastReceiver在10秒内没有执行完毕 
