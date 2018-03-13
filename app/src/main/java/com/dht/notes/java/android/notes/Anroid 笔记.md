@@ -2,16 +2,16 @@
 ### Android 四种加载或启动模式（launchMode）
 1、standard 模式（默认）
         每次激活的Activity是都会创建Activity并放入任务栈中，
-        使用场景：Activity
+        使用场景：Activity  
 2、SingleTop 模式
         如果在任务栈的栈顶存在改Activity实例，则重用该实例，否则 就会创建新的实例放入改栈顶
         即使该activity的实例已经存在（只要不在栈顶）
-        使用场景：新闻类或者阅读类App的内容页面
-3、SingleInstance 模式
-        在一个新栈中 创建该activity的实例，并让多个应用共享该栈中的实例。
+        使用场景：新闻类或者阅读类App的内容页面  
+3、SingleInstance 模式:  
+在一个新栈中 创建该activity的实例，并让多个应用共享该栈中的实例。
         一旦该模式的activity实例已经存在某个栈中，任何应用再激活activity时会重用该栈中的实例
         （会调用该栈中的onNewInstance）
-        使用场景：闹钟提醒
+        使用场景：闹钟提醒  
 4、SingleTask 模式
         如果该栈中已经存在该activity的实例，就重用改实例（会调用该实例的OnNewInstance）
         重用时会让该实例回到栈顶，在它上面的栈都会被移出，如果栈中不存在该实例，则会创建新的实例放入栈中
@@ -21,11 +21,11 @@ measure过程
 layout过程
 ondraw过程
 ### Android多线程实现更新UI的几种方式
-> 1、RunOnUIThread
-> 2、handle的post方法
-> 3、handle的sendMessage
-> 4、view自身的post 
-> 4、view自身的postDelay() 
+> 1、RunOnUIThread  
+> 2、handle的post方法  
+> 3、handle的sendMessage  
+> 4、view自身的post  
+> 5、view自身的postDelay() 
 ### Handle
 Android主线程中只有一个looper 一个MessageQueue,
     在ActivityThread.main中创建于looper
