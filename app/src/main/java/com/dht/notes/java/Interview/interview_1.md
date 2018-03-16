@@ -9,6 +9,28 @@
 
 2、listView getView中图片加载错乱 原因  
 3、下载图片  图片明如何命名使用时间戳，UID等不唯一  
+### OkHttp3 下载网络图片
+     @Override
+          public void onResponse(Call call, Response response) throws IOException {
+             //将响应数据转化为输入流数据
+              InputStream inputStream=response.body().byteStream();
+              //将输入流数据转化为Bitmap位图数据
+              Bitmap bitmap= BitmapFactory.decodeStream(inputStream);
+              File file=new File("/mnt/sdcard/picture.jpg");
+              file.createNewFile();
+              //创建文件输出流对象用来向文件中写入数据
+              FileOutputStream out=new FileOutputStream(file);
+              //将bitmap存储为jpg格式的图片
+              bitmap.compress(Bitmap.CompressFormat.JPEG,100,out);
+              //刷新文件流
+              out.flush();
+              out.close();
+              Message msg=Message.obtain();
+              msg.obj=bitmap;
+              handler.sendMessage(msg);
+          }
+    
+    
 4、事件点击事件  
 5、sqlit 线程中同事执行insert语句阻塞，在进程中或进程的线程中使用则崩溃  
 6、process可以使用在activity，以及service中  

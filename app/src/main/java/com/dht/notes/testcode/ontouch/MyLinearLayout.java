@@ -1,6 +1,8 @@
 package com.dht.notes.testcode.ontouch;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -15,6 +17,7 @@ public class MyLinearLayout extends LinearLayoutCompat {
 
     public MyLinearLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
+        Log.i(TAG, "MyLinearLayout: ");
     }
 
     @Override
@@ -30,9 +33,16 @@ public class MyLinearLayout extends LinearLayoutCompat {
         return super.onInterceptTouchEvent(ev);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         Log.i(TAG, "onTouchEvent() returned: " + super.onTouchEvent(event));
         return super.onTouchEvent(event);
+    }
+
+    @Override
+    public void setOnClickListener(@Nullable OnClickListener l) {
+        super.setOnClickListener(l);
+        Log.i(TAG, "setOnClickListener: ");
     }
 }

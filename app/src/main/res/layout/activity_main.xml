@@ -8,9 +8,10 @@
     <com.dht.notes.testcode.ontouch.MyLinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="match_parent"
-        android:background="@color/colorAccent">
+        android:layout_height="200dp"
+        android:background="@color/colorAccent"
+        android:clickable="true"
+        android:orientation="vertical">
 
         <com.dht.notes.testcode.ontouch.MyTextView
             android:id="@+id/notes"
@@ -21,6 +22,26 @@
             android:gravity="center"
             android:text="notes" />
 
+        <TextView
+            android:id="@+id/test1"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:background="@color/white"
+            android:gravity="center"
+            android:text="test"
+            android:textColor="@color/colorPrimary" />
+
     </com.dht.notes.testcode.ontouch.MyLinearLayout>
 
+
+    <TextView
+        android:id="@+id/test2"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:background="@color/white"
+        android:gravity="center"
+        android:text="test2"
+        android:textColor="@color/colorPrimary" />
 </LinearLayout>
