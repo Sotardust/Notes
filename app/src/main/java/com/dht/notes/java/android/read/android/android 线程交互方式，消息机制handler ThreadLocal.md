@@ -10,6 +10,7 @@
 ### 二、handler执行过程图片展示
     handler 图片.png
 ### 三、Handler机制
+[Android-Handler机制详解](http://www.cnblogs.com/dendai-05/p/6945159.html)
     handler用于解决多线程并发问题
     用法：
     1、传递Message 用于接收子线程发送的数据并更新UI
