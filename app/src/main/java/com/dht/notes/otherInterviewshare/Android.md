@@ -33,14 +33,14 @@ service 服务参见 notes/android笔记
 
 ### Activity 状态保存与恢复
 **onSaveInstanceState()**  
-onSaveInstanceState() 方法用来在Activity被强制销毁之前保存数据，onSaveInstanceState()方法会携带一个 Bundle类型的参数，Bundle提供了一系列的方法用于保存数据，比如可以使用 putString()方法保存字符串，使用 putInt()方法保存整型数据。每个保存方法需要传入两个参数，第一个参数是键，第二个参数是真正要保存的内容。 
+onSaveInstanceState() 方法用来在Activity被强制销毁之前保存数据，onSaveInstanceState()方法会携带一个 Bundle类型的参数，Bundle提供了一系列的方法用于保存数据，比如可以使用 putString()方法保存字符串，使用 putInt()方法保存整型数据。每个保存方法需要传入两个参数，第一个参数是键，第二个参数是真正要保存的内容。   
 **onRestoreInstanceState()**  
 onSaveInstanceState() 方法用来取得之前在onSaveInstanceState() 保存的值。
 另外，除了onRestoreInstanceState()可以取得onSaveInstanceState() 保存的值之外，onCreate()函数也可以取得保存的值，这些值就存在onCreate()函数的参数savedInstanceState里，在哪个函数取出这些值就要看具体的需求了。
 ### service和activity怎么进行数据交互。
->onCreate()方法是服务创建的时候调用的
->onStartCommand()方法在每次启动服务的时候都会调用~
->onDestory()方法在停止服务时候会调用~
+>onCreate()方法是服务创建的时候调用的  
+>onStartCommand()方法在每次启动服务的时候都会调用~  
+>onDestory()方法在停止服务时候会调用~  
 
 1.使用接口回调方式，activity实现相应的接口，service通过接口进行回调，比较灵活
 2.使用广播
@@ -53,10 +53,10 @@ StartCommand 几个返回常量参数
 2、START_NOT_STICKY
 在运行onStartCommand后service进程被kill后，并且没有新的intent传递给它。Service将移出开始状态，并且直到新的明显的方法（startService）调用才重新创建。因为如果没有传递任何未决定的intent那么service是不会启动，也就是期间onstartCommand不会接收到任何null的intent。
 3、START_REDELIVER_INTENT
-在运行onStartCommand后service进程被kill后，系统将会再次启动service，并传入最后一个intent给onstartCommand。直到调用stopSelf(int)才停止传递intent。如果在被kill后还有未处理好的intent，那被kill后服务还是会自动启动。因此onstartCommand不会接收到任何null的intent。
+在运行onStartCommand后service进程被kill后，系统将会再次启动service，并传入最后一个intent给onstartCommand。直到调用stopSelf(int)才停止传递intent。如果在被kill后还有未处理好的intent，那被kill后服务还是会自动启动。因此onstartCommand不会接收到任何null的intent。  
 **2、提升service优先级**
 在AndroidManifest.xml文件中对于intent-filter可以通过android:priority = "1000"这个属性设置最高优先级，1000是最高值，如果数字越小则优先级越低，同时适用于广播
-  目前看来，priority这个属性貌似只适用于broadcast，对于Service来说可能无效
+  目前看来，priority这个属性貌似只适用于broadcast，对于Service来说可能无效  
 **3、提升service进程优先级**
 Android中的进程是托管的，当系统进程空间紧张的时候，会依照优先级自动进行进程的回收Android将进程分为6个等级,它们按优先级顺序由高到低依次是:
 >1.前台进程( FOREGROUND_APP)  
@@ -102,14 +102,13 @@ App应用内广播（Local Broadcast）
 
 ### Android两种序列化的区别和作用。
 
-
-|区别	|Serializable|	Parcelable|
+|区别|Serializable|Parcelable|
 |-|-|
-|所属API	|JAVA API|	Android SDK API|
-|原理	|序列化和反序列化过程需要大量的I/O操作	|序列化和反序列化过程不需要大量的I/O操作|
-|开销	|开销大	|开销小|
-|效率	|低	|很高|
-|使用场景|	序列化到本地或者通过网络传输|	内存序列化|
+|所属API	|JAVA API|Android SDK API|
+|原理|序列化和反序列化过程需要大量的I/O操作|序列化和反序列化过程不需要大量的I/O操作|
+|开销|开销大|开销小|
+|效率|低|很高|
+|使用场景|序列化到本地或者通过网络传输|内存序列化|
 
 
 
