@@ -19,15 +19,15 @@
 service 服务参见 notes/android笔记
 
 ### Activity的四种启动模式与特点
-1.standard 模式 特点：每次激活的Activity是都会创建Activity并放入任务栈中，使用场景：Activity
-2.SingleTop模式
+**1.standard 模式** 特点：每次激活的Activity是都会创建Activity并放入任务栈中，使用场景：Activity  
+**2.SingleTop模式**
 特点：如果任务栈顶存在改Activity的实例，则重用该实例额，否则就会创建新的实例放入该栈顶，即使该Activity的实例已经存在（只要不在栈顶）
 使用场景：新闻类或者阅读类App的内容页面  
-3.SingleInstance模式  
+**3.SingleInstance模式**  
 特点：在一个新栈中，创建该Activity的实例，并让多个应用共享该栈中的实例
 一旦该模式的 Activity实例已经存在某个栈中，任何应用再激活Activity是会重用该栈中的实例（会调用该栈中的``onNewInstance`）  
 使用场景：闹钟模式  
-4.SingleTask模式  
+**4.SingleTask模式**  
 特点：如果该栈中已经存在该Activity的实例，就重用该实例（会调用改实例的OnNewInstance）重用是会让该实例回到栈顶，在它上面的实例将会被移出，如果栈中不存在该实例则会创建新的实例放入栈中  
 使用场景：浏览器，MainActivity
 
@@ -84,7 +84,7 @@ service+broadcast方式，就是当service走onDestroy的时候，发送一个�
 2.同一app内部的不同组件之间的消息通信（单个进程）； 
 3.同一app具有多个进程的不同组件之间的消息通信；   
 4.不同app之间的组件之间消息通信；     
-5.Android系统在特定情况下与App之间的消息通信。
+5.Android系统在特定情况下与App之间的消息通信。  
 分类：  
 >普通广播（Normal Broadcast）  
 系统广播（System Broadcast）   
@@ -103,7 +103,7 @@ App应用内广播（Local Broadcast）
 ### Android两种序列化的区别和作用。
 
 |区别|Serializable|Parcelable|
-|-|-|
+|-|-|-|
 |所属API	|JAVA API|Android SDK API|
 |原理|序列化和反序列化过程需要大量的I/O操作|序列化和反序列化过程不需要大量的I/O操作|
 |开销|开销大|开销小|
