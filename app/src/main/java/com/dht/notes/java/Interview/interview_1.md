@@ -32,7 +32,7 @@
     
     
 4、事件点击事件  
-5、sqlit 线程中同事执行insert语句阻塞，在进程中或进程的线程中使用则崩溃  
+5、sqlit 线程中同时执行insert语句阻塞，在进程中或进程的线程中使用则崩溃  
 6、process可以使用在activity，以及service中  
 ### android:process=”:XXX”与android:process=”XXX”区别
 android:process=":xxx"与android:process="XXX"不仅仅是用来定义当前进程的名字，一般情况各组件的进程名均为当前应用的包名。那有":"开头意味着：
