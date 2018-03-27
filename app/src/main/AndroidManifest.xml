@@ -17,6 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" android:process=":test"/>
+        <activity android:name=".testcode.ontouch.Recycler.RecycleActivity" />
     </application>
 
 
