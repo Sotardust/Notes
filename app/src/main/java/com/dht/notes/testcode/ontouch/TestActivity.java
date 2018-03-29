@@ -40,7 +40,18 @@ public class TestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        getBaseContext();
+        getApplicationContext();
+        getApplication();
+        Log.d(TAG, "onCreate() returned:  getBaseContext() " +  getBaseContext());
+        Log.d(TAG, "onCreate() returned:  getApplicationContext() " +  getApplicationContext());
+        Log.d(TAG, "onCreate() returned:  getApplication() " +  getApplication());
 
+        Log.d(TAG, "onCreate() returned: Integer.MAX_VALUE " + Integer.MAX_VALUE);
+        Log.d(TAG, "onCreate() returned:TestActivity.this " + TestActivity.this);
+        Log.d(TAG, "onCreate() returned: ");
+
+//        findViewById()
 //        Log.d(TAG, "onCreate() returned: " + Thread.currentThread().getId());
 //        System.out.println("android.os.Process.myPid()   = " + android.os.Process.myPid());
 //        Log.d(TAG, "Looper.getMainLooper().getThread() " + Looper.getMainLooper().getThread().getId());
