@@ -1,4 +1,4 @@
-package com.dht.notes.testcode.ontouch;
+package com.dht.notes.testcode.ontouch.view;
 
 import android.content.Context;
 import android.graphics.Canvas;
