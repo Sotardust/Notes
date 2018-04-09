@@ -40,6 +40,8 @@ public class TestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        Intent intent  = new Intent();
+        startActivity(intent,savedInstanceState);
 
 //        Log.d(TAG, "onCreate() returned:  getBaseContext() " +  getBaseContext());
 //        Log.d(TAG, "onCreate() returned:  getApplicationContext() " +  getApplicationContext());
