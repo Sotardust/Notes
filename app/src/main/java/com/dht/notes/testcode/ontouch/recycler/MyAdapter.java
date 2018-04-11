@@ -1,4 +1,4 @@
-package com.dht.notes.testcode.ontouch.Recycler;
+package com.dht.notes.testcode.ontouch.recycler;
 
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;

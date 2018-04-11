@@ -9,15 +9,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".testcode.ontouch.TestActivity">
+        <activity
+            android:name="com.dht.notes.MainActivity"
+            >
+            <!--android:taskAffinity="com.dht.notes.task01"-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" android:process=":test"/>
-        <activity android:name=".testcode.ontouch.Recycler.RecycleActivity" />
+        <activity
+            android:name="com.dht.notes.testcode.ontouch.TestActivity"
+        />
+            <!--android:taskAffinity="com.dht.notes.task02"-->
+        <activity android:name="com.dht.notes.testcode.ontouch.recycler.RecycleActivity" />
     </application>
 
 

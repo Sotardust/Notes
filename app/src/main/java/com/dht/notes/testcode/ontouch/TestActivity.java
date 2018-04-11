@@ -1,18 +1,21 @@
 package com.dht.notes.testcode.ontouch;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
 import com.dht.notes.R;
-import com.dht.notes.testcode.ontouch.Recycler.RecycleActivity;
+import com.dht.notes.testcode.ontouch.recycler.RecycleActivity;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -22,15 +25,15 @@ import butterknife.ButterKnife;
  * Created by dai on 2018/2/8.
  */
 
-public class TestActivity extends AppCompatActivity {
+public class TestActivity extends Activity {
 
     private static final String TAG = "TestActivity";
-    @BindView(R.id.notes)
-    MyTextView notes;
+    //    @BindView(R.id.notes)
+//    MyTextView notes;
     @BindView(R.id.linearLayout)
     MyLinearLayout linearLayout;
     @BindView(R.id.test1)
-    TextView test1;
+    MyTextView test1;
     @BindView(R.id.test2)
     TextView test2;
 
@@ -38,59 +41,9 @@ public class TestActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_test);
         ButterKnife.bind(this);
-        Intent intent  = new Intent();
-        startActivity(intent,savedInstanceState);
-
-//        Log.d(TAG, "onCreate() returned:  getBaseContext() " +  getBaseContext());
-//        Log.d(TAG, "onCreate() returned:  getApplicationContext() " +  getApplicationContext());
-//        Log.d(TAG, "onCreate() returned:  getApplication() " +  getApplication());
-//
-//        Log.d(TAG, "onCreate() returned: Integer.MAX_VALUE " + Integer.MAX_VALUE);
-//        Log.d(TAG, "onCreate() returned:TestActivity.this " + TestActivity.this);
-//        Log.d(TAG, "onCreate() returned: ");
-
-//        findViewById()
-//        Log.d(TAG, "onCreate() returned: " + Thread.currentThread().getId());
-//        System.out.println("android.os.Process.myPid()   = " + android.os.Process.myPid());
-//        Log.d(TAG, "Looper.getMainLooper().getThread() " + Looper.getMainLooper().getThread().getId());
-//
-//        Handler handler = new Handler() {
-//            @Override
-//            public void handleMessage(Message msg) {
-//                super.handleMessage(msg);
-//            }
-//        };
-//        Thread thread = new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                Log.d(TAG, "run: ");
-//
-//                System.out.println("android.os.Process.myPid()   = " + android.os.Process.myPid());
-//            }
-//        });
-//        thread.start();
-//        HandlerThread handlerThread = new HandlerThread("hkh");
-//        Log.d(TAG, " thread.getId() returned: " + thread.getId());
-
-
-//        Log.i(TAG, "onCreate: ");
-//        linearLayout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Log.i(TAG, "onClick(): linearLayout");
-//            }
-//        });
-//
-//        final int[] count = {0};
-//        notes.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Log.i(TAG, "onClick(): notes ");
-//                Toast.makeText(TestActivity.this, "点击" + count[0]++ + "次数", Toast.LENGTH_SHORT).show();
-//            }
-//        });
+        Intent intent = new Intent();
         final ArrayList<Integer> arrayList = new ArrayList<>();
         for (int i = 0; i < 50; i++) {
             arrayList.add(i);
@@ -99,10 +52,6 @@ public class TestActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.i(TAG, "onClick: test1");
-
-                Task task = new Task();
-                task.execute(arrayList);
-
             }
         });
         test2.setOnClickListener(new View.OnClickListener() {
@@ -113,19 +62,32 @@ public class TestActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        MyHandler myHandler = new MyHandler(this);
+//        myHandler.sendMessage()
 
-//        Handler handler = new Handler(){
-//            @Override
-//            public void handleMessage(Message msg) {
-//                super.handleMessage(msg);
-//            }
-//        } ;
-
+//        HashMap
+        Log.d(TAG, "onCreate: ");
 
     }
 
-    class Task extends AsyncTask<ArrayList<Integer>, Integer, Integer> {
+    static class MyHandler extends Handler {
+        WeakReference<Activity> reference;
 
+
+        MyHandler(Activity activity) {
+            reference = new WeakReference<Activity>(activity);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            TestActivity activity = (TestActivity) reference.get();
+            activity.test1.setText("fafdsa");
+        }
+    }
+
+
+    class Task extends AsyncTask<ArrayList<Integer>, Integer, Integer> {
 
 
         @Override
@@ -154,7 +116,7 @@ public class TestActivity extends AppCompatActivity {
         @Override
         protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values);
-            Log.d(TAG, "onProgressUpdate() returned: " + values[0]) ;
+            Log.d(TAG, "onProgressUpdate() returned: " + values[0]);
             test2.setText("数据更新 " + values[0]);
         }
 
@@ -180,11 +142,49 @@ public class TestActivity extends AppCompatActivity {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+//        Log.d(TAG, "onTouchEvent() returned: " + super.onTouchEvent(event));
         return super.onTouchEvent(event);
     }
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
+//        Log.d(TAG, "dispatchTouchEvent() returned: " + super.dispatchTouchEvent(ev));
         return super.dispatchTouchEvent(ev);
     }
+
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        Log.d(TAG, "onResume: ");
+//    }
+//
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//        Log.d(TAG, "onStart: ");
+//    }
+//
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+//        Log.d(TAG, "onPause: ");
+//    }
+//
+//    @Override
+//    protected void onRestart() {
+//        super.onRestart();
+//        Log.d(TAG, "onRestart: ");
+//    }
+//
+//    @Override
+//    protected void onDestroy() {
+//        super.onDestroy();
+//        Log.d(TAG, "onDestroy: ");
+//    }
+//
+//    @Override
+//    protected void onStop() {
+//        super.onStop();
+//        Log.d(TAG, "onStop: ");
+//    }
 }
