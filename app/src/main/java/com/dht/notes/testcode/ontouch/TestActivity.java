@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dht.notes.R;
 import com.dht.notes.testcode.ontouch.recycler.RecycleActivity;
@@ -142,13 +143,19 @@ public class TestActivity extends Activity {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-//        Log.d(TAG, "onTouchEvent() returned: " + super.onTouchEvent(event));
+        //系统默认super.onTouchEvent(event) = false
+        //无论true或者false 都不会处理
+        Log.d(TAG, "onTouchEvent: " );
+        Toast.makeText(getApplicationContext(),"onTouchEvent",Toast.LENGTH_SHORT).show();
         return super.onTouchEvent(event);
     }
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-//        Log.d(TAG, "dispatchTouchEvent() returned: " + super.dispatchTouchEvent(ev));
+        //系统默认点击空白处 super.dispatchTouchEvent(ev)=false
+        //系统默认点击按钮处 super.dispatchTouchEvent(ev)=true
+        //必须执行super.dispatchTouchEvent(ev) 方法 否则即使返回true或者false 都不会往下传递也不会执行onTouchEvent()
+        Log.d(TAG, "dispatchTouchEvent: ");
         return super.dispatchTouchEvent(ev);
     }
 

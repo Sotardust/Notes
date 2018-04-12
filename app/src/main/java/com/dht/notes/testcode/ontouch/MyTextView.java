@@ -1,6 +1,5 @@
 package com.dht.notes.testcode.ontouch;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -28,18 +27,21 @@ public class MyTextView extends android.support.v7.widget.AppCompatButton {
         Log.d(TAG, "MyTextView() called with: context = [" + context + "], attrs = [" + attrs + "], defStyleAttr = [" + defStyleAttr + "]");
     }
 
-
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
-
-//        Log.i(TAG, "dispatchTouchEvent() returned: " + super.dispatchTouchEvent(event));
+        //系统默认super.dispatchTouchEvent(event) =true
+        //若返回false 将不再分发事件也不会执行onTouchEvent事件
+        Log.d(TAG, "dispatchTouchEvent: ");
         return super.dispatchTouchEvent(event);
     }
-    @SuppressLint("ClickableViewAccessibility")
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-//        Log.i(TAG, "onTouchEvent() returned: " + super.onTouchEvent(event));
+        //系统默认super.onTouchEvent() = true
+        //返回false 则不再执行自身点击事件
+        Log.d(TAG, "onTouchEvent: ");
         return super.onTouchEvent(event);
     }
+
 
 }

@@ -1,53 +1,53 @@
 package com.dht.notes.testcode.ontouch;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
+import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.LinearLayout;
 
 /**
- * Created by Administrator on 2018/2/28 0028.
+ * Created by dai on 2018/4/12.
  */
 
 public class MyLinearLayout extends LinearLayout {
+
     private static final String TAG = "MyLinearLayout";
 
     public MyLinearLayout(Context context) {
         super(context);
-        Log.d(TAG, "MyLinearLayout() called with: context = [" + context + "]");
     }
 
-    public MyLinearLayout(Context context, AttributeSet attrs) {
+    public MyLinearLayout(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        Log.d(TAG, "MyLinearLayout() called with: context = [" + context + "], attrs = [" + attrs + "]");
     }
 
-    public MyLinearLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+    public MyLinearLayout(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        Log.d(TAG, "MyLinearLayout() called with: context = [" + context + "], attrs = [" + attrs + "], defStyleAttr = [" + defStyleAttr + "]");
     }
-
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-//        Log.i(TAG, "dispatchTouchEvent() returned: " + super.dispatchTouchEvent(ev));
+        //系统默认super.dispatchTouchEvent(ev) = true
+        //返回true继续往下分发 若返回false onInterceptTouchEvent ，onTouchEvent将不会执行
+        Log.d(TAG, "dispatchTouchEvent: ");
         return super.dispatchTouchEvent(ev);
     }
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-//        Log.i(TAG, "onInterceptTouchEvent() returned: " + super.onInterceptTouchEvent(ev));
-//        return true;
+        Log.d(TAG, "onInterceptTouchEvent: ");
+        //系统默认super.onInterceptTouchEvent(ev) = false
+        //返回true则对事件进行拦截，且onTouchEvent事件继续执行
         return super.onInterceptTouchEvent(ev);
     }
 
-    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-//        Log.i(TAG, "onTouchEvent() returned: " + super.onTouchEvent(event));
+        Log.d(TAG, "onTouchEvent: ");
+        //系统默认onTouchEvent() = true
+        //返回false 只影响自身的onClickListener事件
         return super.onTouchEvent(event);
     }
-
 }
