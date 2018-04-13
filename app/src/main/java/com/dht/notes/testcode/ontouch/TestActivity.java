@@ -64,9 +64,7 @@ public class TestActivity extends Activity {
             }
         });
         MyHandler myHandler = new MyHandler(this);
-//        myHandler.sendMessage()
 
-//        HashMap
         Log.d(TAG, "onCreate: ");
 
     }
