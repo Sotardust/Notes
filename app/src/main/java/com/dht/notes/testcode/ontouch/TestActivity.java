@@ -153,7 +153,6 @@ public class TestActivity extends Activity {
         //系统默认点击空白处 super.dispatchTouchEvent(ev)=false
         //系统默认点击按钮处 super.dispatchTouchEvent(ev)=true
         //必须执行super.dispatchTouchEvent(ev) 方法 否则即使返回true或者false 都不会往下传递也不会执行onTouchEvent()
-        Log.d(TAG, "dispatchTouchEvent: ");
         return super.dispatchTouchEvent(ev);
     }
 
