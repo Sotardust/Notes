@@ -1,6 +1,7 @@
 package com.dht.notes.testcode.ontouch;
 
 import android.content.Context;
+import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -43,5 +44,21 @@ public class MyTextView extends android.support.v7.widget.AppCompatButton {
         return super.onTouchEvent(event);
     }
 
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        Log.d(TAG, "onMeasure: ");
+    }
 
+    @Override
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        Log.d(TAG, "onLayout: ");
+        super.onLayout(changed, left, top, right, bottom);
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        Log.d(TAG, "onDraw: ");
+        super.onDraw(canvas);
+    }
 }

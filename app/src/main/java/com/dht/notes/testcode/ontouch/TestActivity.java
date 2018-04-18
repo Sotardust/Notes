@@ -33,8 +33,8 @@ public class TestActivity extends Activity {
 //    MyTextView notes;
     @BindView(R.id.linearLayout)
     MyLinearLayout linearLayout;
-    @BindView(R.id.test1)
-    MyTextView test1;
+//    @BindView(R.id.test1)
+//    MyTextView test1;
     @BindView(R.id.test2)
     TextView test2;
 
@@ -49,12 +49,12 @@ public class TestActivity extends Activity {
         for (int i = 0; i < 50; i++) {
             arrayList.add(i);
         }
-        test1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i(TAG, "onClick: test1");
-            }
-        });
+//        test1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Log.i(TAG, "onClick: test1");
+//            }
+//        });
         test2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,7 +81,7 @@ public class TestActivity extends Activity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             TestActivity activity = (TestActivity) reference.get();
-            activity.test1.setText("fafdsa");
+//            activity.test1.setText("fafdsa");
         }
     }
 
