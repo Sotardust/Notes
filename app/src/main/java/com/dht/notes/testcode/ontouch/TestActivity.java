@@ -65,6 +65,7 @@ public class TestActivity extends Activity {
         });
         MyHandler myHandler = new MyHandler(this);
 
+//        HandlerThread
         Log.d(TAG, "onCreate: ");
 
     }
