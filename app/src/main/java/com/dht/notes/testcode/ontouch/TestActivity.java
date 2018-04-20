@@ -49,6 +49,9 @@ public class TestActivity extends Activity {
         for (int i = 0; i < 50; i++) {
             arrayList.add(i);
         }
+
+        Log.d(TAG, "onCreate() returned: getTaskId()" + getTaskId());
+
 //        test1.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {

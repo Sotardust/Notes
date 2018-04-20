@@ -27,6 +27,8 @@ class MainActivity : AppCompatActivity() {
         val thread = Thread(Runnable { Log.d(TAG, "run: ") })
         thread.start()
 
+        Log.d(TAG, "onCreate() returned: getTaskId()" + taskId)
+
         Log.d(TAG, " thread.getId() returned: " + thread.id)
 
     }

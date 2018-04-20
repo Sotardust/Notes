@@ -26,5 +26,7 @@
     adb shell ps
     # 查看指定进程状态
     adb shell ps -x [PID]
-    
+
+
+adb shell dumpsys activity 查看Activity所在栈
 

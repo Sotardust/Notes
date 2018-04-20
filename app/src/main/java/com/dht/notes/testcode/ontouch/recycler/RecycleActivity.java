@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.dht.notes.R;
 
@@ -28,7 +29,7 @@ public class RecycleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.module_activity_recycle);
         ButterKnife.bind(this);
-
+        Log.d(TAG, "onCreate() returned: getTaskId()" + getTaskId());
         ArrayList<Integer> list = new ArrayList<>();
         for (int i = 0; i < 8; i++) {
             list.add(i);
