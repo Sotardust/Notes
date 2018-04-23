@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.os.Looper
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import com.dht.notes.testcode.ontouch.TestActivity
+import com.dht.notes.testcode.ontouch.activity.AActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 /**
@@ -18,7 +18,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
          btn.setOnClickListener {
-             val intent = Intent(MainActivity@this, TestActivity::class.java)
+             val intent = Intent(MainActivity@this, AActivity::class.java)
+             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
              startActivity(intent)
          }
         println("android.osProcess.myPid()   = " + android.os.Process.myPid())

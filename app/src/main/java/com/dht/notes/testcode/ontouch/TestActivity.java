@@ -49,6 +49,7 @@ public class TestActivity extends Activity {
         for (int i = 0; i < 50; i++) {
             arrayList.add(i);
         }
+//        hist
 
         Log.d(TAG, "onCreate() returned: getTaskId()" + getTaskId());
 
