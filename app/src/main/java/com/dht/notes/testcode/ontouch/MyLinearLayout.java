@@ -33,6 +33,7 @@ public class MyLinearLayout extends LinearLayout {
         //系统默认super.dispatchTouchEvent(ev) = true
         //返回true继续往下分发 若返回false onInterceptTouchEvent ，onTouchEvent将不会执行
         Log.d(TAG, "dispatchTouchEvent: ");
+
         return super.dispatchTouchEvent(ev);
     }
 

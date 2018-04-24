@@ -26,7 +26,7 @@ import butterknife.ButterKnife;
  * Created by dai on 2018/2/8.
  */
 
-public class TestActivity extends Activity {
+public class TestActivity extends Activity  {
 
     private static final String TAG = "TestActivity";
     //    @BindView(R.id.notes)
@@ -70,7 +70,10 @@ public class TestActivity extends Activity {
         MyHandler myHandler = new MyHandler(this);
 
 //        HandlerThread
+//        WindowManager
+//        ViewGroup
         Log.d(TAG, "onCreate: ");
+
 
     }
 
