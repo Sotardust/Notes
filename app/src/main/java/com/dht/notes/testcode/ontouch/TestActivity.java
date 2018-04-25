@@ -69,6 +69,8 @@ public class TestActivity extends Activity  {
         });
         MyHandler myHandler = new MyHandler(this);
 
+
+
 //        HandlerThread
 //        WindowManager
 //        ViewGroup
