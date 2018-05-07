@@ -12,7 +12,6 @@ java JVM 垃圾回收
 中又分为1个eden区和两个Survior区域。
 
 
-
 一般情况下，新创建的对象都会被分配到eden区，这些对象经过一个minor gc后仍然存活将会被移动到
 
 Survior区域中，对象在Survior中没熬过一个Minor GC，年龄就会增加一岁，当他的年龄到达一定程度时，
@@ -45,7 +44,7 @@ survior区已经被清空。这个时候，from和to会交换他们的角色，�
 
 Minor GC：从年轻代回收内存
 
-当jvm无法为一个新的对象分配空间时会触发Minor GC，比如当Eden区满了。
+当jvm无法为一个新的对象分配空间时会触发Minor GC，比如当Eden区满了。                     
 
 当内存池被填满的时候，其中的内容全部会被复制，指针会从0开始跟踪空闲内存。Eden和Survior区不存在内存碎片
 

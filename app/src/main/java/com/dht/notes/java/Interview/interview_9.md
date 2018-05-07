@@ -57,9 +57,37 @@ synchronized 加在对象上的话，就是以这个对象为锁，其他也以�
 重写：参数列表必须完全与被重写的方法相同，否则不能称其为重写而是重载；
 返回类型必须与被重写的方法的分会类型相同
 
+
 ### java 反射机制
+Java反射机制是指在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意一个方法和属性；这种动态获取的信息以及动态调用对象的方法的功能称为java语言的反射机制。
+用一句话总结就是反射可以实现在运行时可以知道任意一个类的属性和方法。
 
 ### java classLoad 加载机制
 
 
 ### 事件分发机制如何走到dispatchEventTouch方法中去的
+
+### 图片 四种压缩几种色彩详解
+枚举变量
+```
+public static final Bitmap.Config ALPHA_8
+public static final Bitmap.Config ARGB_4444
+public static final Bitmap.Config ARGB_8888
+public static final Bitmap.Config RGB_565
+
+```
+ARGB 指的是一种色彩模式，里面A代表Alpha，R表示red，G表示Green，B表示Blue，三原色，每个原色都存储这表示颜色的信息值
+
+ALPHA_8  ：表示Alpha由8位组成
+ARGB_4444:表示由4个4位组成即16位
+ARGB_8888:表示由4个8位组成即32位
+RGB_565  :表示R为5位，G为6位，B为5位共16位
+
+ALPHA_8代表8位Alpha位图
+ARGB_4444代表16位的ARGB位图
+ARGB_8888代表32位的ARGB位图
+RGB_565代表8位RGB位图
+
+位图位数越高代表其可以存储的颜色信息就越多，当然图像也就越逼真。
+
+
