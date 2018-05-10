@@ -92,6 +92,7 @@ public class TestActivity extends Activity  {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             TestActivity activity = (TestActivity) reference.get();
+//            HashMap
 //            activity.test1.setText("fafdsa");
         }
     }
