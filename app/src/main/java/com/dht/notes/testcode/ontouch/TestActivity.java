@@ -52,6 +52,8 @@ public class TestActivity extends Activity  {
 //        MessageQueue
 //        hist
 
+//        onRe
+
         Log.d(TAG, "onCreate() returned: getTaskId()" + getTaskId());
 
 //        test1.setOnClickListener(new View.OnClickListener() {
