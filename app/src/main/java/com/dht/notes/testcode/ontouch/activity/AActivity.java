@@ -8,6 +8,7 @@ import android.util.Log;
 import android.widget.Button;
 
 import com.dht.notes.R;
+import com.dht.notes.testcode.ontouch.TestActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,7 +36,7 @@ public class AActivity extends Activity {
 
     @OnClick(R.id.btn)
     public void onViewClicked() {
-        Intent intent = new Intent(AActivity.this, BActivity.class);
+        Intent intent = new Intent(AActivity.this, TestActivity.class);
 //        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }

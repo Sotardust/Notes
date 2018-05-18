@@ -26,14 +26,14 @@ import butterknife.ButterKnife;
  * Created by dai on 2018/2/8.
  */
 
-public class TestActivity extends Activity  {
+public class TestActivity extends Activity {
 
     private static final String TAG = "TestActivity";
     //    @BindView(R.id.notes)
 //    MyTextView notes;
     @BindView(R.id.linearLayout)
     MyLinearLayout linearLayout;
-//    @BindView(R.id.test1)
+    //    @BindView(R.id.test1)
 //    MyTextView test1;
     @BindView(R.id.test2)
     TextView test2;
@@ -49,6 +49,7 @@ public class TestActivity extends Activity  {
         for (int i = 0; i < 50; i++) {
             arrayList.add(i);
         }
+        calculate();
 //        MessageQueue
 //        hist
 
@@ -71,7 +72,6 @@ public class TestActivity extends Activity  {
             }
         });
         MyHandler myHandler = new MyHandler(this);
-
 
 
 //        HandlerThread
@@ -157,8 +157,8 @@ public class TestActivity extends Activity  {
     public boolean onTouchEvent(MotionEvent event) {
         //系统默认super.onTouchEvent(event) = false
         //无论true或者false 都不会处理
-        Log.d(TAG, "onTouchEvent: " );
-        Toast.makeText(getApplicationContext(),"onTouchEvent",Toast.LENGTH_SHORT).show();
+        Log.d(TAG, "onTouchEvent: ");
+        Toast.makeText(getApplicationContext(), "onTouchEvent", Toast.LENGTH_SHORT).show();
         return super.onTouchEvent(event);
     }
 
@@ -205,4 +205,16 @@ public class TestActivity extends Activity  {
 //        super.onStop();
 //        Log.d(TAG, "onStop: ");
 //    }
+
+    /**
+     * 如何对两千万个不同的以137开始的手机号码进行排序
+     */
+
+    String[] strings = {"18222170916","18226170916","18222670616","18222170916","18223177916","18222171916","18222170816","18222190916",};
+    private void calculate() {
+        Log.d(TAG, "calculate: ");
+        System.out.println("Integer.MAX_VALUE = " + Integer.MAX_VALUE);
+        System.out.println("Integer.MAX_VALUE = " + "18222170916");
+
+    }
 }
