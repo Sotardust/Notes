@@ -2,6 +2,7 @@ package com.dht.notes.testcode.ontouch;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.support.v4.app.DialogFragment;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;

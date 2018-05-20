@@ -18,6 +18,7 @@ import com.dht.notes.testcode.ontouch.recycler.RecycleActivity;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -210,11 +211,18 @@ public class TestActivity extends Activity {
      * 如何对两千万个不同的以137开始的手机号码进行排序
      */
 
-    String[] strings = {"18222170916","18226170916","18222670616","18222170916","18223177916","18222171916","18222170816","18222190916",};
+    String[] strings = {"18222170916", "18226170916", "18222670616", "18222170916", "18223177916", "18222171916", "18222170816", "18222190916",};
+
+    /**
+     * 截取前三位数，然后转换后面几位数为整数型，使用快速排序
+     */
     private void calculate() {
         Log.d(TAG, "calculate: ");
         System.out.println("Integer.MAX_VALUE = " + Integer.MAX_VALUE);
         System.out.println("Integer.MAX_VALUE = " + "18222170916");
+
+//        System.out.println("(\"18222170916\".\"18222370916\") = " + ("18222170916"."18222370916"));
+//        Arrays.sort();
 
     }
 }
