@@ -10,7 +10,7 @@ ContentProvider 的底层是采用Android中的Binder机制
 #### 统一资源标识符（URI）
 定义：Uniform Resource Identifier 即统一资源标识符
 作用：唯一标识
-     外界通信通过URI找到对应的COntentProvider 与其中的数据，在进行数据操作
+     外界通信通过URI找到对应的ContentProvider 与其中的数据，在进行数据操作
 具体使用
      URI分为系统预置与自定义 分别对应系统内置的数据如通讯录，日程表等等
      自定义数据库

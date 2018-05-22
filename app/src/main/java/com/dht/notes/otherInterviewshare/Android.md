@@ -68,8 +68,8 @@ StartCommand 几个返回常量参数
   
 **3、提升service进程优先级**
 Android中的进程是托管的，当系统进程空间紧张的时候，会依照优先级自动进行进程的回收Android将进程分为6个等级,它们按优先级顺序由高到低依次是:
->1.前台进程( FOREGROUND_APP)  
->2.可视进程(VISIBLE_APP )  
+>1.前台进程(FOREGROUND_APP)  
+>2.可视进程(VISIBLE_APP)  
 >3.次要服务进程(SECONDARY_SERVER )  
 >4.后台进程 (HIDDEN_APP)  
 >5.内容供应节点(CONTENT_PROVIDER)  
