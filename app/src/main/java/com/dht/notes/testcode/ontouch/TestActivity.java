@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.dht.notes.R;
 import com.dht.notes.testcode.ontouch.recycler.RecycleActivity;
+import com.dht.notes.testcode.ontouch.test.Test;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -49,11 +50,12 @@ public class TestActivity extends Activity {
         for (int i = 0; i < 50; i++) {
             arrayList.add(i);
         }
-        calculate();
+//        calculate();
 //        MessageQueue
 //        hist
 
-//        onRe
+        Test test = new Test();
+        test.printNxN(3);
 
         Log.d(TAG, "onCreate() returned: getTaskId()" + getTaskId());
 

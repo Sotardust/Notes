@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
          btn.setOnClickListener {
              val intent = Intent(MainActivity@this, AActivity::class.java)
-             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+//             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
              startActivity(intent)
          }
         println("android.osProcess.myPid()   = " + android.os.Process.myPid())

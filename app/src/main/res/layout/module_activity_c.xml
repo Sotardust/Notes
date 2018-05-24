@@ -6,7 +6,7 @@
 
     <Button
         android:id="@+id/btn"
-        android:text="跳转到DActivity"
+        android:text="当前为C页面跳转到DActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

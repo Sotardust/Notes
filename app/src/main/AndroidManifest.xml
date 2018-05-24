@@ -24,13 +24,14 @@
         <activity android:name="com.dht.notes.testcode.ontouch.recycler.RecycleActivity" />
         <activity android:name=".testcode.ontouch.activity.AActivity" />
         <activity android:name=".testcode.ontouch.activity.BActivity"
-            android:launchMode="singleInstance"/>
+            android:launchMode="singleTop"/>
         <!--android:launchMode="singleTop" android:process="com.dht.notes.b"-->
         <activity android:name=".testcode.ontouch.activity.CActivity"
             android:launchMode="singleInstance" />
         <!--android:launchMode="singleInstance"-->
         <activity android:name=".testcode.ontouch.activity.DActivity"
             android:launchMode="singleTask" android:taskAffinity="com.dht.notes.d"/>
+        <activity android:name=".testcode.ontouch.bitmap.BitmapActivity" />
         <!--android:launchMode="singleTask"-->
         <!--android:taskAffinity="com.dht.notes.d"-->
     </application>
