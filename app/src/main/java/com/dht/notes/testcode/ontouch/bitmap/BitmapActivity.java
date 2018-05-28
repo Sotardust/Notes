@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.dht.notes.R;
@@ -16,6 +17,8 @@ import butterknife.ButterKnife;
  */
 
 public class BitmapActivity extends AppCompatActivity {
+
+    private static final String TAG = "BitmapActivity";
     @BindView(R.id.bitmap_image)
     ImageView bitmapImage;
     Bitmap bitmap;
@@ -26,8 +29,9 @@ public class BitmapActivity extends AppCompatActivity {
         setContentView(R.layout.module_activity_bitmap);
         ButterKnife.bind(this);
         bitmap = BitmapUtil.readBitmapFromResource(getApplicationContext());
-
-        bitmapImage.setImageBitmap(bitmap);
+        Log.d(TAG, "onCreate() returned: bitmap " + bitmap);
+//        bitmapImage.setImageBitmap(BitmapUtil.bitmapScale(bitmap,2));
+        bitmapImage.setImageBitmap(BitmapUtil.compressImage1(bitmap));
     }
 
     @Override

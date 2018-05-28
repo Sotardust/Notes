@@ -8,6 +8,7 @@ import android.graphics.Matrix;
 import android.util.Log;
 
 import com.dht.notes.R;
+import com.dht.notes.testcode.ontouch.util.ScreenUtil;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -31,23 +32,26 @@ public class BitmapUtil {
     public static Bitmap readBitmapFromResource(Context context) {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
+
         @SuppressLint("ResourceType")
         InputStream inputStream = context.getResources().openRawResource(R.drawable.image_1);
-        BitmapFactory.decodeStream(inputStream,null,options);
-        float srcWidth = options.outWidth;
-        float srcHeight = options.outHeight;
-        Log.d(TAG, "readBitmapFromResource: srcWidth" + srcWidth);
-        Log.d(TAG, "readBitmapFromResource: srcHeight" + srcHeight);
-        int height = 200;
-        int width = 200;
-
+        BitmapFactory.decodeStream(inputStream, null, options);
+        int height = ScreenUtil.HEIGHT;
+        int width = ScreenUtil.WIDTH;
+        options.inSampleSize = getFitInSampleSize(width, height, options);
         options.inJustDecodeBounds = false;
-        options.inSampleSize = getFitInSampleSize(width,height,options);
-        System.out.println("options.inSampleSize = " + options.inSampleSize);
+        Log.d(TAG, "readBitmapFromResource() returned: options.inSampleSize " + options.inSampleSize);
+        try {
+            //TODO 调用两次decodeStream方法造成输入流的位置改变导致bitmap返回值为null，需要重置，（会不会造成内存过多后面有待验证）
+            inputStream.reset();
+        } catch (Exception e) {
+            Log.d(TAG, "readBitmapFromResource() returned: e " + e);
+        }
         return BitmapFactory.decodeStream(inputStream, null, options);
+
     }
 
-    public static int getFitInSampleSize(int reqWidth, int reqHeight, BitmapFactory.Options options) {
+    private static int getFitInSampleSize(int reqWidth, int reqHeight, BitmapFactory.Options options) {
         int inSampleSize = 1;
         if (options.outWidth > reqWidth || options.outHeight > reqHeight) {
             int widthRatio = Math.round((float) options.outWidth / (float) reqWidth);
@@ -88,6 +92,7 @@ public class BitmapUtil {
         }
         return null;
     }
+
     /**
      * 根据scale生成一张图片
      *
@@ -101,6 +106,32 @@ public class BitmapUtil {
         Bitmap resizeBmp = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
         return resizeBmp;
     }
+
+    public static Bitmap compressImage1(Bitmap image) {
+        if (image == null) {
+            return null;
+        }
+        ByteArrayOutputStream baos = null;
+        try {
+            baos = new ByteArrayOutputStream();
+            image.compress(Bitmap.CompressFormat.PNG, 20, baos);
+            byte[] bytes = baos.toByteArray();
+            ByteArrayInputStream isBm = new ByteArrayInputStream(bytes);
+            return BitmapFactory.decodeStream(isBm);
+        } catch (OutOfMemoryError e) {
+            Log.d(TAG, "compressImage1() returned: OutOfMemoryError" + e);
+        } finally {
+            try {
+                if (baos != null) {
+                    baos.close();
+                }
+            } catch (IOException e) {
+                Log.d(TAG, "compressImage1() returned: IOException" + e);
+            }
+        }
+        return null;
+    }
+
 
 
 }
