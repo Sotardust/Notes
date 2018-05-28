@@ -36,3 +36,7 @@ onRestoreInstanceState()方法的触发时机
 什么是内部？内部就是我是你的一部分，我了解你，我知道你的全部，没有你就没有我。（所以内部类对象是以外部类对象存在为前提的）  
 
 ### 双层ViewGroup 侧边滑动问题
+
+在外层ViewGroup中 重写onInterceptTouchEvent方法 
+把x坐标与屏幕宽进行差值对比相差50 则返回值设置为false 
+
