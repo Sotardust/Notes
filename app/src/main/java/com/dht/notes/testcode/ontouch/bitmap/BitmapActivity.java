@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.ImageView;
 
@@ -41,6 +42,7 @@ public class BitmapActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate() returned: 内存大小" + (bitmap.getByteCount())/(1024*1024));
 //        bitmapImage.setImageBitmap(BitmapUtil.bitmapScale(bitmap,2));
         bitmapImage.setImageBitmap(bitmap);
+        RecyclerView.ViewHolder
     }
 
     @Override

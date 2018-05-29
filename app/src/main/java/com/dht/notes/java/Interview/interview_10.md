@@ -43,6 +43,12 @@ onRestoreInstanceState()方法的触发时机
 ### 硬件加速 绘制View 与程序绘制View的不同
 
 ### RecycleView是如何优化的
+一、标准化了ViewHolder，使用Adapter适配器时，面向ViewHolder而不是单纯的View，直接把ViewHolder的实现封装起来，  
+用户只要实现自己的ViewHolder就可以了，该组件会自动帮你回收并复用每一个item。  
+不但变得更精简，也变得更加容易使用，而且更容易组合设计出自己需要的滑动布局。  
+二、将Layout抽象成了一个LayoutManager，RecyclerView不负责子View的布局，
+而是通过使用LayoutManager来实现不同的布局效果，如使用LinearLayoutManager来指定方向，
+其默认是垂直，也可以设置为水平，当然你也可以自己来定义。
 
 ### 线程池
 
