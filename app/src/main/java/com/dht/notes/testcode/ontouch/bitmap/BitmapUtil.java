@@ -4,7 +4,13 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Matrix;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.util.Log;
 
 import com.dht.notes.R;
@@ -34,7 +40,7 @@ public class BitmapUtil {
         options.inJustDecodeBounds = true;
 
         @SuppressLint("ResourceType")
-        InputStream inputStream = context.getResources().openRawResource(R.drawable.image_1);
+        InputStream inputStream = context.getResources().openRawResource(R.drawable.image_14);
         BitmapFactory.decodeStream(inputStream, null, options);
         int height = ScreenUtil.HEIGHT;
         int width = ScreenUtil.WIDTH;
@@ -102,7 +108,7 @@ public class BitmapUtil {
      */
     public static Bitmap bitmapScale(Bitmap bitmap, float scale) {
         Matrix matrix = new Matrix();
-        matrix.postScale(scale, scale); // 长和宽放大缩小的比例
+        matrix.postScale(scale, scale);
         Bitmap resizeBmp = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
         return resizeBmp;
     }
@@ -132,6 +138,47 @@ public class BitmapUtil {
         return null;
     }
 
+    //放大或者缩小图片
+    public static Bitmap zoomBitmap(Bitmap bitmap, int w, int h) {
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        Matrix matrix = new Matrix();
+        float scaleWidth = ((float) w / width);
+        float scaleHeight = ((float) h / height);
+        matrix.postScale(scaleWidth, scaleHeight);// 长和宽放大缩小的比例
+        Bitmap newbmp = Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix, true);
+        return newbmp;
+    }
+
+    //获得圆角图片的方法
+    public static Bitmap getRoundedCornerBitmap(Bitmap bitmap, float roundPx) {
+
+        Bitmap output = Bitmap.createBitmap(bitmap.getWidth(), bitmap
+                .getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(output);
+
+        final int color = 0xff424242;
+        final Paint paint = new Paint();
+        final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
+        final RectF rectF = new RectF(rect);
+
+        paint.setAntiAlias(true);
+        canvas.drawARGB(0, 0, 0, 0);
+        paint.setColor(color);
+        canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
+
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        canvas.drawBitmap(bitmap, rect, rect, paint);
+
+        return output;
+    }
+
+    //对 bitmap 进行裁剪
+    public Bitmap bitmapClip(Context context, int id, int x, int y) {
+        Bitmap map = BitmapFactory.decodeResource(context.getResources(), id);
+        map = Bitmap.createBitmap(map, x, y, 120, 120);
+        return map;
+    }
 
 
 }

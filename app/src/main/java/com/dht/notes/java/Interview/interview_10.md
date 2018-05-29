@@ -40,3 +40,9 @@ onRestoreInstanceState()方法的触发时机
 在外层ViewGroup中 重写onInterceptTouchEvent方法 
 把x坐标与屏幕宽进行差值对比相差50 则返回值设置为false 
 
+### 硬件加速 绘制View 与程序绘制View的不同
+
+### RecycleView是如何优化的
+
+### 线程池
+
