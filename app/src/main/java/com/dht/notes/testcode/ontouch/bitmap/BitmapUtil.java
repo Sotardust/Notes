@@ -58,11 +58,33 @@ public class BitmapUtil {
     }
 
     private static int getFitInSampleSize(int reqWidth, int reqHeight, BitmapFactory.Options options) {
+//        int inSampleSize = 1;
+//        if (options.outWidth > reqWidth || options.outHeight > reqHeight) {
+//            int widthRatio = Math.round((float) options.outWidth / (float) reqWidth);
+//            int heightRatio = Math.round((float) options.outHeight / (float) reqHeight);
+//            inSampleSize = Math.min(widthRatio, heightRatio);
+//        }
+        final int height = options.outHeight;
+        final int width = options.outWidth;
         int inSampleSize = 1;
-        if (options.outWidth > reqWidth || options.outHeight > reqHeight) {
-            int widthRatio = Math.round((float) options.outWidth / (float) reqWidth);
-            int heightRatio = Math.round((float) options.outHeight / (float) reqHeight);
-            inSampleSize = Math.min(widthRatio, heightRatio);
+
+        if (height > reqHeight || width > reqWidth) {
+
+            final int halfHeight = height / 2;
+            final int halfWidth = width / 2;
+
+            while ((halfHeight / inSampleSize) > reqHeight && (halfWidth / inSampleSize) > reqWidth) {
+                inSampleSize *= 2;
+            }
+
+            long totalPixels = width / inSampleSize * height / inSampleSize;
+
+            final long totalReqPixelsCap = reqWidth * reqHeight * 2;
+
+            while (totalPixels > totalReqPixelsCap) {
+                inSampleSize *= 2;
+                totalPixels /= 2;
+            }
         }
         return inSampleSize;
     }
