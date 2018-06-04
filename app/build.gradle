@@ -40,4 +40,6 @@ dependencies {
     //https://github.com/JakeWharton/butterknife
     implementation "com.jakewharton:butterknife:$rootProject.ext.butterknifeVersion"
     annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.ext.butterknifeVersion"
+
+    implementation 'com.jakewharton:disklrucache:2.0.2'
 }
