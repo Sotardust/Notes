@@ -51,4 +51,36 @@ onRestoreInstanceState()方法的触发时机
 其默认是垂直，也可以设置为水平，当然你也可以自己来定义。
 
 ### 线程池
+Android中的线程池的概念来源于Java中的Executor，Executor是一个接口，真正的线程池的实现为ThreadPoolExecutor，ThreadPoolExecutor提供了一系列参数来配置线程池，通过不同的参数可以创建不同的线程池。
 
+优点：
+> 1. 复用线程池中的线程，避免因为线程的创建和销毁所带来的性能开销。
+> 2. 能够有效的控制线程池的最大并发数，避免大量的线程之间以互相抢占系统资源而导致的阻塞现象
+> 3. 能够对线程进行简单的管理，并提供定时执行以及指定间隔循环执行等功能
+
+** 线程池的构造方法 **
+```
+ public ThreadPoolExecutor(int corePoolSize,
+                              int maximumPoolSize,
+                              long keepAliveTime,
+                              TimeUnit unit,
+                    BlockingQueue<Runnable> workQueue,
+                          ThreadFactory threadFactory)
+```
+1. CorePoolSize :核心线程数
+    默认情况下，核心线程数会在线程中一直存活，即使它们处于闲置状态。  
+    如果将ThreadPoolExecutor的allowCoreThreadTimeOut属性设置为true，那么核心线程就会存在超时策略，这个时间间隔有keepAliveTime所决定，当等待时间超过keepAliveTime所指定的时长后，核心线程就会被停止。
+    
+2. maximumPoolSize ：所能容纳最大线程数
+    当活动线程数达到这个数值后，后续的新任务将会被阻塞。
+    
+3. ThreadPoolExecutor ： 构造方法
+4. workQueue ：线程池中的任务队列
+    线程池中的任务队列，通过线程池execute方法提交的Runnable对象会存储在这个参数中。
+    这个任务队列是BlockQueue类型，属于阻塞队列，就是当队列为空的时候，此时取出任务的操作会被阻塞，等待任务加入队列中不为空的时候，才能进行取出操作，而在满队列的时候，添加操作同样被阻塞。
+5. KeepAliveTime ：非核心线程池超时时长
+    非核心线程闲置时的超时时长，超过这个时长，非核心线程就会被回收，当ThreadPoolExector的allowCoreThreadTimeOut属性设置为True时，keepAliveTime同样会作用于核心线程。
+6. unit ： 超时的时间单位
+    常用的有TimeUnit.MILLISECONDS（毫秒）、TimeUnit.SECONDS(秒)以及TimeUnit.MINUTES(分钟)等。
+7. threadFactory 线程工程，为线程池提供新线程
+    线程工厂，为线程池提供创建新线程的功能。ThreadFactory是一个接口，它只有一个方法，newThread（Runnable r），用来创建线程。
