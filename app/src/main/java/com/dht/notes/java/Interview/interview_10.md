@@ -41,6 +41,7 @@ onRestoreInstanceState()方法的触发时机
 把x坐标与屏幕宽进行差值对比相差50 则返回值设置为false 
 
 ### 硬件加速 绘制View 与程序绘制View的不同
+[Android 4.0的图形硬件加速及绘制技巧](http://blog.51cto.com/zuiniuwang/721798)
 
 ### RecycleView是如何优化的
 一、标准化了ViewHolder，使用Adapter适配器时，面向ViewHolder而不是单纯的View，直接把ViewHolder的实现封装起来，  
