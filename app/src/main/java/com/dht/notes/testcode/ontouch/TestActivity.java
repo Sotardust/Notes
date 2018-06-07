@@ -34,8 +34,8 @@ public class TestActivity extends Activity {
 //    MyTextView notes;
     @BindView(R.id.linearLayout)
     MyLinearLayout linearLayout;
-    //    @BindView(R.id.test1)
-//    MyTextView test1;
+        @BindView(R.id.test1)
+    MyTextView test1;
     @BindView(R.id.test2)
     TextView test2;
 
@@ -62,12 +62,12 @@ public class TestActivity extends Activity {
 
         Log.d(TAG, "onCreate() returned: getTaskId()" + getTaskId());
 
-//        test1.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Log.i(TAG, "onClick: test1");
-//            }
-//        });
+        test1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i(TAG, "onClick: test1");
+            }
+        });
         test2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
