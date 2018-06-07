@@ -39,6 +39,9 @@ public class TestActivity extends Activity {
     @BindView(R.id.test2)
     TextView test2;
 
+    private volatile int  num  ;
+
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -82,6 +85,14 @@ public class TestActivity extends Activity {
         Log.d(TAG, "onCreate: ");
 
 
+    }
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
     }
 
     static class MyHandler extends Handler {
