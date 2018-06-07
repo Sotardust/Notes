@@ -3,6 +3,7 @@
 [你不得不了解的JVM（一）](http://www.jianshu.com/p/24c074138efa)  
 [你不得不了解的JVM（二）](http://www.jianshu.com/p/7c708a66ff42)  
 
+[深入理解JVM—JVM内存模型](https://www.cnblogs.com/dingyingsi/p/3760447.html)
 java JVM 垃圾回收
 
 在什么时候：
