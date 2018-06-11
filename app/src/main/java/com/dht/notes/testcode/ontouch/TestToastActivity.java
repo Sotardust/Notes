@@ -3,11 +3,9 @@ package com.dht.notes.testcode.ontouch;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dht.notes.R;
@@ -44,10 +42,10 @@ public class TestToastActivity extends Activity {
 
                 String username = myedit1.getText().toString();
                 String password = myedit2.getText().toString();
-                if (false||true) {
-                    Toast.makeText(getApplicationContext(), "用户名或密码不能为空", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+//                if (false||true) {
+//                    Toast.makeText(getApplicationContext(), "用户名或密码不能为空", Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
 
                 //测试数据 用户名为：wang ,密码为：123
                 //对用户名或密码进行判断
