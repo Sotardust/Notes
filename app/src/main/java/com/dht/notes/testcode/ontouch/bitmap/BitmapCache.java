@@ -17,6 +17,7 @@ public class BitmapCache {
     private static final String TAG = "BitmapCache";
     private static BitmapCache cache;
     private LruCache<String, Bitmap> lruCache;
+//    DiskLruCache
 
 
     private BitmapCache() {
