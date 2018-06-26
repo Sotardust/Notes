@@ -76,6 +76,11 @@
             android:layout_toRightOf="@+id/mybtn1"
             android:text="重置" />
 
+
     </LinearLayout>
 
+    <ImageView
+        android:id="@+id/image1"
+        android:layout_width="500dp"
+        android:layout_height="500dp" />
 </LinearLayout>

@@ -1,12 +1,15 @@
 package com.dht.notes.testcode.ontouch;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +26,7 @@ public class TestToastActivity extends Activity {
     private EditText myedit2;
     private Button mybtn1;
     private Button mybtn2;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,6 +41,13 @@ public class TestToastActivity extends Activity {
         myedit2 = (EditText) findViewById(R.id.myedit2);
         mybtn1 = (Button) findViewById(R.id.mybtn1);
         mybtn2 = (Button) findViewById(R.id.mybtn2);
+        imageView = (ImageView) findViewById(R.id.image1);
+
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.stone_b1);
+        System.out.println("bitmap = " + bitmap);
+        imageView.setImageBitmap(bitmap);
+
+
         //提交按钮
         mybtn1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,7 +55,7 @@ public class TestToastActivity extends Activity {
 
                 String username = myedit1.getText().toString();
                 String password = myedit2.getText().toString();
-                if (false||true) {
+                if (false || true) {
                     Toast.makeText(getApplicationContext(), "用户名或密码不能为空", Toast.LENGTH_SHORT).show();
                     return;
                 }
