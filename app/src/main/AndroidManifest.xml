@@ -37,7 +37,6 @@
         <activity android:name=".testcode.ontouch.activity.DActivity"
             android:launchMode="singleTask" android:taskAffinity="com.dht.notes.d"/>
         <activity android:name=".testcode.ontouch.bitmap.BitmapActivity" />
-        <activity android:name=".testcode.ontouch.TestToastActivity" />
         <!--android:launchMode="singleTask"-->
         <!--android:taskAffinity="com.dht.notes.d"-->
     </application>

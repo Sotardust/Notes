@@ -14,4 +14,10 @@ class ExampleUnitTest {
     fun addition_isCorrect() {
         assertEquals(4, 2 + 2)
     }
+
+    @Test
+    fun testJava() {
+        val test = com.dht.notes.testcode.ontouch.test.Test();
+        test.test()
+    }
 }

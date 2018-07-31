@@ -38,9 +38,10 @@ public class AActivity extends Activity {
 
     @OnClick(R.id.btn)
     public void onViewClicked() {
-        Intent intent = new Intent(AActivity.this, BActivity.class);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
+        new TestFragment().show(getFragmentManager(), "dat");
+//        Intent intent = new Intent(AActivity.this, BActivity.class);
+////        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//        startActivity(intent);
     }
 
     public void test1() {
