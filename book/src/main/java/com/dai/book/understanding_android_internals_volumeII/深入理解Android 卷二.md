@@ -32,5 +32,3 @@ NotificationManagerService ，WallpaperManagerService
 以上服务为Android Framework Java 层的核心
 
 
-
-
