@@ -19,12 +19,26 @@ class ExampleUnitTest {
     fun testJava() {
 
 
-        while (true) {
-            val data = 5
-            if (data > 3) {
-                System.out.print("dht+onCreate: data = $data")
-                return
+//        while (true) {
+//            val data = 5
+//            if (data > 3) {
+//                System.out.print("dht+onCreate: data = $data")
+//                return
+//            }
+//        }
+
+        var second = 1201
+        val min = second / 60
+        second %= 60
+        var info = "距上次刷卡间隔小于"
+        if (min < 1) {
+            info += " $second 秒！"
+        } else {
+            info += "$min 分钟"
+            if (second != 0) {
+                info += " $second 秒！"
             }
         }
+        print("info = $info")
     }
 }
