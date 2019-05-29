@@ -1,7 +1,5 @@
 package com.dht.notes;
 
-import android.util.Log;
-
 import org.junit.Test;
 
 import java.text.ParseException;
