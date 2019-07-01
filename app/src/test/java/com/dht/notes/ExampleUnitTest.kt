@@ -2,6 +2,7 @@ package com.dht.notes
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
+import java.text.NumberFormat
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -40,6 +41,30 @@ class ExampleUnitTest {
             }
         }
         print("info = $info")
+    }
+
+    @Test
+    fun testJava1() {
+
+
+//        while (true) {
+//            val data = 5
+//            if (data > 3) {
+//                System.out.print("dht+onCreate: data = $data")
+//                return
+//            }
+//        }
+
+        // 创建一个数值格式化对象
+
+        val numberFormat = NumberFormat.getInstance()
+
+        // 设置精确到小数点后2位
+
+        numberFormat.maximumFractionDigits = 4
+
+        val result = numberFormat.format((4f  / 9f) )
+        print("result = $result")
     }
 
 }

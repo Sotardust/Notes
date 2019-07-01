@@ -1,5 +1,6 @@
 package com.dht.notes;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -13,7 +14,7 @@ import io.reactivex.disposables.Disposable;
 /**
  * created by Administrator on 2019/5/28 18:46
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
 
     private static final String TAG = "MainActivity";
 
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Button button = (Button) findViewById(R.id.btn);
         Button button1 = (Button) findViewById(R.id.btn1);
         RxBus.getInstance().toObservable(BeanOne.class)

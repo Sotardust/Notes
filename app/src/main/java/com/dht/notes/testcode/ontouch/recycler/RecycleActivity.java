@@ -39,7 +39,7 @@ public class RecycleActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplication(), LinearLayoutManager.VERTICAL, false);
         recycle.setLayoutManager(layoutManager);
         recycle.setAdapter(myAdapter);
-//        PhoneWindow
+//
     }
 
 //    @Override
