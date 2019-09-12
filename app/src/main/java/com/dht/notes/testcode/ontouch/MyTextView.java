@@ -6,12 +6,13 @@ import android.support.v4.app.DialogFragment;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.ViewGroup;
 
 /**
  * Created by Administrator on 2018/2/28 0028.
  */
 
-public class MyTextView extends android.support.v7.widget.AppCompatButton {
+public class MyTextView extends ViewGroup {
     private static final String TAG = "MyTextView";
 
     public MyTextView(Context context) {
@@ -30,11 +31,23 @@ public class MyTextView extends android.support.v7.widget.AppCompatButton {
     }
 
     @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        requestDisallowInterceptTouchEvent(false);
+        Log.d(TAG, "onInterceptTouchEvent() called with: ev = [" + ev + "]");
+        return super.onInterceptTouchEvent(ev);
+    }
+
+    @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
         //系统默认super.dispatchTouchEvent(event) =true
         //若返回false 将不再分发事件也不会执行onTouchEvent事件
         Log.d(TAG, "dispatchTouchEvent: ");
         return super.dispatchTouchEvent(event);
+    }
+
+    @Override
+    protected void onLayout(boolean changed, int l, int t, int r, int b) {
+
     }
 
     @Override
@@ -51,11 +64,7 @@ public class MyTextView extends android.support.v7.widget.AppCompatButton {
         Log.d(TAG, "onMeasure: ");
     }
 
-    @Override
-    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        Log.d(TAG, "onLayout: ");
-        super.onLayout(changed, left, top, right, bottom);
-    }
+
 
     @Override
     protected void onDraw(Canvas canvas) {

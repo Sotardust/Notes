@@ -2,7 +2,8 @@
 1、targetVieSon 与Android 6.0 权限相关  
 ### targetSdkVersion
 1.targetSdkVersion:targetSdk主要是提供向前兼容的作用，什么意思呢？
-手机系统4.0的，或者 5.0或者更高，但是编译包的时候用的compileSdk是6.0，但是表现形式得按照targetSdk。
+手机系统4.0的，或者 5.0或者更高，但是编译包的时候用的compileSdk是6.0，
+但是表现形式得按照targetSdk。
 >  1.提供向下兼容。
 >  2.确定app的表现行为。
 >  3.这允许你在适应新的行为变化之前就可以使用新的API（因为你已经更新了compileSdkVersion打出来的包就是在compileSdkVersion上打出来的）。

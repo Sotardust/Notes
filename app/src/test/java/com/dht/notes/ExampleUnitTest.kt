@@ -69,19 +69,19 @@ class ExampleUnitTest {
     }
 
     @Test
-    fun testJava2(): Int {
+    fun testJava2() {
 
         val a = "12"
         var b = 1
         try {
             b = a.toInt()
-            return b
+
         } catch (e: Exception) {
             print(" result $b ,e $e")
-            return b
+
         } finally {
             print("result = $3")
-            return 3
+
         }
     }
 

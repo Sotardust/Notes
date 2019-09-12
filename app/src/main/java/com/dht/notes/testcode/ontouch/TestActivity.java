@@ -170,7 +170,7 @@ public class TestActivity extends Activity {
     public boolean onTouchEvent(MotionEvent event) {
         //系统默认super.onTouchEvent(event) = false
         //无论true或者false 都不会处理
-        Log.d(TAG, "onTouchEvent: ");
+        Log.d(TAG, "onTouchEvent() called with: event = [" + event + "]");
         Toast.makeText(getApplicationContext(), "onTouchEvent", Toast.LENGTH_SHORT).show();
         return super.onTouchEvent(event);
     }
@@ -180,6 +180,7 @@ public class TestActivity extends Activity {
         //系统默认点击空白处 super.dispatchTouchEvent(ev)=false
         //系统默认点击按钮处 super.dispatchTouchEvent(ev)=true
         //必须执行super.dispatchTouchEvent(ev) 方法 否则即使返回true或者false 都不会往下传递也不会执行onTouchEvent()
+        Log.d(TAG, "dispatchTouchEvent() called with: ev = [" + ev + "]");
         return super.dispatchTouchEvent(ev);
     }
 

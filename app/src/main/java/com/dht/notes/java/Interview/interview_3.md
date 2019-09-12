@@ -15,7 +15,10 @@ Activity的启动过程
 7. 对签名后的apk文件进行对其处理
   
 **第一部：打包资源文件，生成R.java文件。**  
-【输入】Resource文件（就是工程中res中的文件）、Assets文件（相当于另外一种资源，这种资源Android系统并不像对res中的文件那样优化它）、AndroidManifest.xml文件（包名就是从这里读取的，因为生成R.java文件需要包名）、Android基础类库（Android.jar文件）  
+【输入】Resource文件（就是工程中res中的文件）、Assets文件（相当于另外一种资源，
+这种资源Android系统并不像对res中的文件那样优化它）、
+AndroidManifest.xml文件（包名就是从这里读取的，因为生成R.java文件需要包名）、
+Android基础类库（Android.jar文件）  
 【工具】aapt工具  
 【输出】打包好的资源（bin目录中的resources.ap_文件）、R.java文件（gen目录中） 
     
@@ -31,7 +34,8 @@ Activity的启动过程
 【输出】.class文件  
 
 **第四步：转换所有的class文件，生成classes.dex文件。**  
-【输入】 .class文件（包括Aidl生成.class文件，R生成的.class文件，源文件生成的.class文件），库文件（.jar文件）  
+【输入】 .class文件（包括Aidl生成.class文件，R生成的.class文件，源文件生成的.class文件），
+库文件（.jar文件）  
 【工具】javac工具    
 【输出】.dex文件  
   
@@ -57,13 +61,24 @@ setContentView(),inflate()
 [Android应用程序窗口（Activity）的窗口对象（Window）的创建过程分析](https://blog.csdn.net/luoshengyang/article/details/8223770)
 
 ### activity ,service application 中的content的区别 
-getApplication()和getApplicationContext() 两者的内存地址都是相同的，看来它们是同一个对象。其实这个结果也很好理解，因为前面已经说过了，Application本身就是一个Context，所以这里获取getApplicationContext()得到的结果就是Application本身的实例。那么问题来了，既然这两个方法得到的结果都是相同的，那么Android为什么要提供两个功能重复的方法呢？实际上这两个方法在作用域上有比较大的区别。getApplication()方法的语义性非常强，一看就知道是用来获取Application实例的，但是这个方法只有在Activity和Service中才能调用的到。那么也许在绝大多数情况下我们都是在Activity或者Service中使用Application的，但是如果在一些其它的场景，比如BroadcastReceiver中也想获得Application的实例，这时就可以借助getApplicationContext()方法了。
+getApplication()和getApplicationContext() 两者的内存地址都是相同的，看来它们是同一个对象。
+其实这个结果也很好理解，因为前面已经说过了，Application本身就是一个Context，
+所以这里获取getApplicationContext()得到的结果就是Application本身的实例。
+那么问题来了，既然这两个方法得到的结果都是相同的，那么Android为什么要提供两个功能重复的方法呢？
+实际上这两个方法在作用域上有比较大的区别。getApplication()方法的语义性非常强，
+一看就知道是用来获取Application实例的，
+但是这个方法只有在Activity和Service中才能调用的到。
+那么也许在绝大多数情况下我们都是在Activity或者Service中使用Application的，
+但是如果在一些其它的场景，比如BroadcastReceiver中也想获得Application的实例，
+这时就可以借助getApplicationContext()方法了。
 
 **正确使用Context**  
-一般Context造成的内存泄漏，几乎都是当Context销毁的时候，却因为被引用导致销毁失败，而Application的Context对象可以理解为随着进程存在的，所以我们总结出使用Context的正确姿势：  
+一般Context造成的内存泄漏，几乎都是当Context销毁的时候，却因为被引用导致销毁失败，
+而Application的Context对象可以理解为随着进程存在的，所以我们总结出使用Context的正确姿势：  
 1. 当Application的Context能搞定的情况下，并且生命周期长的对象，优先使用Application的Context。
 2. 不要让生命周期长于Activity的对象持有到Activity的引用。
-3. 尽量不要在Activity中使用非静态内部类，因为非静态内部类会隐式持有外部类实例的引用，如果使用静态内部类，将外部实例引用作为弱引用持有。
+3. 尽量不要在Activity中使用非静态内部类，因为非静态内部类会隐式持有外部类实例的引用，
+如果使用静态内部类，将外部实例引用作为弱引用持有。
                                     
 ### Dalvik和标准Java虚拟机之间的主要差别？
 ||Dalvik|JVM|
