@@ -8,20 +8,31 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.util.LruCache;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dht.notes.R;
 import com.dht.notes.testcode.ontouch.recycler.RecycleActivity;
 import com.dht.notes.testcode.ontouch.test.Test;
+import com.jakewharton.disklrucache.DiskLruCache;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by dai on 2018/2/8.
@@ -34,13 +45,12 @@ public class TestActivity extends Activity {
 //    MyTextView notes;
     @BindView(R.id.linearLayout)
     MyLinearLayout linearLayout;
-        @BindView(R.id.test1)
+    @BindView(R.id.test1)
     MyTextView test1;
     @BindView(R.id.test2)
     TextView test2;
 
-    private volatile int  num  ;
-
+    private volatile int num;
 
 
     @Override
@@ -83,8 +93,105 @@ public class TestActivity extends Activity {
 //        WindowManager
 //        ViewGroup
         Log.d(TAG, "onCreate: ");
+        testRxJava();
+        View view;
+        ViewGroup viewGroup ;
+
+    }
+    public void testGlide(){
+        DiskLruCache diskLruCache ;
+        LruCache cache ;
+        Handler handler ;
+        Thread.currentThread();
+//        HashMap
+
+    }
 
 
+    public void testRxJava() {
+        // RxJava的链式操作
+        Observable.create(new ObservableOnSubscribe<Integer>() {
+            // 1. 创建被观察者(Observable) & 定义需发送的事件
+            @Override
+            public void subscribe(ObservableEmitter<Integer> emitter) throws Exception {
+                emitter.onNext(1);
+
+                Thread.sleep(5000);
+                emitter.onNext(2);
+                Thread.sleep(1000);
+                emitter.onNext(3);
+                Thread.sleep(2000);
+                emitter.onComplete();
+            }
+        }).subscribe(new Observer<Integer>() {
+            // 2. 创建观察者(Observer) & 定义响应事件的行为
+            // 3. 通过订阅（subscribe）连接观察者和被观察者
+            @Override
+            public void onSubscribe(Disposable d) {
+                Log.d(TAG, "开始采用subscribe连接");
+            }
+            // 默认最先调用复写的 onSubscribe（）
+
+            @Override
+            public void onNext(Integer value) {
+                Log.d(TAG, "对Next事件" + value + "作出响应");
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.d(TAG, "对Error事件作出响应");
+            }
+
+            @Override
+            public void onComplete() {
+                Log.d(TAG, "对Complete事件作出响应");
+            }
+
+        });
+
+    }
+
+    public void testRxJava(final ObservableEmitter<Integer> emitter) {
+        Observable.create(new ObservableOnSubscribe<Integer>() {
+            // 1. 创建被观察者(Observable) & 定义需发送的事件
+            @Override
+            public void subscribe(ObservableEmitter<Integer> emitter) throws Exception {
+                emitter.onNext(1);
+
+                Thread.sleep(5000);
+                emitter.onNext(212);
+                Thread.sleep(1000);
+                emitter.onNext(3);
+                Thread.sleep(2000);
+                emitter.onComplete();
+            }
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Integer>() {
+                    // 2. 创建观察者(Observer) & 定义响应事件的行为
+                    // 3. 通过订阅（subscribe）连接观察者和被观察者
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        Log.d(TAG, "开始采用subscribe连接");
+                    }
+                    // 默认最先调用复写的 onSubscribe（）
+
+                    @Override
+                    public void onNext(Integer value) {
+                        emitter.onNext(value);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d(TAG, "对Error事件作出响应");
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.d(TAG, "对Complete事件作出响应");
+                    }
+
+                });
     }
 
     public int getNum() {
