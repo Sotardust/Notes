@@ -4,4 +4,5 @@
 2. Zygote进程会首先创建一个SystemServer进程，SystemServer进程负责启动系统的关键服务，
 如包管理服务PackageManagerService和应用程序组件管理服务ActivityManagerService。
     
-3. 当我们需要启动一个Android应用程序时，ActivityManagerService会通过Socket进程间通信机制，通知Zygote进程为这个应用程序创建一个新的进程
+3. 当我们需要启动一个Android应用程序时，ActivityManagerService会通过Socket进程间通信机制，
+    通知Zygote进程为这个应用程序创建一个新的进程

@@ -34,7 +34,7 @@ public class BActivity extends Activity {
     @OnClick(R.id.btn)
     public void onViewClicked() {
         Intent intent = new Intent(BActivity.this, CActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
 //        dumpsystem
     }

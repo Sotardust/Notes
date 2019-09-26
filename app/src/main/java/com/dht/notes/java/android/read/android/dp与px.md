@@ -4,10 +4,11 @@
 |160dpi|320x533|mdpi|1|
 |240dpi|480x800|hdpi|1.5|
 |320dpi|720x1280|xhdpi|2|
-|480dpi|1080x192|xxhdpi|3|
+|480dpi|1080x1920|xxhdpi|3|
 |560dpi|1440x2560|xxxhdpi|3.5|
 
 dp与px的换算公式：px = dp * Density
+
 
 ### DisplayMetrics::densityDpi与density的区别
 ```

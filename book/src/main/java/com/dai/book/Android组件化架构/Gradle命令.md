@@ -1,6 +1,8 @@
 ### 命令
 1、查看module的依赖树：
-``` gradlew module_name ：dependencies ```
+``` 
+gradlew module_name ：dependencies 
+```
 ```
 +--- project :uiframeworkXX
 |    +--- com.android.support:appcompat-v7:22.2.1

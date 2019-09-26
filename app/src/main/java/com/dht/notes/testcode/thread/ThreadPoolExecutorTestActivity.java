@@ -9,9 +9,10 @@ import android.widget.Button;
 
 import com.dht.notes.R;
 
-import java.util.concurrent.ExecutorService;
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -22,7 +23,7 @@ public class ThreadPoolExecutorTestActivity extends Activity {
     private static final String TAG = "dht";
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate (@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thread);
 
@@ -30,57 +31,66 @@ public class ThreadPoolExecutorTestActivity extends Activity {
         Button button2 = findViewById(R.id.btn2);
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick (View v) {
                 threadPool();
             }
         });
 
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick (View v) {
                 threadPool();
             }
         });
     }
 
-    private void threadPool() {
-        final ExecutorService executorService = Executors.newFixedThreadPool(1);
+    final ThreadPoolExecutor executorService = (ThreadPoolExecutor) Executors.newFixedThreadPool(1);
+    final ThreadPoolExecutor executorService1 = (ThreadPoolExecutor) Executors.newFixedThreadPool(3, new ThreadFactory() {
+
+        AtomicInteger index = new AtomicInteger(1);
+
+        @Override
+        public Thread newThread (Runnable r) {
+            return new Thread(r, "离线提交线程池-" + index.getAndIncrement());
+        }
+    });
+    private void threadPool () {
         for (int i = 0; i < 10; i++) {
 
             final int finalI = i;
             executorService.execute(new Runnable() {
                 @Override
-                public void run() {
+                public void run () {
                     try {
                         Thread.sleep(1000 * finalI);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    Log.d(TAG, "executor called  i = " + finalI + ", Thread = " + Thread.currentThread());
+                    Thread thread = Thread.currentThread();
+
+                    BlockingQueue<Runnable> runnables = executorService.getQueue();
+                    Log.d(TAG, "executor() called i = " + finalI + ", Thread = " + thread + ", runnables = " + runnables.size());
                 }
             });
 
         }
-        final ExecutorService executorService1 = Executors.newFixedThreadPool(3, new ThreadFactory() {
 
-            AtomicInteger index = new AtomicInteger(1);
-            @Override
-            public Thread newThread(Runnable r) {
-                return new Thread(r, "离线提交线程池-" + index.getAndIncrement());
-            }
-        });
         for (int i = 0; i < 10; i++) {
 
             final int finalI = i;
             executorService1.execute(new Runnable() {
                 @Override
-                public void run() {
+                public void run () {
                     try {
                         Thread.sleep(1000 * finalI);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    Log.d(TAG, "Service() called i = " + finalI + ", Thread = " + Thread.currentThread());
+
+                    Thread thread = Thread.currentThread();
+
+                    BlockingQueue<Runnable> runnables = executorService1.getQueue();
+                    Log.d(TAG, "Service() called i = " + finalI + ", Thread = " + thread + ", runnables = " + runnables.size());
                 }
             });
 
