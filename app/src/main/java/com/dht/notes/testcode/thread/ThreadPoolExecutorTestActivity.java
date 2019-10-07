@@ -19,18 +19,30 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * created by Administrator on 2019/9/25 17:56
+ *
+ * @author Administrator
  */
 public class ThreadPoolExecutorTestActivity extends Activity {
 
     private static final String TAG = "dht";
 
-    ThreadPoolExecutor executor = new ThreadPoolExecutor(1, 10, 1000,
-            TimeUnit.MILLISECONDS, new LinkedBlockingDeque<Runnable>());
+    ThreadPoolExecutor executor = new ThreadPoolExecutor(5, 10, 1000,
+            TimeUnit.MILLISECONDS, new LinkedBlockingDeque<Runnable>(9), new ThreadFactory() {
+        @Override
+        public Thread newThread (Runnable r) {
+            return new Thread(r);
+        }
+    });
     ThreadPoolExecutor service = new ThreadPoolExecutor(1, 5, 1000,
-            TimeUnit.MILLISECONDS, new LinkedBlockingDeque<Runnable>());
+            TimeUnit.MILLISECONDS, new LinkedBlockingDeque<Runnable>(), new ThreadFactory() {
+        @Override
+        public Thread newThread (Runnable r) {
+            return new Thread(r);
+        }
+    });
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate (@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thread);
 
@@ -38,15 +50,26 @@ public class ThreadPoolExecutorTestActivity extends Activity {
         Button button2 = findViewById(R.id.btn2);
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick (View v) {
                 threadPool();
 //                executor.
             }
         });
 
+        Thread  thread = new Thread();
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run () {
+
+            }
+        };
+
+
+        Object object = new Object();
+
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick (View v) {
                 threadPool();
             }
         });
@@ -58,18 +81,19 @@ public class ThreadPoolExecutorTestActivity extends Activity {
         AtomicInteger index = new AtomicInteger(1);
 
         @Override
-        public Thread newThread(Runnable r) {
+        public Thread newThread (Runnable r) {
             return new Thread(r, "离线提交线程池-" + index.getAndIncrement());
         }
     });
 
-    private void threadPool() {
+    private void threadPool () {
         for (int i = 0; i < 10; i++) {
 
             final int finalI = i;
+
             executor.execute(new Runnable() {
                 @Override
-                public void run() {
+                public void run () {
                     try {
                         Thread.sleep(1000 * finalI);
                     } catch (InterruptedException e) {
@@ -89,7 +113,7 @@ public class ThreadPoolExecutorTestActivity extends Activity {
             final int finalI = i;
             service.execute(new Runnable() {
                 @Override
-                public void run() {
+                public void run () {
                     try {
                         Thread.sleep(1000 * finalI);
                     } catch (InterruptedException e) {
