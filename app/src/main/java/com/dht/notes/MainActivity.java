@@ -8,6 +8,7 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewStub;
 import android.view.Window;
 import android.widget.Button;
 
@@ -29,11 +30,14 @@ public class MainActivity extends Activity {
         }
     };
 
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        ViewStub viewStub ;
 
         Window window;
 

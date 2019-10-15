@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".testcode.service.ServiceActivity">
+        <activity android:name=".testcode.nestedscrollview.NestedActivity">
             <!--android:taskAffinity="com.dht.notes.task01"-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,7 +39,8 @@
         <activity android:name=".testcode.ontouch.activity.DActivity"
             android:launchMode="singleTask" android:taskAffinity="com.dht.notes.d"/>
         <activity android:name=".testcode.ontouch.bitmap.BitmapActivity" />
-<!--        <activity android:name=".testcode.thread.ThreadPoolExecutorTestActivity" />-->
+<!--        <activity android:name=".testcode.nestedscrollview.NestedActivity" />-->
+        <!--        <activity android:name=".testcode.thread.ThreadPoolExecutorTestActivity" />-->
         <!--android:launchMode="singleTask"-->
         <!--android:taskAffinity="com.dht.notes.d"-->
         <service android:name=".testcode.service.MyService" />
