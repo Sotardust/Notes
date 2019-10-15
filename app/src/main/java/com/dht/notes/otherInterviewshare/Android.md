@@ -49,18 +49,28 @@ onSaveInstanceState() 方法用来取得之前在onSaveInstanceState() 保存的
 1.使用接口回调方式，activity实现相应的接口，service通过接口进行回调，比较灵活
 2.使用广播
 
+
+
 ### 怎么保证service不被杀死。
 **1、onStartCommand 返回START_STICKY**  
 
 StartCommand 几个返回常量参数  
 1、`START_STICKY`
-在运行onStartCommand后service进程被kill后，那将保留在开始状态，但是不保留那些传入的intent。不久后service就会再次尝试重新创建，因为保留在开始状态，在创建     service后将保证调用onstartCommand。如果没有传递任何开始命令给service，那将获取到null的intent。  
+在运行onStartCommand后service进程被kill后，那将保留在开始状态，但是不保留那些传入的intent。
+不久后service就会再次尝试重新创建，因为保留在开始状态，在创建    
+ service后将保证调用onstartCommand。如果没有传递任何开始命令给service，那将获取到null的intent。  
 
 2、`START_NOT_STICKY`
-在运行onStartCommand后service进程被kill后，并且没有新的intent传递给它。Service将移出开始状态，并且直到新的明显的方法（startService）调用才重新创建。因为如果没有传递任何未决定的intent那么service是不会启动，也就是期间onstartCommand不会接收到任何null的intent。
+在运行onStartCommand后service进程被kill后，并且没有新的intent传递给它。
+Service将移出开始状态，并且直到新的明显的方法（startService）调用才重新创建。
+因为如果没有传递任何未决定的intent那么service是不会启动，
+也就是期间onstartCommand不会接收到任何null的intent。
   
 3、`START_REDELIVER_INTENT`
-在运行onStartCommand后service进程被kill后，系统将会再次启动service，并传入最后一个intent给onstartCommand。直到调用stopSelf(int)才停止传递intent。如果在被kill后还有未处理好的intent，那被kill后服务还是会自动启动。因此onstartCommand不会接收到任何null的intent。  
+在运行onStartCommand后service进程被kill后，系统将会再次启动service，
+并传入最后一个intent给onstartCommand。直到调用stopSelf(int)才停止传递intent。
+如果在被kill后还有未处理好的intent，那被kill后服务还是会自动启动。
+因此onstartCommand不会接收到任何null的intent。  
 
 **2、提升service优先级**
 在AndroidManifest.xml文件中对于intent-filter可以通过android:priority = "1000"这个属性设置最高优先级，1000是最高值，如果数字越小则优先级越低，同时适用于广播
@@ -76,13 +86,17 @@ Android中的进程是托管的，当系统进程空间紧张的时候，会依�
 >6.空进程(EMPTY_APP)  
 
 **4、onDestroy方法里重启service**  
-service+broadcast方式，就是当service走onDestroy的时候，发送一个自定义的广播，当收到广播的时候，重新启动service；
+service+broadcast方式，就是当service走onDestroy的时候，发送一个自定义的广播，
+当收到广播的时候，重新启动service；
 
 **5、Application加上Persistent属性**
-看Android的文档知道，当进程长期不活动，或系统需要资源时，会自动清理门户，杀死一些Service，和不可见的Activity等所在的进程。但是如果某个进程不想被杀死（如数据缓存进程，或状态监控进程，或远程服务进程）
+看Android的文档知道，当进程长期不活动，或系统需要资源时，会自动清理门户，杀死一些Service，
+和不可见的Activity等所在的进程。但是如果某个进程不想被杀死
+（如数据缓存进程，或状态监控进程，或远程服务进程）
 
 **6、监听系统广播判断Service状态**
-通过系统的一些广播，比如：手机重启、界面唤醒、应用状态改变等等监听并捕获到，然后判断我们的Service是否还存活，记得加权限。
+通过系统的一些广播，比如：手机重启、界面唤醒、应用状态改变等等监听并捕获到，
+然后判断我们的Service是否还存活，记得加权限。
 
 **7、将APK安装到/system/app，变身系统级应用**
 

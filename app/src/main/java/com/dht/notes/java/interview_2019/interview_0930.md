@@ -65,3 +65,5 @@ service +broadcast 方式，就是当service走onDestory()的时候，发送一�
 设置音频和视频编码，音频使用 AAC编码，视频使用H264编码。
 
 ### 自定义view的绘制
+
+### sleep()和wait()区别
