@@ -19,7 +19,7 @@ public class NestedActivity extends Activity {
     private static final String TAG = "dht";
 
     @Override
-    protected void onCreate (@Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nested);
 
@@ -45,7 +45,7 @@ public class NestedActivity extends Activity {
 
         recyclerView.setAdapter(nestedAdapter);
 
-        HashMap<String, Integer> hashMap = new HashMap<>(3);
+        HashMap<String, Integer> hashMap = new HashMap<>(8);
 
         hashMap.put("Java", 1);
         hashMap.put("Kotlin", 2);
@@ -54,9 +54,15 @@ public class NestedActivity extends Activity {
         hashMap.put("Python", 5);
         hashMap.put("C", 6);
         hashMap.put("C++", 7);
+        hashMap.put("PHP", 8);
+        hashMap.put("Objective-C", 9);
+        hashMap.put("JavaScript", 10);
+        hashMap.put("Mysql", 11);
+        hashMap.put("Swift", 12);
+        hashMap.put("Go", 13);
 
         for (Map.Entry<String, Integer> entry : hashMap.entrySet()) {
-            Log.d(TAG, "onCreate()  = [" + entry.getKey() + " -> " + entry.getValue() + "]");
+            Log.d(TAG, "HashMap  = [" + entry.getKey() + " -> " + entry.getValue() + "]");
         }
     }
 }
