@@ -61,6 +61,8 @@ public class NestedActivity extends Activity {
         hashMap.put("Swift", 12);
         hashMap.put("Go", 13);
 
+        hashMap.get("Go");
+
         for (Map.Entry<String, Integer> entry : hashMap.entrySet()) {
             Log.d(TAG, "HashMap  = [" + entry.getKey() + " -> " + entry.getValue() + "]");
         }
