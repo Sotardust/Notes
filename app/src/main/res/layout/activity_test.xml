@@ -35,7 +35,7 @@
         <!--android:text="notes" />-->
 
 
-    <TextView
+    <com.dht.notes.testcode.ontouch.view.MyView
         android:id="@+id/test2"
         android:layout_width="100dp"
         android:layout_height="50dp"

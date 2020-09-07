@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 
 /**
@@ -23,21 +24,26 @@ public class MyView extends View {
         super(context, attrs);
     }
 
+
+
     @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        Log.d(TAG, "onMeasure: ");
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        //系统默认super.dispatchTouchEvent(event) =true
+        //若返回false 将不再分发事件也不会执行onTouchEvent事件
+        Log.d(TAG, "dispatchTouchEvent: "+ event.getAction());
+        return super.dispatchTouchEvent(event);
     }
 
     @Override
-    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        super.onLayout(changed, left, top, right, bottom);
-        Log.d(TAG, "onLayout: ");
+    protected void onLayout(boolean changed, int l, int t, int r, int b) {
+
     }
 
     @Override
-    protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-        Log.d(TAG, "onDraw: ");
+    public boolean onTouchEvent(MotionEvent event) {
+        //系统默认super.onTouchEvent() = true
+        //返回false 则不再执行自身点击事件
+        Log.d(TAG, "onTouchEvent: " + event.getAction());
+        return super.onTouchEvent(event);
     }
 }

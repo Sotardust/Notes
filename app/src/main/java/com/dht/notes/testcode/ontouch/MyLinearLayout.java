@@ -32,14 +32,15 @@ public class MyLinearLayout extends LinearLayout {
     public boolean dispatchTouchEvent(MotionEvent ev) {
         //系统默认super.dispatchTouchEvent(ev) = true
         //返回true继续往下分发 若返回false onInterceptTouchEvent ，onTouchEvent将不会执行
-        Log.d(TAG, "dispatchTouchEvent: ");
-
-        return super.dispatchTouchEvent(ev);
+        Log.d(TAG, "dispatchTouchEvent: "+ ev.getAction());
+        boolean result = super.dispatchTouchEvent(ev);
+//        Log.d(TAG, "dispatchTouchEvent: "+ ev.getAction() +" result = "+ result);
+        return result;
     }
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        Log.d(TAG, "onInterceptTouchEvent: ");
+        Log.d(TAG, "onInterceptTouchEvent: "+ ev.getAction());
         //系统默认super.onInterceptTouchEvent(ev) = false
         //返回true则对事件进行拦截，且onTouchEvent事件继续执行
         return super.onInterceptTouchEvent(ev);
@@ -47,7 +48,7 @@ public class MyLinearLayout extends LinearLayout {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        Log.d(TAG, "onTouchEvent: ");
+        Log.d(TAG, "onTouchEvent: "+ event.getAction());
         //系统默认onTouchEvent() = true
         //返回false 只影响自身的onClickListener事件
         return super.onTouchEvent(event);
