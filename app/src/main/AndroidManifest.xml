@@ -9,10 +9,10 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
+
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".testcode.ontouch.TestActivity">
+        <activity android:name=".MainActivity">
             <!--android:taskAffinity="com.dht.notes.task01"-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,30 +21,17 @@
             </intent-filter>
         </activity>
         <!--        <activity-->
-        <!--            android:name="com.dht.notes.testcode.ontouch.TestActivity"-->
+        <!--            android:name="com.dht.notes.testcode.other.ontouch.TestActivity"-->
         <!--            android:launchMode="singleTask" />-->
         <!--android:taskAffinity="com.dht.notes.task02"-->
-        <activity android:name="com.dht.notes.testcode.ontouch.recycler.RecycleActivity" />
-        <activity android:name=".testcode.ontouch.activity.AActivity" />
-        <activity
-            android:name=".testcode.ontouch.activity.BActivity"
-            android:launchMode="singleTop" />
-        <!--android:launchMode="singleTop" android:process="com.dht.notes.b"-->
-        <activity
-            android:name=".testcode.ontouch.activity.CActivity"
-            android:launchMode="singleInstance" />
-        <!--android:launchMode="singleInstance"-->
-        <activity
-            android:name=".testcode.ontouch.activity.DActivity"
-            android:launchMode="singleTask"
-            android:taskAffinity="com.dht.notes.d" />
-        <activity android:name=".testcode.ontouch.bitmap.BitmapActivity" />
-<!--        <activity android:name=".testcode.ontouch.TestActivity" />-->
+
+        <activity android:name=".testcode.view.FlowActivity" />
+        <!--        <activity android:name=".testcode.ontouch.TestActivity" />-->
         <!--        <activity android:name=".testcode.nestedscrollview.NestedActivity" />-->
         <!--        <activity android:name=".testcode.thread.ThreadPoolExecutorTestActivity" />-->
         <!--android:launchMode="singleTask"-->
         <!--android:taskAffinity="com.dht.notes.d"-->
-        <service android:name=".testcode.service.MyService" />
+        <service android:name=".testcode.other.service.MyService" />
     </application>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />

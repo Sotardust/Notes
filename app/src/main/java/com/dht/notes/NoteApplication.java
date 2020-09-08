@@ -1,12 +1,9 @@
 package com.dht.notes;
 
-import android.app.Activity;
 import android.app.Application;
-import android.os.Bundle;
-import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
-import com.dht.notes.testcode.ontouch.util.ScreenUtil;
+import com.dht.notes.testcode.other.ontouch.util.ScreenUtil;
 
 /**
  * Created by dai on 2018/3/29.
