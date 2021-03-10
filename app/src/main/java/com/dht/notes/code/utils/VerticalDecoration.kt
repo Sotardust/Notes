@@ -1,4 +1,4 @@
-package com.dht.notes.testcode.utils
+package com.dht.notes.code.utils
 
 import android.graphics.Canvas
 import android.graphics.Paint

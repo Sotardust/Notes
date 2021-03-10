@@ -1,4 +1,4 @@
-package com.dht.notes.testcode.adapter
+package com.dht.notes.code.adapter
 
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder

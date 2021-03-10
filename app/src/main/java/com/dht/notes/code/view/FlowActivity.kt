@@ -1,4 +1,4 @@
-package com.dht.notes.testcode.view
+package com.dht.notes.code.view
 
 import android.app.Activity
 import android.os.Bundle

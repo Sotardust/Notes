@@ -5,7 +5,7 @@
     android:orientation="vertical">
 
 
-    <com.dht.notes.testcode.other.ontouch.MyLinearLayout
+    <com.dht.notes.code.other.ontouch.MyLinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="200dp"
@@ -13,7 +13,7 @@
         android:clickable="true"
         android:orientation="vertical">
 
-        <com.dht.notes.testcode.other.ontouch.MyTextView
+        <com.dht.notes.code.other.ontouch.MyTextView
             android:id="@+id/test1"
             android:layout_width="100dp"
             android:layout_height="50dp"
@@ -23,7 +23,7 @@
             android:text="test"
             android:textColor="@color/colorPrimary" />
 
-    </com.dht.notes.testcode.other.ontouch.MyLinearLayout>
+    </com.dht.notes.code.other.ontouch.MyLinearLayout>
 
     <!--<com.dht.notes.testcode.other.ontouch.MyTextView-->
         <!--android:id="@+id/test1"-->
@@ -35,7 +35,7 @@
         <!--android:text="notes" />-->
 
 
-    <com.dht.notes.testcode.other.ontouch.view.MyView
+    <com.dht.notes.code.other.ontouch.view.MyView
         android:id="@+id/test2"
         android:layout_width="100dp"
         android:layout_height="50dp"

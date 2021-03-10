@@ -1,6 +1,5 @@
-package com.dht.notes.testcode.view
+package com.dht.notes.code.view
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -10,7 +9,7 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.View
 import com.dht.notes.R
-import com.dht.notes.testcode.other.ontouch.util.ScreenUtil
+import com.dht.notes.code.other.ontouch.util.ScreenUtil
 
 /**
  *  created by Administrator on 2020/9/8 17:53

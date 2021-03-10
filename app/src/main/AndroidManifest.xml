@@ -25,13 +25,14 @@
         <!--            android:launchMode="singleTask" />-->
         <!--android:taskAffinity="com.dht.notes.task02"-->
 
-        <activity android:name=".testcode.view.FlowActivity" />
+        <activity android:name=".code.view.FlowActivity" />
+        <activity android:name=".code.lock.ThreadLockActivity" />
         <!--        <activity android:name=".testcode.ontouch.TestActivity" />-->
         <!--        <activity android:name=".testcode.nestedscrollview.NestedActivity" />-->
         <!--        <activity android:name=".testcode.thread.ThreadPoolExecutorTestActivity" />-->
         <!--android:launchMode="singleTask"-->
         <!--android:taskAffinity="com.dht.notes.d"-->
-        <service android:name=".testcode.other.service.MyService" />
+        <service android:name=".code.other.service.MyService" />
     </application>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
