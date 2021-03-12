@@ -7,7 +7,7 @@ public class MyAsyncTask extends AsyncTask<String,String,String> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-
+        Object object = new Object();
     }
 
     @Override

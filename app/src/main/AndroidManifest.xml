@@ -33,7 +33,27 @@
         <!--android:launchMode="singleTask"-->
         <!--android:taskAffinity="com.dht.notes.d"-->
         <service android:name=".code.other.service.MyService" />
+
+        <activity
+            android:name=".code.activity.AActivity"
+            android:configChanges="orientation|keyboardHidden" />
+        <activity
+            android:name=".code.activity.BActivity"
+            android:launchMode="singleTask"
+            android:taskAffinity="com.dht.notes.dfasf" />
+
+        <activity
+            android:name=".code.activity.CActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".code.activity.DActivity"
+            android:launchMode="singleInstance" />
+        <activity android:name=".code.animation.AnimationActivity" />
+        <!--            android:taskAffinity="com.dht.notes.dfasf"-->
+
+
     </application>
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
