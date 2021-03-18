@@ -29,9 +29,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="unBindService" />
+
     <Button
         android:id="@+id/btn5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="printData" />
+
+    <Button
+        android:id="@+id/btn6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="输出结果" />
 </LinearLayout>

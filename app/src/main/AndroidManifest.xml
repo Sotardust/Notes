@@ -32,7 +32,7 @@
         <!--        <activity android:name=".testcode.thread.ThreadPoolExecutorTestActivity" />-->
         <!--android:launchMode="singleTask"-->
         <!--android:taskAffinity="com.dht.notes.d"-->
-        <service android:name=".code.other.service.MyService" />
+        <service android:name=".code.service.MyService" />
 
         <activity
             android:name=".code.activity.AActivity"
@@ -49,6 +49,8 @@
             android:name=".code.activity.DActivity"
             android:launchMode="singleInstance" />
         <activity android:name=".code.animation.AnimationActivity" />
+        <activity android:name=".code.service.ServiceActivity" />
+        <activity android:name=".code.provider.ProviderActivity" />
         <!--            android:taskAffinity="com.dht.notes.dfasf"-->
 
 

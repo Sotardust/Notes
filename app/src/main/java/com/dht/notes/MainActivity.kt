@@ -9,6 +9,8 @@ import com.dht.notes.code.activity.AActivity
 import com.dht.notes.code.adapter.MainAdapter
 import com.dht.notes.code.animation.AnimationActivity
 import com.dht.notes.code.lock.ThreadLockActivity
+import com.dht.notes.code.provider.ProviderActivity
+import com.dht.notes.code.service.ServiceActivity
 import com.dht.notes.code.utils.VerticalDecoration
 import com.dht.notes.code.view.FlowActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -40,9 +42,9 @@ class MainActivity : Activity() {
 //            Log.d(Companion.TAG, "textClick onCreate: setOnClickListener ")
 //
 //        }
-        val list = arrayListOf("自定义View", "线程锁", "生命周期跳转", "动画属性")
+        val list = arrayListOf("自定义View", "线程锁", "activity 生命周期跳转", "Animation 动画属性", "service aidl 服务", "ContentProvider 内容提供者")
         recyclerView.layoutManager = LinearLayoutManager(applicationContext)
-        recyclerView.addItemDecoration(VerticalDecoration(10))
+        recyclerView.addItemDecoration(VerticalDecoration(5))
         val adapter = MainAdapter(list)
         recyclerView.adapter = adapter
         addActivityList()
@@ -59,6 +61,8 @@ class MainActivity : Activity() {
         activityList.add(ThreadLockActivity::class)
         activityList.add(AActivity::class)
         activityList.add(AnimationActivity::class)
+        activityList.add(ServiceActivity::class)
+        activityList.add(ProviderActivity::class)
     }
 
     companion object {

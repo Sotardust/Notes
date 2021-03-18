@@ -7,6 +7,8 @@ import android.animation.TypeEvaluator;
  */
 
 public class PointEvaluator implements TypeEvaluator<Point> {
+
+    //评估方法
     @Override
     public Point evaluate(float fraction, Point startValue, Point endValue) {
         // 将动画初始值startValue 和 动画结束值endValue 强制类型转换成Point对象
