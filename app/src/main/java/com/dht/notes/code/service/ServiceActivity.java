@@ -1,6 +1,7 @@
 package com.dht.notes.code.service;
 
 import android.app.Activity;
+import android.app.IntentService;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -53,6 +54,7 @@ public class ServiceActivity extends Activity {
         Button button4 = findViewById(R.id.btn4);
         Button button5 = findViewById(R.id.btn5);
         Button button6 = findViewById(R.id.btn6);
+
 
         Handler handler = new Handler();
         button1.setOnClickListener(new View.OnClickListener() {

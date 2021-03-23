@@ -1,7 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/providerText"
+        android:layout_width="match_parent"
+        android:layout_height="200dp" />
+
+
+    <Button
+        android:id="@+id/providerInsert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="插入" />
+
+    <Button
+        android:id="@+id/providerDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="删除" />
+
+    <Button
+        android:id="@+id/providerUpdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="更新" />
+
+    <Button
+        android:id="@+id/providerQuery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="查询" />
+
 
 </LinearLayout>

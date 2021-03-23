@@ -53,6 +53,12 @@
         <activity android:name=".code.provider.ProviderActivity" />
         <!--            android:taskAffinity="com.dht.notes.dfasf"-->
 
+        <provider android:name=".code.provider.MyProvider"
+            android:authorities="com.dht.notes.code.provider">
+
+        </provider>
+
+
 
     </application>
 
