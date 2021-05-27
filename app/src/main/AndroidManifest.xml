@@ -51,6 +51,7 @@
         <activity android:name=".code.animation.AnimationActivity" />
         <activity android:name=".code.service.ServiceActivity" />
         <activity android:name=".code.provider.ProviderActivity" />
+        <activity android:name=".code.fragment.FragmentActivity" />
         <!--            android:taskAffinity="com.dht.notes.dfasf"-->
 
         <provider android:name=".code.provider.MyProvider"

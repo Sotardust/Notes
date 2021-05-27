@@ -22,5 +22,17 @@
 
 ### Binder 原理流程介绍一下
 
+### JVM内存模型
+
+### Java同步机制有哪些，volatile和syncronized区别
+
+
+### LeanCanary 原理
+    https://cloud.tencent.com/developer/article/1675655
+    
+    
+### HashMap和HashTable区别，ConcurrentHashMap分段加锁的原理
+        
+
 
 
