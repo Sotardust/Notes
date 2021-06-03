@@ -15,7 +15,6 @@ public class BaseEvent {
     }
 
     public Object getResult() {
-
         return result;
     }
 

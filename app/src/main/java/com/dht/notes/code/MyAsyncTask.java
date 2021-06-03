@@ -2,6 +2,7 @@ package com.dht.notes.code;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Looper;
 
 public class MyAsyncTask extends AsyncTask<String, String, String> {
 
@@ -11,6 +12,8 @@ public class MyAsyncTask extends AsyncTask<String, String, String> {
         Object object = new Object();
         String string = new String();
         string.trim();
+
+
     }
 
     @Override
