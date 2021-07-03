@@ -23,7 +23,7 @@ class FlowActivity : Activity() {
         list.add("测试数据1234ok的")
         list.add("测试数234ok的")
 
-        for(index in 0..1000){
+        for(index in 0..100){
             list.add("数据 $index")
         }
         flowView.setInstanceData(list)

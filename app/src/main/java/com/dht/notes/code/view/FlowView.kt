@@ -19,7 +19,16 @@ class FlowView : View {
 
     private val TAG = "dht1"
 
+
+    constructor(context: Context) : super(context) {
+        init(context)
+    }
+
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
+        init(context)
+    }
+
+    constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(context, attrs, defStyle) {
         init(context)
     }
 
@@ -27,6 +36,7 @@ class FlowView : View {
 
     //文本间隔宽度
     private val intervalWidth = 30f
+
     //文本间隔高度
     private val intervalHeight = 10f
     private lateinit var bitmap: Bitmap
@@ -39,7 +49,7 @@ class FlowView : View {
         paint.textSize = 50f
         mHeight = paint.descent() - paint.ascent()
 //        val ist  = resources.openRawResource(R.drawable.bg_text)
-        bitmap = BitmapFactory.decodeResource(context.resources,R.drawable.text_bound)
+        bitmap = BitmapFactory.decodeResource(context.resources, R.drawable.brvah_sample_footer_loading)
     }
 
 

@@ -135,7 +135,8 @@ App应用内广播（Local Broadcast）
 
 作用：  
 Serializable的作用是为了保存对象的属性到本地文件、数据库、网络流、rmi以方便数据传输，当然这种传输可以是程序内的也可以是两个程序间的。  
-Android的Parcelable的设计初衷是因为Serializable效率过慢，为了在程序内不同组件间以及不同Android程序间(AIDL)高效的传输数据而设计，这些数据仅在内存中存在，Parcelable是通过IBinder通信的消息的载体。
+Android的Parcelable的设计初衷是因为Serializable效率过慢，为了在程序内不同组件间以及不同Android程序间(AIDL)高效的传输数据而设计，  
+这些数据仅在内存中存在，Parcelable是通过IBinder通信的消息的载体。
 
 ### 内存泄漏和内存溢出区别
 **内存泄露**（memory leak） 原理是，使用过的内存空间没有被及时释放，长时间占用内存，最终导致内存空间不足，而出现内存溢出。

@@ -1,13 +1,17 @@
 package com.dht.notes
 
 import android.app.Activity
+import android.app.IntentService
 import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
+import android.os.HandlerThread
+import android.util.SparseArray
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dht.notes.code.activity.AActivity
 import com.dht.notes.code.adapter.MainAdapter
 import com.dht.notes.code.animation.AnimationActivity
+import com.dht.notes.code.animation.WifiWaveActivity
 import com.dht.notes.code.lock.ThreadLockActivity
 import com.dht.notes.code.provider.ProviderActivity
 import com.dht.notes.code.service.ServiceActivity
@@ -15,6 +19,7 @@ import com.dht.notes.code.utils.VerticalDecoration
 import com.dht.notes.code.view.FlowActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
+import java.util.concurrent.Callable
 import kotlin.reflect.KClass
 
 /**
@@ -26,6 +31,7 @@ class MainActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
 
 //        linear.setOnTouchListener { _, event ->
 //            Log.d(Companion.TAG, "onCreate: setOnTouchListener ${event.action}")
@@ -42,7 +48,14 @@ class MainActivity : Activity() {
 //            Log.d(Companion.TAG, "textClick onCreate: setOnClickListener ")
 //
 //        }
-        val list = arrayListOf("自定义View", "线程锁", "activity 生命周期跳转", "Animation 动画属性", "service aidl 服务", "ContentProvider 内容提供者")
+        val list = arrayListOf(
+                "水波纹",
+                "自定义View",
+                "线程锁",
+                "activity 生命周期跳转",
+                "Animation 动画属性",
+                "service aidl 服务",
+                "ContentProvider 内容提供者")
         recyclerView.layoutManager = LinearLayoutManager(applicationContext)
         recyclerView.addItemDecoration(VerticalDecoration(5))
         val adapter = MainAdapter(list)
@@ -57,6 +70,7 @@ class MainActivity : Activity() {
     }
 
     private fun addActivityList() {
+        activityList.add(WifiWaveActivity::class)
         activityList.add(FlowActivity::class)
         activityList.add(ThreadLockActivity::class)
         activityList.add(AActivity::class)
