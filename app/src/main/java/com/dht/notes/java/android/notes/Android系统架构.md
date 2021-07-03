@@ -20,8 +20,7 @@ Android系统架构分为五层，从上到下依次是应用层、应用框架�
 | Package Manager(包管理器) | 管理所有安装在Android系统中的应用程序 |
 | Notification Manager(通知管理器) | 使得应用程序可以在状态栏中显示自定义的提示信息 | 
 | Resource Manager（资源管理器） | 提供应用程序使用的各种非代码资源，如本地化字符串、图片、布局文件、颜色文件等 | 
-| Telephony Manager(电话管理器) | 管理所有的移动设备功能 | 
-| Package Manager(包管理器) | 管理所有安装在Android系统中的应用程序 | 
+| Telephony Manager(电话管理器) | 管理所有的移动设备功能 |
 | Window Manager（窗口管理器） | 管理所有开启的窗口程序 | 
 | Content Providers（内容提供器） | 使得不同应用程序之间可以共享数据 | 
 | View System（视图系统 | 构建应用程序的基本组件 | 

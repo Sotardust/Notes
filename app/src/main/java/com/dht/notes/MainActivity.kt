@@ -67,6 +67,8 @@ class MainActivity : Activity() {
 
         val myAsyncTask = MyAsyncTask()
         myAsyncTask.execute("fdsa")
+
+        val text:StringBuffer
     }
 
     private fun addActivityList() {
