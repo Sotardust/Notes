@@ -8,6 +8,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.view.animation.LinearInterpolator
 import com.dht.notes.R
 import kotlinx.android.synthetic.main.activity_wifi_wave.*
@@ -21,8 +22,9 @@ class WifiWaveActivity : Activity() {
         setContentView(R.layout.activity_wifi_wave)
 //        waveView.startWave()
 
+        val radarView = findViewById<View>(R.id.radar) as RadarView
 
-        ObjectAnimator.ofFloat(waveView,
+        ObjectAnimator.ofFloat(radarView,
                 "rotation", 0f, 360f)
                 .apply {
 
@@ -51,7 +53,7 @@ class WifiWaveActivity : Activity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        waveView.stopWave()
+//        waveView.stopWave()
     }
 
     companion object {
