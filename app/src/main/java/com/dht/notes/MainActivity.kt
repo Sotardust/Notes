@@ -12,6 +12,7 @@ import com.dht.notes.code.activity.AActivity
 import com.dht.notes.code.adapter.MainAdapter
 import com.dht.notes.code.animation.AnimationActivity
 import com.dht.notes.code.animation.WifiWaveActivity
+import com.dht.notes.code.coordlayout.CoorActivity
 import com.dht.notes.code.lock.ThreadLockActivity
 import com.dht.notes.code.provider.ProviderActivity
 import com.dht.notes.code.service.ServiceActivity
@@ -49,6 +50,7 @@ class MainActivity : Activity() {
 //
 //        }
         val list = arrayListOf(
+                "Scroll",
                 "水波纹",
                 "自定义View",
                 "线程锁",
@@ -68,10 +70,12 @@ class MainActivity : Activity() {
         val myAsyncTask = MyAsyncTask()
         myAsyncTask.execute("fdsa")
 
-        val text:StringBuffer
+        val text: StringBuffer
     }
 
     private fun addActivityList() {
+        activityList.add(CoorActivity::class)
+
         activityList.add(WifiWaveActivity::class)
         activityList.add(FlowActivity::class)
         activityList.add(ThreadLockActivity::class)

@@ -52,7 +52,8 @@
         <activity android:name=".code.service.ServiceActivity" />
         <activity android:name=".code.provider.ProviderActivity" />
         <activity android:name=".code.fragment.FragmentActivity" />
-        <activity android:name=".code.animation.WifiWaveActivity" />
+        <activity android:name=".code.animation.ScrollActivity" />
+        <activity android:name=".code.coordlayout.CoorActivity" />
         <!--            android:taskAffinity="com.dht.notes.dfasf"-->
 
         <provider android:name=".code.provider.MyProvider"

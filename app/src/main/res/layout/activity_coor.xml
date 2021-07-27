@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/new_coordinator_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:theme="@style/ThemeOverlay.AppCompat.DayNight.ActionBar">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="123dp"
+        android:theme="@android:style/Theme.Translucent">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/news_tool_bar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="123dp"
+            android:background="@drawable/ic_morning_news"
+            app:contentScrim="@color/white"
+            app:expandedTitleMarginBottom="200dp"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:statusBarScrim="@android:color/transparent">
+
+
+            <ImageView
+                android:id="@+id/news_closed1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="20dp"
+                android:baselineAlignBottom="true"
+                android:paddingEnd="15dp"
+                android:paddingRight="15dp"
+                android:src="@drawable/ic_news_close"
+                app:layout_collapseMode="pin"
+                tools:ignore="RtlSymmetry,VectorDrawableCompat" />
+
+            <RelativeLayout
+                android:id="@+id/rl_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="37dp"
+                android:layout_marginBottom="30dp"
+                android:gravity="center_vertical"
+                android:paddingStart="16dp"
+                android:paddingLeft="16dp"
+                app:layout_collapseMode="pin"
+                tools:ignore="RtlSymmetry">
+
+                <TextView
+                    android:id="@+id/tv_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:includeFontPadding="false"
+                    android:textColor="#000000"
+                    android:textSize="48sp"
+                    android:textStyle="normal"
+                    tools:text="10:11" />
+
+                <View
+                    android:id="@+id/line"
+                    android:layout_width="1dp"
+                    android:layout_height="28dp"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_toEndOf="@+id/tv_time"
+                    android:layout_toRightOf="@+id/tv_time"
+                    android:background="#616161" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_toRightOf="@+id/line"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_news_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="早上好"
+                        android:textColor="@color/color_43C4C5"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/tv_news_title_desc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="这是我们为您精选的早间新闻"
+                        android:textColor="@color/color_43C4C5"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/news_tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:layout_gravity="bottom"
+            android:background="@color/white"
+            android:paddingLeft="6dp"
+
+            app:tabIndicatorHeight="0dp" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/ic_morning_news"
+        app:layout_collapseMode="pin">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="早间新闻"
+            android:textColor="@color/color_43C4C5"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/news_closed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="20dp"
+            android:baselineAlignBottom="true"
+            android:paddingEnd="15dp"
+            android:paddingRight="15dp"
+            android:src="@drawable/ic_news_close"
+            app:layout_collapseMode="pin"
+            tools:ignore="RtlSymmetry,VectorDrawableCompat" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1800dp"
+        android:text="fdafas"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <!--    <com.optimizer.test.view.android.widget.AppViewPager-->
+    <!--        android:id="@+id/news_viewPager"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        app:layout_behavior="@string/appbar_scrolling_view_behavior" />-->
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+

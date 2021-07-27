@@ -20,40 +20,42 @@ class WifiWaveActivity : Activity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_wifi_wave)
+
+        wifi_wave.start()
 //        waveView.startWave()
 
-        val radarView = findViewById<View>(R.id.radar) as RadarView
-
-        ObjectAnimator.ofFloat(radarView,
-                "rotation", 0f, 360f)
-                .apply {
-
-                    interpolator = LinearInterpolator()
-                    duration = 1500L
-                    this.repeatCount = ObjectAnimator.INFINITE
-                    this.repeatMode = ObjectAnimator.RESTART
-                    start()
-                    addUpdateListener(object : ValueAnimator.AnimatorUpdateListener {
-                        override fun onAnimationUpdate(animation: ValueAnimator?) {
-                            Log.d(Companion.TAG, "onAnimationUpdate() called with: animation = $animation")
-//                            waveView.update()
-                        }
-
-                    })
-                    addListener(object : AnimatorListenerAdapter() {
-                        override fun onAnimationEnd(animation: Animator?) {
-                            super.onAnimationEnd(animation)
-
-
-                        }
-
-                    })
-                }
+//         val radarView = findViewById<View>(R.id.radar) as RadarView
+//
+//         ObjectAnimator.ofFloat(radarView,
+//                 "rotation", 0f, 360f)
+//                 .apply {
+//
+//                     interpolator = LinearInterpolator()
+//                     duration = 1500L
+//                     this.repeatCount = ObjectAnimator.INFINITE
+//                     this.repeatMode = ObjectAnimator.RESTART
+//                     start()
+//                     addUpdateListener(object : ValueAnimator.AnimatorUpdateListener {
+//                         override fun onAnimationUpdate(animation: ValueAnimator?) {
+//                             Log.d(Companion.TAG, "onAnimationUpdate() called with: animation = $animation")
+// //                            waveView.update()
+//                         }
+//
+//                     })
+//                     addListener(object : AnimatorListenerAdapter() {
+//                         override fun onAnimationEnd(animation: Animator?) {
+//                             super.onAnimationEnd(animation)
+//
+//
+//                         }
+//
+//                     })
+//                 }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-//        waveView.stopWave()
+        wifi_wave.stop()
     }
 
     companion object {
