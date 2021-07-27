@@ -25,7 +25,6 @@ public class Singleton {
     public  void add() {
         synchronized (Singleton.class) {
 
-            System.out.println("count = " + (++count) + " this = " + this);
         }
     }
 }
