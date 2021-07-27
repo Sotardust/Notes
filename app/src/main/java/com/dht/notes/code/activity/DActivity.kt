@@ -21,6 +21,7 @@ class DActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_d)
         Log.d(TAG, "onCreate: ")
+        Log.d(TAG, "onCreate: 添加日志信息")
         btnText.text = "D跳转到B"
         btnText.setOnClickListener {
             startActivity(Intent(this, BActivity::class.java))
@@ -35,6 +36,7 @@ class DActivity : Activity() {
     override fun onRestart() {
         super.onRestart()
         Log.d(TAG, "onRestart: ")
+        Log.d(TAG, "用于测试git 命令: ")
     }
 
     override fun onNewIntent(intent: Intent?) {
