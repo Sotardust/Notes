@@ -35,8 +35,7 @@ class TelephonyActivity : Activity() {
     }
 
 
-    @SuppressLint("NewApi", "MissingPermission")
-    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
+    @SuppressLint("MissingPermission", "NewApi")
     private fun getInfo(): String {
 
         val list: HashSet<String> = hashSetOf()
@@ -46,7 +45,7 @@ class TelephonyActivity : Activity() {
             netExtraInfo = from(netExtraInfo)
         }
         try {
-            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
                 val subscriptionManager: SubscriptionManager = this.getSystemService(Context.TELEPHONY_SUBSCRIPTION_SERVICE) as SubscriptionManager
                 val activeSubscriptionInfoList: List<SubscriptionInfo> = subscriptionManager.activeSubscriptionInfoList
                 for (subscriptionInfo in activeSubscriptionInfoList) {
@@ -64,12 +63,13 @@ class TelephonyActivity : Activity() {
         }
 
         try {
-            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
                 for (cellInfo in manager.allCellInfo) {
                     when (cellInfo) {
                         is CellInfoGsm -> {
                             val cellIdentity: CellIdentityGsm = cellInfo.cellIdentity
                             list.add(cellIdentity.mobileNetworkOperator)
+
                         }
                         is CellInfoWcdma -> {
                             val cellIdentity: CellIdentityWcdma = cellInfo.cellIdentity
