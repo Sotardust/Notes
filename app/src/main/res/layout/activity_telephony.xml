@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <Button
+        android:id="@+id/phoneBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="获取手机卡信息" />
+
+    <com.dht.notes.code.coordlayout.NestedScrollLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/info"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </com.dht.notes.code.coordlayout.NestedScrollLayout>
+
+</LinearLayout>

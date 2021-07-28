@@ -16,6 +16,7 @@ import com.dht.notes.code.coordlayout.CoorActivity
 import com.dht.notes.code.lock.ThreadLockActivity
 import com.dht.notes.code.provider.ProviderActivity
 import com.dht.notes.code.service.ServiceActivity
+import com.dht.notes.code.telephony.TelephonyActivity
 import com.dht.notes.code.utils.VerticalDecoration
 import com.dht.notes.code.view.FlowActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -50,6 +51,7 @@ class MainActivity : Activity() {
 //
 //        }
         val list = arrayListOf(
+                "sim卡信息",
                 "Scroll",
                 "水波纹",
                 "自定义View",
@@ -74,8 +76,8 @@ class MainActivity : Activity() {
     }
 
     private fun addActivityList() {
+        activityList.add(TelephonyActivity::class)
         activityList.add(CoorActivity::class)
-
         activityList.add(WifiWaveActivity::class)
         activityList.add(FlowActivity::class)
         activityList.add(ThreadLockActivity::class)
