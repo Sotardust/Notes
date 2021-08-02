@@ -30,20 +30,18 @@ class CoorActivity : FragmentActivity() {
         //     Log.d(TAG, "onCreate() called with: appBarLayout = $appBarLayout, verticalOffset = $verticalOffset")
         // }
 
-        var appBarHeight = app_bar_layout.height
-        var toolBarHeight = toolbar.height
         var height = 0f
         app_bar_layout.addOnOffsetChangedListener(object : AppBarLayout.BaseOnOffsetChangedListener<AppBarLayout> {
             override fun onOffsetChanged(appBarLayout: AppBarLayout, verticalOffset: Int) {
                 if (height == 0f) {
-                    height = (app_bar_layout.height - toolbar.height).toFloat()
+                    height = (app_bar_layout.height - new_toolbar.height).toFloat()
                     return
                 }
 
                 val value = abs(verticalOffset) / height
-                toolbar.alpha = if (value < 0.3f) 0f else value
+                new_toolbar.alpha = if (value < 0.3f) 0f else value
 
-                Log.d(TAG, "onOffsetChanged() called abs(verticalOffset) % height :${abs(verticalOffset) / height} with:${app_bar_layout.height} toolbar:${toolbar.height}  verticalOffset = $verticalOffset")
+                Log.d(TAG, "onOffsetChanged() called abs(verticalOffset) % height :${abs(verticalOffset) / height} with:${app_bar_layout.height} toolbar:${new_toolbar.height}  verticalOffset = $verticalOffset")
             }
 
         })

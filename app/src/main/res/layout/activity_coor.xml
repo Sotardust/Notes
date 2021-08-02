@@ -10,38 +10,39 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
-        android:layout_height="123dp"
-        android:theme="@android:style/Theme.Translucent">
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/news_tool_bar_layout"
             android:layout_width="match_parent"
-            android:layout_height="123dp"
-            android:background="@drawable/ic_morning_news"
+            android:layout_height="147dp"
             app:contentScrim="@color/white"
-            app:expandedTitleMarginBottom="200dp"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:statusBarScrim="@android:color/transparent">
+            android:background="@drawable/ic_morning_news"
 
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:statusBarScrim="?attr/colorPrimary"
+            >
+<!--            app:statusBarScrim="@android:color/transparent"-->
 
             <ImageView
-                android:id="@+id/news_closed1"
+                android:id="@+id/news_close"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="80dp"
                 android:layout_gravity="end"
-                android:layout_marginTop="20dp"
                 android:baselineAlignBottom="true"
+                android:paddingTop="24dp"
                 android:paddingEnd="15dp"
                 android:paddingRight="15dp"
-                android:src="@drawable/ic_news_close"
                 app:layout_collapseMode="pin"
+                app:srcCompat="@drawable/ic_news_close"
                 tools:ignore="RtlSymmetry,VectorDrawableCompat" />
 
             <RelativeLayout
                 android:id="@+id/rl_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="37dp"
+                android:layout_marginTop="61dp"
                 android:layout_marginBottom="30dp"
                 android:gravity="center_vertical"
                 android:paddingStart="16dp"
@@ -55,13 +56,12 @@
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:includeFontPadding="false"
-                    android:textColor="#000000"
                     android:textSize="48sp"
                     android:textStyle="normal"
                     tools:text="10:11" />
 
                 <View
-                    android:id="@+id/line"
+                    android:id="@+id/news_line"
                     android:layout_width="1dp"
                     android:layout_height="28dp"
                     android:layout_centerInParent="true"
@@ -77,32 +77,54 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="15dp"
                     android:layout_marginLeft="15dp"
-                    android:layout_toRightOf="@+id/line"
+                    android:layout_toRightOf="@+id/news_line"
                     android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/tv_news_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="早上好"
-                        android:textColor="@color/color_43C4C5"
                         android:textSize="20sp" />
 
                     <TextView
                         android:id="@+id/tv_news_title_desc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="这是我们为您精选的早间新闻"
-                        android:textColor="@color/color_43C4C5"
                         android:textSize="13sp" />
                 </LinearLayout>
 
-
             </RelativeLayout>
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/new_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:visibility="gone"
+                app:layout_collapseMode="pin">
+
+                <TextView
+                    android:id="@+id/tv_news_head"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="24dp"
+                    android:textSize="20sp" />
+
+                <ImageView
+                    android:id="@+id/news_toolbar_close"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:paddingTop="24dp"
+                    android:paddingEnd="15dp"
+                    android:paddingRight="15dp"
+                    app:layout_collapseMode="pin"
+                    app:srcCompat="@drawable/ic_news_close"
+                    tools:ignore="RtlSymmetry,VectorDrawableCompat" />
+
+            </androidx.appcompat.widget.Toolbar>
 
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
-
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/news_tabLayout"
@@ -111,41 +133,9 @@
             android:layout_gravity="bottom"
             android:background="@color/white"
             android:paddingLeft="6dp"
-
             app:tabIndicatorHeight="0dp" />
 
     </com.google.android.material.appbar.AppBarLayout>
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@drawable/ic_morning_news"
-        app:layout_collapseMode="pin">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="早间新闻"
-            android:textColor="@color/color_43C4C5"
-            android:textSize="25dp"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/news_closed"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginTop="20dp"
-            android:baselineAlignBottom="true"
-            android:paddingEnd="15dp"
-            android:paddingRight="15dp"
-            android:src="@drawable/ic_news_close"
-            app:layout_collapseMode="pin"
-            tools:ignore="RtlSymmetry,VectorDrawableCompat" />
-
-    </androidx.appcompat.widget.Toolbar>
-
 
     <TextView
         android:layout_width="match_parent"
