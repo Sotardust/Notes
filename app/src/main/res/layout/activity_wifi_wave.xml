@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_276ef3"
+    android:background="@color/white"
     android:gravity="center"
     android:orientation="vertical">
 <!--    android:background="@color/color_276ef3"-->
@@ -20,9 +20,17 @@
     <!--        app:wave_width="1dp" />-->
 
 
-    <com.dht.notes.code.animation.RadarView
-        android:id="@+id/radar"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    <com.dht.notes.code.animation.WifiWaveView
+        android:id="@+id/wifi_wave"
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
+        android:layout_marginTop="97dp"
+        app:center_radius="50dp"
+
+        app:max_radius="100dp"
+        app:wave_duration="1500"
+        app:wave_interval_time="500"
+        app:wave_side_color="@color/colorPrimary"
+        app:wave_width="2dp" />
 
 </LinearLayout>
