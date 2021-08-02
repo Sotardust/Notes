@@ -12,7 +12,7 @@ object KotlinTest {
       test()
     }
 
-    fun test() = runBlocking {git
+    fun test() = runBlocking {
         println("........................")
         GlobalScope.launch {
 
