@@ -1,7 +1,11 @@
 package com.dht.notes.code;
 
+import android.util.Log;
+
 public class Singleton {
 
+
+    private static final String TAG = "Singleton";
 
     private volatile static Singleton mSingleton;
 
@@ -25,7 +29,8 @@ public class Singleton {
     public  void add() {
         synchronized (Singleton.class) {
 
-            System.out.println("count = " + (++count) + " this = " + this);
+            Log.d(TAG, "add: ");
+            System.out.println("TAG = " + TAG);
         }
     }
 }

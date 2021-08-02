@@ -19,7 +19,6 @@ class AActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_a)
-        Log.d(TAG, "onCreate: ")
         btnText.text = "A跳转到B"
         btnText.setOnClickListener {
             startActivity(Intent(this, BActivity::class.java))

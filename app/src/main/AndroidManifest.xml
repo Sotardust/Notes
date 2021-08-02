@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.dht.notes">
 
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
     <application
         android:name=".NoteApplication"
         android:allowBackup="true"
@@ -52,7 +54,9 @@
         <activity android:name=".code.service.ServiceActivity" />
         <activity android:name=".code.provider.ProviderActivity" />
         <activity android:name=".code.fragment.FragmentActivity" />
-        <activity android:name=".code.animation.WifiWaveActivity" />
+        <activity android:name=".code.animation.ScrollActivity" />
+        <activity android:name=".code.coordlayout.CoorActivity" />
+        <activity android:name=".code.telephony.TelephonyActivity" />
         <!--            android:taskAffinity="com.dht.notes.dfasf"-->
 
         <provider android:name=".code.provider.MyProvider"
@@ -69,11 +73,13 @@
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <uses-permission
         android:name="android.permission.CONTROL_LOCATION_UPDATES"
         tools:ignore="ProtectedPermissions" />
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 
 
 </manifest>

@@ -1,5 +1,6 @@
 package com.dht.notes.code.adapter
 
+import android.util.Log
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.dht.notes.R
@@ -13,9 +14,12 @@ import com.dht.notes.R
 
 class MainAdapter : BaseQuickAdapter<String, BaseViewHolder> {
 
+
+    private  val TAG = "dht2"
     constructor(data: MutableList<String>) : super(R.layout.item_main, data)
 
     override fun convert(holder: BaseViewHolder, item: String) {
+        Log.d(TAG, "convert() called with:, item = $item")
         holder.setText(R.id.item_content, item)
 
     }
