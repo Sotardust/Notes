@@ -18,6 +18,7 @@ public class MyAsyncTask extends AsyncTask<String, String, String> {
     @Override
     protected String doInBackground(String... strings) {
 
+        Log.d(TAG, "doInBackground: c4");
         Log.d(TAG, "doInBackground: ");
         return null;
     }
