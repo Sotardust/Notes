@@ -26,6 +26,7 @@ public class MyAsyncTask extends AsyncTask<String, String, String> {
     protected void onProgressUpdate(String... values) {
         super.onProgressUpdate(values);
 
+        Log.d(TAG, "onProgressUpdate: c3");
         Log.d(TAG, "onProgressUpdate: ");
     }
 
