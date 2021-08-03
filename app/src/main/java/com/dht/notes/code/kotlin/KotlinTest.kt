@@ -18,6 +18,8 @@ object KotlinTest {
 
             println("1........................")
             println("1........................")
+            println("3git 1........................")
+            println("1........................")
             val count = repeat()
             println("2........................")
             val data = count + 5
