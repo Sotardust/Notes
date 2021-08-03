@@ -24,6 +24,11 @@ object KotlinTest {
             val data = count + 5
 
             println("3........................")
+            println("3.........fsafasdfas...............")
+            println("3........................")
+
+
+
             println("data = ${data}")
 
         }

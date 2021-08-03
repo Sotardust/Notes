@@ -35,6 +35,7 @@ public class MyAsyncTask extends AsyncTask<String, String, String> {
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
         Log.d(TAG, "onPostExecute: ");
+        Log.d(TAG, "onPostExecute: 1211 git");
     }
 
     @Override
