@@ -25,11 +25,14 @@ public class MyAsyncTask extends AsyncTask<String, String, String> {
     @Override
     protected void onProgressUpdate(String... values) {
         super.onProgressUpdate(values);
+
+        Log.d(TAG, "onProgressUpdate: ");
     }
 
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
+        Log.d(TAG, "onPostExecute: ");
     }
 
     @Override
