@@ -32,6 +32,7 @@ public class MyAsyncTask extends AsyncTask<String, String, String> {
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
+        Log.d(TAG, "onPostExecute: c8");
         Log.d(TAG, "onPostExecute: ");
     }
 
