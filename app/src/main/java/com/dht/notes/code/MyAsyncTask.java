@@ -38,5 +38,6 @@ public class MyAsyncTask extends AsyncTask<String, String, String> {
     @Override
     protected void onCancelled(String s) {
         super.onCancelled(s);
+        Log.d(TAG, "onCancelled: ");
     }
 }
