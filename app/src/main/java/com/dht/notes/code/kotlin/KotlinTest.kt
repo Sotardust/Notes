@@ -20,7 +20,6 @@ object KotlinTest {
             println("3git 1........................")
             println("1........................")
             val count = repeat()
-            println("2........................")
             val data = count + 5
             println("3........................")
             println("data = ${data}")
