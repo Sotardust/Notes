@@ -13,6 +13,8 @@ public class MyAsyncTask extends AsyncTask<String, String, String> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
+
+        Log.d(TAG, "onPreExecute: ");
     }
 
     @Override

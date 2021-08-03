@@ -26,6 +26,7 @@ object KotlinTest {
             println("3........................")
             println("3.........fsafasdfas...............")
             println("3........................")
+            println("3..................fdsafagit......")
 
 
 
