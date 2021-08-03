@@ -39,6 +39,9 @@ object KotlinTest {
                 count++
             }
             println(" 300011111111111111")
+            println(" 3000111111111111C9")
+
+
             count
         }
 
