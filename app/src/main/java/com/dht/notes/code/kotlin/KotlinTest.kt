@@ -18,12 +18,11 @@ object KotlinTest {
 
             println("1........................")
             println("1........................")
-            println("3git 1........................")
+
             println("1........................")
             val count = repeat()
             val data = count + 5
-            println("3........................")
-            println("3........................")
+
             println("3........................")
             println("data = ${data}")
 
