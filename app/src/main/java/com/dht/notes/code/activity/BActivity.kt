@@ -22,6 +22,7 @@ class BActivity : Activity() {
         setContentView(R.layout.activity_b)
         Log.d(TAG, "onCreate: ")
         btnText.text = "B跳转到C"
+        btnText.text = "B跳转到C1"
         btnText.setOnClickListener {
             startActivity(Intent(this, CActivity::class.java))
         }
