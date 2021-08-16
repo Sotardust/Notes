@@ -23,6 +23,8 @@ class BActivity : Activity() {
         Log.d(TAG, "onCreate: ")
         btnText.text = "B跳转到C"
         btnText.text = "B跳转到C1"
+        btnText.text = "B跳转到C1"
+        btnText.text = "B跳转到C1"
         btnText.setOnClickListener {
             startActivity(Intent(this, CActivity::class.java))
         }
