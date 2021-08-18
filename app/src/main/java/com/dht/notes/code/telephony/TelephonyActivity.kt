@@ -38,7 +38,13 @@ class TelephonyActivity : Activity() {
         setContentView(R.layout.activity_telephony)
 
         phoneBtn.setOnClickListener {
-            info.text = getInfo()
+            // info.text = getInfo()
+
+            val list1 = TestList()
+            list1.setTestCase(TestCase())
+            println("list1.getAdPlacementList(1) = ${list1.getAdPlacementList(1)}")
+            println("list1.getAdPlacementList(4) = ${list1.getAdPlacementList(4)}")
+            println("list1.getAdPlacementList(5) = ${list1.getAdPlacementList(5)}")
         }
 
         GlobalScope.launch {
