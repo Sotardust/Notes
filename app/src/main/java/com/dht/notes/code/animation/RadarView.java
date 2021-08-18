@@ -80,6 +80,7 @@ public class RadarView extends FrameLayout {
         mPaintSector.setColor(Color.WHITE);
         mPaintSector.setAntiAlias(true);
         mShader = new SweepGradient(viewSize / 2, viewSize / 2, Color.TRANSPARENT, getContext().getResources().getColor(R.color.color_595ecdfb));
+
         mPaintSector.setShader(mShader);
 
     }
@@ -99,7 +100,7 @@ public class RadarView extends FrameLayout {
     @Override
     protected void onDraw (Canvas canvas) {
         canvas.drawCircle(viewSize / 2, viewSize / 2, 350, mPaintLine);
-        canvas.drawCircle(viewSize / 2, viewSize / 2, 340, mPaintSector);
+        // canvas.drawCircle(viewSize / 2, viewSize / 2, 340, mPaintSector);
         super.onDraw(canvas);
     }
 

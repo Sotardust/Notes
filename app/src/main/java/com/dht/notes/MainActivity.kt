@@ -13,6 +13,7 @@ import com.dht.notes.code.adapter.MainAdapter
 import com.dht.notes.code.animation.AnimationActivity
 import com.dht.notes.code.animation.WifiWaveActivity
 import com.dht.notes.code.coordlayout.CoorActivity
+import com.dht.notes.code.floatingwindow.FloatingWindowActivity
 import com.dht.notes.code.lock.ThreadLockActivity
 import com.dht.notes.code.provider.ProviderActivity
 import com.dht.notes.code.service.ServiceActivity
@@ -51,6 +52,7 @@ class MainActivity : Activity() {
 //
 //        }
         val list = arrayListOf(
+                "悬浮球测试",
                 "sim卡信息",
                 "Scroll",
                 "水波纹",
@@ -76,6 +78,7 @@ class MainActivity : Activity() {
     }
 
     private fun addActivityList() {
+        activityList.add(FloatingWindowActivity::class)
         activityList.add(TelephonyActivity::class)
         activityList.add(CoorActivity::class)
         activityList.add(WifiWaveActivity::class)

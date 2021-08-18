@@ -57,6 +57,8 @@
         <activity android:name=".code.animation.ScrollActivity" />
         <activity android:name=".code.coordlayout.CoorActivity" />
         <activity android:name=".code.telephony.TelephonyActivity" />
+        <activity android:name=".code.floatingwindow.FloatingWindowActivity" />
+        <activity android:name=".code.animation.WifiWaveActivity" />
         <!--            android:taskAffinity="com.dht.notes.dfasf"-->
 
         <provider android:name=".code.provider.MyProvider"
