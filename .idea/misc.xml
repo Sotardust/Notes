@@ -5,6 +5,7 @@
       <map>
         <entry key="../../../../../layout/custom_preview.xml" value="0.19166666666666668" />
         <entry key="app/src/main/res/layout/activity_floating_window.xml" value="0.125" />
+        <entry key="app/src/main/res/layout/activity_telephony.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_wifi_wave.xml" value="0.115625" />
       </map>
     </option>

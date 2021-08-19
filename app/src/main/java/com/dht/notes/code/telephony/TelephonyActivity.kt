@@ -45,6 +45,51 @@ class TelephonyActivity : Activity() {
             println("list1.getAdPlacementList(1) = ${list1.getAdPlacementList(1)}")
             println("list1.getAdPlacementList(4) = ${list1.getAdPlacementList(4)}")
             println("list1.getAdPlacementList(5) = ${list1.getAdPlacementList(5)}")
+
+            println("SceneAdUtils.adWrapperViewMap[\"fds\"]  = ${SceneAdUtils.adWrapperViewMap["fds"]}")
+
+            SceneAdUtils.adWrapperViewMap["df"] = mutableListOf(
+                SceneAdUtils.InterstitialAdEcpm("dff", 0.6f),
+                SceneAdUtils.InterstitialAdEcpm("dff", 0.8f)
+            )
+
+
+            val list2 = SceneAdUtils.adWrapperViewMap["df"]
+            val resul1 = list2?.maxBy { it.ecpm }
+            list2?.remove(resul1)
+            println("SceneAdUtils list2 = ${list2}")
+            println("SceneAdUtils resul1 = ${resul1}")
+             val result  = mutableListOf("345","dfa","wdfas")
+            val value  =  result[0]
+            result.remove(value)
+            println("result = ${result}")
+
+            val value1= mutableListOf<String>()
+            println("value1 = ${value1.isNullOrEmpty()}")
+            println("result = ${result}")
+
+
+        }
+        phoneBtn1.setOnClickListener {
+            // info.text = getInfo()
+
+            val list1 = TestList()
+            list1.setTestCase(TestCase())
+            println("list1.getAdPlacementList(1) = ${list1.getAdPlacementList(1)}")
+            println("list1.getAdPlacementList(4) = ${list1.getAdPlacementList(4)}")
+            println("list1.getAdPlacementList(5) = ${list1.getAdPlacementList(5)}")
+            val list22 = mutableListOf<String>()
+
+            list22.add("fsa")
+            println("SceneAdUtils list22 = ${list22.size}")
+            list22.remove("fsa")
+
+            println("SceneAdUtils list22.... = ${list22.size}")
+            println("SceneAdUtils list22.... = ${list22.isNullOrEmpty()}")
+
+            // println("SceneAdUtils.adWrapperViewMap[\";ffsds\"]  = ${SceneAdUtils.adWrapperViewMap["df"]?.maxBy { it.ecpm }!!.ecpm}")
+            println("SceneAdUtils.adWrapperViewMap[\"fds\"] = ${SceneAdUtils.adWrapperViewMap["fds"].isNullOrEmpty()}")
+
         }
 
         GlobalScope.launch {
@@ -172,4 +217,6 @@ class TelephonyActivity : Activity() {
     companion object {
         private const val TAG = "dht123"
     }
+
+
 }

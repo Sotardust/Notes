@@ -6,6 +6,7 @@ import java.util.List;
 public class TestCase {
 
 
+
     public List<String> getAdPlacementList(int appPlacement) {
         List<String> adPlacementsList = new ArrayList<>();
 
