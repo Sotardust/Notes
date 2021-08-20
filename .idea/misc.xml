@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../../layout/custom_preview.xml" value="0.19166666666666668" />
+        <entry key="app/src/main/res/drawable/ic_news_close.xml" value="0.20092592592592592" />
+        <entry key="app/src/main/res/drawable/svg_floating_window.xml" value="0.16822916666666668" />
         <entry key="app/src/main/res/layout/activity_floating_window.xml" value="0.125" />
         <entry key="app/src/main/res/layout/activity_telephony.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_wifi_wave.xml" value="0.115625" />

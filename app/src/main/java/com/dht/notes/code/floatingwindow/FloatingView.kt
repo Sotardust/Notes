@@ -5,7 +5,6 @@ import android.animation.AnimatorListenerAdapter
 import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.Canvas
-import android.graphics.Color
 import android.graphics.Matrix
 import android.graphics.Paint
 import android.graphics.RectF
@@ -19,44 +18,52 @@ import android.view.animation.LinearInterpolator
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import com.dht.notes.R
-import com.dht.notes.code.animation.WifiWaveView
-import kotlin.math.abs
 
 /**
  * created by dht on 2021/8/18 15:33
  */
 class FloatingView : View {
 
+
     //内圈小圆的圆心
-    private var innerCircleX = 0f
-    private var innerCircleY = 0f
+    private var circleX = 0f
+    private var circleY = 0f
 
     //内圈小圆的半径
     private var innerCircleRadius = 0f
 
+    //外圈大圆的半径
+    private var circleRadius = 0f
+
     //View的宽高
-    private var mWidth = 0
-    private var mHeight = 0
+    private var viewWidth = 0
+    private var viewHeight = 0
 
     //圆环宽度
-    private var mStrokeWidth = 20f
+    private var strokeWidth = 15f
 
-    //画笔
-    private val mPaint by lazy {
+    private val bgPaint by lazy {
         Paint().apply {
             isAntiAlias = true
-            color = Color.WHITE
+            color = ContextCompat.getColor(context, R.color.color_6F6F70)
             style = Paint.Style.FILL
-            strokeWidth = 10f
+            strokeWidth = 5f
         }
     }
 
-    //画笔
-    private val mPaint1 by lazy {
+    private val gradientPaint by lazy {
         Paint().apply {
             isAntiAlias = true
             style = Paint.Style.FILL
-            strokeWidth = 10f
+            strokeWidth = 5f
+        }
+    }
+    private val grayPaint by lazy {
+        Paint().apply {
+            isAntiAlias = true
+            color = ContextCompat.getColor(context, R.color.color_8A8A8A)
+            style = Paint.Style.FILL
+            strokeWidth = 5f
         }
     }
 
@@ -72,12 +79,14 @@ class FloatingView : View {
         initData()
     }
 
-    private var sweepAngle = 270f
+    private var currentIndex = 0
     private var lastSweepAngle = 0f
     private fun initData() {
-        ValueAnimator.ofInt(-90, -450).apply {
+
+        // ValueAnimator.ofInt(-90, -360).apply {
+        ValueAnimator.ofInt(0, 30).apply {
             this.interpolator = LinearInterpolator()
-            this.duration = 5000
+            this.duration = 1000
             this.start()
             this.addListener(object : AnimatorListenerAdapter() {
                 override fun onAnimationEnd(animation: Animator?) {
@@ -85,9 +94,7 @@ class FloatingView : View {
                 }
             })
             addUpdateListener { animation ->
-                sweepAngle = (animation.animatedValue as Int).toFloat()
-                lastSweepAngle = abs(90f + ((animation.animatedValue as Int)))
-                Log.d(TAG, "onAnimationUpdate: sweepAngle $sweepAngle  value =${animation.animatedValue as Int}")
+                currentIndex = animation.animatedValue as Int
                 invalidate()
             }
         }
@@ -99,54 +106,61 @@ class FloatingView : View {
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-        mWidth = MeasureSpec.getSize(widthMeasureSpec)
-        mHeight = MeasureSpec.getSize(heightMeasureSpec)
+        viewWidth = MeasureSpec.getSize(widthMeasureSpec)
+        viewHeight = MeasureSpec.getSize(heightMeasureSpec)
+        Log.d(TAG, "onMeasure() called with: viewWidth = $viewWidth, viewHeight = $viewHeight")
         if (layoutParams.width == ViewGroup.LayoutParams.WRAP_CONTENT) {
-            mWidth =500 //设置默认宽高
+            viewWidth = 220 //设置默认宽高
         }
         if (layoutParams.height == ViewGroup.LayoutParams.WRAP_CONTENT) {
-            mHeight = 500
+            viewHeight = 220
         }
         //外圈扇形所在矩形区域
-        rectF.set(paddingLeft.toFloat(), paddingTop.toFloat(), mWidth.toFloat() - paddingRight.toFloat(), mHeight.toFloat() - paddingBottom.toFloat())
-        innerCircleX = mWidth * 0.5f
-        innerCircleY = mHeight * 0.5f
-        innerCircleRadius = mWidth * 0.5f - mStrokeWidth - (paddingStart + paddingEnd)
+        rectF.set(paddingLeft.toFloat(), paddingTop.toFloat(), viewWidth.toFloat() - paddingRight.toFloat() - 2 * strokeWidth, viewHeight.toFloat() - paddingBottom.toFloat() - 2 * strokeWidth)
+        circleX = viewWidth / 2f
+        circleY = viewHeight / 2f
+        circleRadius = viewWidth / 2f
+        innerCircleRadius = viewWidth / 2f - strokeWidth - (paddingStart + paddingEnd)
         //保存测量结果
-        setMeasuredDimension(mWidth, mHeight)
-
-        Log.d(TAG, "onMeasure() called with: innerCircleX = $innerCircleX, innerCircleY = $innerCircleY innerCircleRadius = $innerCircleRadius")
+        setMeasuredDimension((viewWidth), (viewHeight))
     }
 
+
     var isFirst = true
+
+    var start = -90f
+    var end = -270f
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
         if (isFirst) {
-            isFirst = false
+            rectF.offset(strokeWidth, strokeWidth)
             val color1 = ContextCompat.getColor(context, R.color.color_faee65)
             val color2 = ContextCompat.getColor(context, R.color.color_eeaf47)
-            val shader = SweepGradient(rectF.width() / 2f, rectF.height() / 2f, color2, color1)
+            val shader = SweepGradient(rectF.centerX(), rectF.centerY(), color2, color1)
             val matrix = Matrix()
-            matrix.postRotate(-90f,rectF.width() / 2f, rectF.height() / 2f)
+            matrix.postRotate(-90f, rectF.centerX(), rectF.centerY())
             shader.setLocalMatrix(matrix)
-            mPaint1.shader = shader
-
+            gradientPaint.shader = shader
+            isFirst = false
         }
-        // canvas.drawArc(rectF, 30f, 90f, true, mPaint1)
-        // for (entry in 0..32) {
-        //     val sweepAngle = entry.value / valueAll * 360f
-        //     startAngle += sweepAngle
-        // }
-        Log.d(TAG, "onDraw: sweepAngle = $sweepAngle lastSweepAngle = $lastSweepAngle")
-        // canvas.drawArc(rectF,  -sweepAngle, -lastSweepAngle,true, mPaint1)
-        canvas.drawArc(rectF, sweepAngle, lastSweepAngle, true, mPaint1)
-        // lastSweepAngle = sweepAngle
 
-        canvas.drawCircle(innerCircleX, innerCircleY, innerCircleRadius, mPaint)
+        canvas.drawCircle(circleX, circleY, circleRadius, bgPaint)
+
+        for (index in 1..36) {
+            canvas.drawArc(rectF, (index * 10f) + 2f, 8f, true, grayPaint)
+        }
+
+        for (index in 0..currentIndex) {
+            canvas.drawArc(rectF, -((index * 10f) + 2f) - 90f, -8f, true, gradientPaint)
+        }
+
+        canvas.drawCircle(circleX, circleY, innerCircleRadius - strokeWidth, bgPaint)
+
     }
 
+
     companion object {
-        private const val TAG = "dht"
+        private const val TAG = "FloatingView"
     }
 }
