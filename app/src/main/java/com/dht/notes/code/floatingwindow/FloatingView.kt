@@ -9,13 +9,10 @@ import android.graphics.Matrix
 import android.graphics.Paint
 import android.graphics.RectF
 import android.graphics.SweepGradient
-import android.os.Build
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
-import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
-import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import com.dht.notes.R
 
@@ -25,68 +22,150 @@ import com.dht.notes.R
 class FloatingView : View {
 
 
-    //内圈小圆的圆心
+    /**
+     * 内圈小圆的圆心
+     */
     private var circleX = 0f
     private var circleY = 0f
 
-    //内圈小圆的半径
+    /**
+     * 外圈大圆的半径
+     */
+    private var circleRadius = 220f
+
+    /**
+     * 内圈小圆的半径
+     */
     private var innerCircleRadius = 0f
 
-    //外圈大圆的半径
-    private var circleRadius = 0f
+    /**
+     * 圆环宽度
+     */
+    private var circleWidth = 15f
 
-    //View的宽高
-    private var viewWidth = 0
-    private var viewHeight = 0
+    /**
+     * 动画持续时间
+     */
+    private var duration = 1000
 
-    //圆环宽度
-    private var strokeWidth = 15f
+    /**
+     * 扇形所在的矩形区域
+     */
+    private val rectF = RectF()
 
-    private val bgPaint by lazy {
-        Paint().apply {
-            isAntiAlias = true
-            color = ContextCompat.getColor(context, R.color.color_6F6F70)
-            style = Paint.Style.FILL
-            strokeWidth = 5f
-        }
-    }
+    //渐变开始、结束颜色、
+    private var gradientStartColor = ContextCompat.getColor(context, R.color.color_faee65)
+    private var gradientEndColor = ContextCompat.getColor(context, R.color.color_eeaf47)
 
-    private val gradientPaint by lazy {
-        Paint().apply {
-            isAntiAlias = true
-            style = Paint.Style.FILL
-            strokeWidth = 5f
-        }
-    }
-    private val grayPaint by lazy {
-        Paint().apply {
-            isAntiAlias = true
-            color = ContextCompat.getColor(context, R.color.color_8A8A8A)
-            style = Paint.Style.FILL
-            strokeWidth = 5f
-        }
-    }
+    /**
+     * 圆背景颜色
+     */
+    private var bgColor = ContextCompat.getColor(context, R.color.color_6F6F70)
 
-    constructor(context: Context?) : super(context) {
-        initData()
-    }
+    /**
+     * 圆环背景颜色
+     */
+    private var grayColor = ContextCompat.getColor(context, R.color.color_8A8A8A)
 
-    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs) {
-        initData()
-    }
+    /**
+     * 设置不同画笔
+     */
+    private val bgPaint = getPaint()
+    private val gradientPaint = getPaint()
+    private val grayPaint = getPaint()
 
-    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
-        initData()
-    }
-
+    /**
+     * 动画执行的当前索引
+     */
     private var currentIndex = 0
-    private var lastSweepAngle = 0f
+
+    private var valueAnimator: ValueAnimator? = null
+
+    constructor(context: Context) : this(context, null)
+
+    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
+
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
+        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.FloatingView, defStyleAttr, 0)
+        bgColor = typedArray.getColor(R.styleable.FloatingView_bg_paint_color, bgColor)
+        gradientStartColor = typedArray.getColor(R.styleable.FloatingView_gradient_start_paint_color, gradientStartColor)
+        gradientEndColor = typedArray.getColor(R.styleable.FloatingView_gradient_end_paint_color, gradientEndColor)
+        grayColor = typedArray.getColor(R.styleable.FloatingView_gray_paint_color, grayColor)
+        duration = typedArray.getInt(R.styleable.FloatingView_duration, duration)
+        circleWidth = typedArray.getDimension(R.styleable.FloatingView_ring_width, circleWidth)
+        circleRadius = typedArray.getDimension(R.styleable.FloatingView_circle_radius, circleRadius)
+        typedArray.recycle()
+        initData()
+    }
+
+    /**
+     * 设置画笔
+     */
+    private fun getPaint(): Paint {
+        return Paint().apply {
+            isAntiAlias = true
+            style = Paint.Style.FILL
+            strokeWidth = 5f
+        }
+    }
+
+    /**
+     * 初始化数据
+     */
     private fun initData() {
 
-        // ValueAnimator.ofInt(-90, -360).apply {
-        ValueAnimator.ofInt(0, 30).apply {
+        //外圈扇形所在矩形区域
+        rectF.set(0f, 0f, 2 * (circleRadius - circleWidth), 2 * (circleRadius - circleWidth))
+        circleX = circleRadius
+        circleY = circleRadius
+        innerCircleRadius = circleRadius - 2 * circleWidth
+        bgPaint.color = bgColor
+        grayPaint.color = grayColor
+
+        //设置矩形圆点偏移量
+        rectF.offset(circleWidth, circleWidth)
+
+        val shader = SweepGradient(rectF.centerX(), rectF.centerY(), gradientEndColor, gradientStartColor)
+        val matrix = Matrix()
+        matrix.postRotate(-90f, rectF.centerX(), rectF.centerY())
+        shader.setLocalMatrix(matrix)
+        gradientPaint.shader = shader
+    }
+
+    override fun onDraw(canvas: Canvas) {
+        super.onDraw(canvas)
+
+        canvas.drawCircle(circleX, circleY, circleRadius, bgPaint)
+
+        drawCircle(canvas)
+
+        canvas.drawCircle(circleX, circleY, innerCircleRadius, bgPaint)
+
+    }
+
+
+    /**
+     * 绘制圆环
+     */
+    private fun drawCircle(canvas: Canvas) {
+
+        for (index in 1..36) {
+            canvas.drawArc(rectF, (index * 10f) + 2f, 8f, true, grayPaint)
+        }
+
+        for (index in 0..currentIndex) {
+            canvas.drawArc(rectF, -((index * 10f) + 2f) - 90f, -8f, true, gradientPaint)
+        }
+    }
+
+    /**
+     * 开始动画
+     * @param degree 内存使用程度
+     */
+    fun startAnima(degree: Int) {
+        valueAnimator = ValueAnimator.ofInt(0, degree * 35 / 100).apply {
             this.interpolator = LinearInterpolator()
-            this.duration = 1000
+            this.duration = duration
             this.start()
             this.addListener(object : AnimatorListenerAdapter() {
                 override fun onAnimationEnd(animation: Animator?) {
@@ -100,63 +179,11 @@ class FloatingView : View {
         }
     }
 
-    //扇形所在的矩形区域
-    private val rectF = RectF()
-
-    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
-    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-        viewWidth = MeasureSpec.getSize(widthMeasureSpec)
-        viewHeight = MeasureSpec.getSize(heightMeasureSpec)
-        Log.d(TAG, "onMeasure() called with: viewWidth = $viewWidth, viewHeight = $viewHeight")
-        if (layoutParams.width == ViewGroup.LayoutParams.WRAP_CONTENT) {
-            viewWidth = 220 //设置默认宽高
-        }
-        if (layoutParams.height == ViewGroup.LayoutParams.WRAP_CONTENT) {
-            viewHeight = 220
-        }
-        //外圈扇形所在矩形区域
-        rectF.set(paddingLeft.toFloat(), paddingTop.toFloat(), viewWidth.toFloat() - paddingRight.toFloat() - 2 * strokeWidth, viewHeight.toFloat() - paddingBottom.toFloat() - 2 * strokeWidth)
-        circleX = viewWidth / 2f
-        circleY = viewHeight / 2f
-        circleRadius = viewWidth / 2f
-        innerCircleRadius = viewWidth / 2f - strokeWidth - (paddingStart + paddingEnd)
-        //保存测量结果
-        setMeasuredDimension((viewWidth), (viewHeight))
-    }
-
-
-    var isFirst = true
-
-    var start = -90f
-    var end = -270f
-    override fun onDraw(canvas: Canvas) {
-        super.onDraw(canvas)
-
-        if (isFirst) {
-            rectF.offset(strokeWidth, strokeWidth)
-            val color1 = ContextCompat.getColor(context, R.color.color_faee65)
-            val color2 = ContextCompat.getColor(context, R.color.color_eeaf47)
-            val shader = SweepGradient(rectF.centerX(), rectF.centerY(), color2, color1)
-            val matrix = Matrix()
-            matrix.postRotate(-90f, rectF.centerX(), rectF.centerY())
-            shader.setLocalMatrix(matrix)
-            gradientPaint.shader = shader
-            isFirst = false
-        }
-
-        canvas.drawCircle(circleX, circleY, circleRadius, bgPaint)
-
-        for (index in 1..36) {
-            canvas.drawArc(rectF, (index * 10f) + 2f, 8f, true, grayPaint)
-        }
-
-        for (index in 0..currentIndex) {
-            canvas.drawArc(rectF, -((index * 10f) + 2f) - 90f, -8f, true, gradientPaint)
-        }
-
-        canvas.drawCircle(circleX, circleY, innerCircleRadius - strokeWidth, bgPaint)
-
+    /**
+     * 停止动画
+     */
+    fun stopAnima() {
+        valueAnimator?.cancel()
     }
 
 

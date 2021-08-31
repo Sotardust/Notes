@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <declare-styleable name="FloatingView">
+        <attr name="bg_paint_color" format="color" />
+        <attr name="gradient_start_paint_color" format="color" />
+        <attr name="gradient_end_paint_color" format="color" />
+        <attr name="gray_paint_color" format="color" />
+        <!--圆环宽度-->
+        <attr name="ring_width" format="dimension" />
+        <!--圆环最大宽度-->
+        <attr name="circle_radius" format="dimension" />
+        <!--动画扫描时间-->
+        <attr name="duration" format="integer" />
+
+    </declare-styleable>
     <declare-styleable name="WifiWaveView">
 
         <!-- 波纹颜色-->

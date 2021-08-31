@@ -51,7 +51,7 @@ class ExampleUnitTest {
         c[Calendar.MINUTE] = 0
         c[Calendar.SECOND] = 0
         c[Calendar.MILLISECOND] = 0
-        println("c.timeInMillis  =${c.timeInMillis/1000 }")
+        println("c.timeInMillis  =${c.timeInMillis / 1000}")
 
 
     }
@@ -73,4 +73,14 @@ class ExampleUnitTest {
         }
     }
 
+    @Test
+    fun testJava3() {
+
+        println("UUID.randomUUID() i =  = ${"12rq".hashCode()}")
+        println("UUID.randomUUID() i =  = ${"12rq".hashCode()}")
+        for (i in 0..30) {
+            println("UUID.randomUUID() i = $i = ${UUID.randomUUID()}")
+            println("UUID.randomUUID() i = $i = ${Object().hashCode()}")
+        }
+    }
 }

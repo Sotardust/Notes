@@ -46,9 +46,11 @@ class FloatingWindowActivity : Activity() {
             CircularRingView.CircularRingElement(Color.parseColor("#ff0000"), 21f)
         )
         crv_attendance.setElementList(datas)
-        crv_attendance.setRingThickness(crv_attendance.dp2px(20f))
+        // crv_attendance.setRingThickness(crv_attendance.dp2px(20f))
 
+        floating.startAnima(99)
 
+        progressCircleView.startAnima(80f)
 
     }
 

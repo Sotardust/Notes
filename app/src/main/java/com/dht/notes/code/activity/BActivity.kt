@@ -20,6 +20,7 @@ class BActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_b)
+        // intent.getS
         Log.d(TAG, "onCreate: ")
         btnText.text = "B跳转到C"
         btnText.text = "B跳转到C1"

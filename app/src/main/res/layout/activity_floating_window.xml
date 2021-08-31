@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     android:orientation="vertical">
 
     <TextView
@@ -10,14 +12,20 @@
         android:text="悬浮球测试" />
 
 
-
     <com.dht.notes.code.floatingwindow.FloatingView
+        android:id="@+id/floating"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center" />
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        app:circle_radius="36dp" />
 
     <com.dht.notes.code.floatingwindow.CircularRingView
         android:id="@+id/crv_attendance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
+    <com.dht.notes.code.floatingwindow.ProgressCircleView
+        android:id="@+id/progressCircleView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 </LinearLayout>

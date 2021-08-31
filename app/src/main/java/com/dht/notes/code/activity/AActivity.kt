@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import com.dht.notes.R
 import kotlinx.android.synthetic.main.activity_a.*
+import java.util.*
 
 /**
  *  created by Administrator on 2020/9/8 17:20
@@ -21,7 +22,11 @@ class AActivity : Activity() {
         setContentView(R.layout.activity_a)
         btnText.text = "A跳转到B"
         btnText.setOnClickListener {
-            startActivity(Intent(this, BActivity::class.java))
+            val value  = UUID.randomUUID()
+            Log.d(TAG, "onCreate() called value =$value")
+            val intent = Intent(this, BActivity::class.java)
+            intent.putExtra("value",value)
+            startActivity(intent)
         }
     }
 
