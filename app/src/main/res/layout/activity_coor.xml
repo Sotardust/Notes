@@ -19,7 +19,6 @@
             android:layout_height="123dp"
             android:background="@drawable/ic_morning_news"
             app:contentScrim="@color/white"
-            app:expandedTitleMarginBottom="200dp"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:statusBarScrim="@android:color/transparent">
 
@@ -120,6 +119,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:visibility="gone"
         android:background="@drawable/ic_morning_news"
         app:layout_collapseMode="pin">
 
