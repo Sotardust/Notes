@@ -1,14 +1,10 @@
 ### 什么是协程
 >官方描述：协程通过将复杂性放入库来简化异步编程。程序的逻辑可以在协程中顺序地表达，而底层库会为我们解决其异步性。该库可以将用户代码的相关部分包装为回调、订阅相关事件、在不同线程（甚至不同机器）上调度执行，而代码则保持如同顺序执行一样简单。
 
-#### 协程的核心竞争力
-Kotlin 协程的核心竞争力在于：它能简化异步并发任务。
-
 #### 线程和协程的目的差异
 
 * 线程的目的是提高CPU资源使用率， 使多个任务得以并行的运行，是为了服务于机器的.
 * 协程的目的是为了让多个任务之间更好的协作，主要体现在代码逻辑上，是为了服务开发者 (能提升资源的利用率, 但并不是原始目的)
-
 
 #### 线程和协程的调度差异
 
@@ -24,5 +20,252 @@ Kotlin 协程的核心竞争力在于：它能简化异步并发任务。
 ```
 
 ```
+#### 协程的核心竞争力
+Kotlin 协程的核心竞争力在于：它能简化异步并发任务。
+
+#### 协程上下文 CoroutineContext
+ + 协程总是运行在一些以 CoroutineContext 类型为代表的上下文中 ，协程上下文是各种不同元素的集合
+ + 集合内部的元素Element是根据key去对应（Map特点），但是不允许重复（Set特点）
+ + Element之间可以通过+号进行组合
+ + Element有如下四类，共同组成了CoroutineContext
+    + Job：协程的唯一标识，用来控制协程的生命周期(new、active、completing、completed、cancelling、cancelled)
+    + CoroutineDispatcher：指定协程运行的线程(IO、Default、Main、Unconfined)
+    + CoroutineName: 指定协程的名称，默认为coroutine
+    + CoroutineExceptionHandler: 指定协程的异常处理器，用来处理未捕获的异常
+
+#### CoroutineDispatcher 作用
+
+ + 用于指定协程的运行线程
+ + kotlin已经内置了CoroutineDispatcher的4个实现，分别为 Dispatchers的Default、IO、Main、Unconfined字段
+```
+public actual object Dispatchers {
+
+    @JvmStatic
+    public actual val Default: CoroutineDispatcher = createDefaultDispatcher()
+    
+    @JvmStatic
+    public val IO: CoroutineDispatcher = DefaultScheduler.IO
+    
+    @JvmStatic
+    public actual val Unconfined: CoroutineDispatcher = kotlinx.coroutines.Unconfined
+    
+    @JvmStatic
+    public actual val Main: MainCoroutineDispatcher get() = MainDispatcherLoader.dispatcher
+}
+
+```
+#### Dispatchers.Default
+Default根据useCoroutinesScheduler属性（默认为true） 去获取对应的线程池
++ DefaultScheduler ：Kotlin内部自己实现的线程池逻辑
++ CommonPool：Java类库中的Executor实现的线程池逻辑
+```
+internal actual fun createDefaultDispatcher(): CoroutineDispatcher =
+    if (useCoroutinesScheduler) DefaultScheduler else CommonPool
+internal object DefaultScheduler : ExperimentalCoroutineDispatcher() {
+    .....
+}
+
+open class ExperimentalCoroutineDispatcher(
+    private val corePoolSize: Int,
+    private val maxPoolSize: Int,
+    private val idleWorkerKeepAliveNs: Long,
+    private val schedulerName: String = "CoroutineScheduler"
+) : ExecutorCoroutineDispatcher() {
+    constructor(
+        corePoolSize: Int = CORE_POOL_SIZE,
+        maxPoolSize: Int = MAX_POOL_SIZE,
+        schedulerName: String = DEFAULT_SCHEDULER_NAME
+    ) : this(corePoolSize, maxPoolSize, IDLE_WORKER_KEEP_ALIVE_NS, schedulerName)
+
+    ......
+}
+//java类库中的Executor实现线程池逻辑
+internal object CommonPool : ExecutorCoroutineDispatcher() {}
+
+```
+DefaultScheduler的主要实现都在其父类 ExperimentalCoroutineDispatcher 中
+
+```
+open class ExperimentalCoroutineDispatcher(
+    private val corePoolSize: Int,
+    private val maxPoolSize: Int,
+    private val idleWorkerKeepAliveNs: Long,
+    private val schedulerName: String = "CoroutineScheduler"
+) : ExecutorCoroutineDispatcher() {
+    public constructor(
+        corePoolSize: Int = CORE_POOL_SIZE,
+        maxPoolSize: Int = MAX_POOL_SIZE,
+        schedulerName: String = DEFAULT_SCHEDULER_NAME
+    ) : this(corePoolSize, maxPoolSize, IDLE_WORKER_KEEP_ALIVE_NS, schedulerName)
+
+    constructor(
+        corePoolSize: Int = CORE_POOL_SIZE,
+        maxPoolSize: Int = MAX_POOL_SIZE
+    ) : this(corePoolSize, maxPoolSize, IDLE_WORKER_KEEP_ALIVE_NS)
+    
+    override val executor: Executor
+       get() = coroutineScheduler
+
+    private var coroutineScheduler = createScheduler()
+    
+    //创建CoroutineScheduler实例
+    private fun createScheduler() = CoroutineScheduler(corePoolSize, maxPoolSize, idleWorkerKeepAliveNs, schedulerName)
+    
+    override val executor: Executorget() = coroutineScheduler
+
+    override fun dispatch(context: CoroutineContext, block: Runnable): Unit =
+        try {
+            //dispatch方法委托到CoroutineScheduler的dispatch方法
+            coroutineScheduler.dispatch(block)
+        } catch (e: RejectedExecutionException) {
+            ....
+        }
+
+    override fun dispatchYield(context: CoroutineContext, block: Runnable): Unit =
+        try {
+            //dispatchYield方法委托到CoroutineScheduler的dispatchYield方法
+            coroutineScheduler.dispatch(block, tailDispatch = true)
+        } catch (e: RejectedExecutionException) {
+            ...
+        }
+    
+	internal fun dispatchWithContext(block: Runnable, context: TaskContext, tailDispatch: Boolean) {
+        try {
+            //dispatchWithContext方法委托到CoroutineScheduler的dispatchWithContext方法
+            coroutineScheduler.dispatch(block, context, tailDispatch)
+        } catch (e: RejectedExecutionException) {
+            ....
+        }
+    }
+    override fun close(): Unit = coroutineScheduler.close()
+    //实现请求阻塞
+    public fun blocking(parallelism: Int = BLOCKING_DEFAULT_PARALLELISM): CoroutineDispatcher {
+        require(parallelism > 0) { "Expected positive parallelism level, but have $parallelism" }
+        return LimitingDispatcher(this, parallelism, null, TASK_PROBABLY_BLOCKING)
+    }
+	//实现并发数量限制
+    public fun limited(parallelism: Int): CoroutineDispatcher {
+        require(parallelism > 0) { "Expected positive parallelism level, but have $parallelism" }
+        require(parallelism <= corePoolSize) { "Expected parallelism level lesser than core pool size ($corePoolSize), but have $parallelism" }
+        return LimitingDispatcher(this, parallelism, null, TASK_NON_BLOCKING)
+    }
+    
+    ....
+}
+
+```
+实现请求数量限制是调用 LimitingDispatcher 类，其类实现为
+```
+private class LimitingDispatcher(
+    private val dispatcher: ExperimentalCoroutineDispatcher,
+    private val parallelism: Int,
+    private val name: String?,
+    override val taskMode: Int
+) : ExecutorCoroutineDispatcher(), TaskContext, Executor {
+    //同步阻塞队列
+    private val queue = ConcurrentLinkedQueue<Runnable>()
+    //cas计数
+    private val inFlightTasks = atomic(0)
+    
+    override fun dispatch(context: CoroutineContext, block: Runnable) = dispatch(block, false)
+
+    private fun dispatch(block: Runnable, tailDispatch: Boolean) {
+        var taskToSchedule = block
+        while (true) {
+
+            if (inFlight <= parallelism) {
+                //LimitingDispatcher的dispatch方法委托给了DefaultScheduler的dispatchWithContext方法
+                dispatcher.dispatchWithContext(taskToSchedule, this, tailDispatch)
+                return
+            }
+            ......
+        }
+    }
+}
+
+```
+
+#### Dispatchers.IO
+先看下 Dispatchers.IO 的定义
+```
+    /**
+     *This dispatcher shares threads with a [Default][Dispatchers.Default] dispatcher, so using
+     * `withContext(Dispatchers.IO) { ... }` does not lead to an actual switching to another thread &mdash;
+     * typically execution continues in the same thread.
+     */
+    @JvmStatic
+    public val IO: CoroutineDispatcher = DefaultScheduler.IO
+    
+    
+    Internal object DefaultScheduler : ExperimentalCoroutineDispatcher() {
+    val IO = blocking(systemProp(IO_PARALLELISM_PROPERTY_NAME, 64.coerceAtLeast(AVAILABLE_PROCESSORS)))
+    
+    ......
+    
+    }
+    
+```
+IO在DefaultScheduler中的实现 是调用blacking()方法，而blacking（）方法最终实现是LimitingDispatcher类，
+所以 从源码可以看出 Dispatchers.Default和IO 是在同一个线程中运行的，也就是共用相同的线程池。
+
+而Default和IO 都是共享CoroutineScheduler线程池 ，kotlin内部实现了一套线程池两种调度策略，主要是通过dispatch方法中的Mode区分的
+
+|Type|Mode|
+|-|-|
+|Default|NON_BLOCKING|
+|IO|PROBABLY_BLOCKING|
+
+```
+internal enum class TaskMode {
+
+    //执行CPU密集型任务
+    NON_BLOCKING,
+
+    //执行IO密集型任务
+    PROBABLY_BLOCKING,
+}
+fun dispatch(block: Runnable, taskContext: TaskContext = NonBlockingContext, tailDispatch: Boolean = false) {
+......
+     if (task.mode == TaskMode.NON_BLOCKING) {
+            signalCpuWork() //Dispatchers.Default
+     } else {
+            signalBlockingWork() // Dispatchers.IO
+     }
+}
+
+```
+|Type|处理策略|适合场景|
+|-|-|
+|Default|CoroutineScheduler最多有corePoolSize个线程被创建，corePoolSize它的取值为max(2, CPU核心数)，
+即它会尽量的等于CPU核心数|1.CPU密集型任务的特点是执行任务时CPU会处于忙碌状态，任务会消耗大量的CPU资源2.复杂计算、视频解码等，如果此时线程数太多，超过了CPU核心数，那么这些超出来的线程是得不到CPU的执行的，只会浪费内存资源3.因为线程本身也有栈等空间，同时线程过多，频繁的线程切换带来的消耗也会影响线程池的性能4.对于CPU密集型任务，线程池并发线程数等于CPU核心数才能让CPU的执行效率最大化|
+|IO|创建比corePoolSize更多的线程来运行IO型任务，但不能大于maxPoolSize1.公式：max(corePoolSize, min(CPU核心数 * 128, 2^21 - 2))，即大于corePoolSize，小于2^21 - 22.2^21 - 2是一个很大的数约为2M，但是CoroutineScheduler是不可能创建这么多线程的，所以就需要外部限制提交的任务数3.Dispatchers.IO构造时就通过LimitingDispatcher默认限制了最大线程并发数parallelism为max(64, CPU核心数)，即最多只能提交parallelism个任务到CoroutineScheduler中执行，剩余的任务被放进队列中等待。|1.IO密集型任务的特点是执行任务时CPU会处于闲置状态，任务不会消耗大量的CPU资源2.网络请求、IO操作等，线程执行IO密集型任务时大多数处于阻塞状态，处于阻塞状态的线程是不占用CPU的执行时间3.此时CPU就处于闲置状态，为了让CPU忙起来，执行IO密集型任务时理应让线程的创建数量更多一点，理想情况下线程数应该等于提交的任务数，对于这些多创建出来的线程，当它们闲置时，线程池一般会有一个超时回收策略，所以大部分情况下并不会占用大量的内存资源4.但也会有极端情况，所以对于IO密集型任务，线程池并发线程数应尽可能地多才能提高CPU的吞吐量，这个尽可能地多的程度并不是无限大，而是根据业务情况设定，但肯定要大于CPU核心数。|
+
+##### Dispatchers.Unconfined
+任务执行在默认的启动线程。之后由调用resume的线程决定恢复协程的线程
+```
+internal object Unconfined : CoroutineDispatcher() {
+    //为false为不需要dispatch
+    override fun isDispatchNeeded(context: CoroutineContext): Boolean = false
+
+    override fun dispatch(context: CoroutineContext, block: Runnable) {
+        // 只有当调用yield方法时，Unconfined的dispatch方法才会被调用
+        // yield() 表示当前协程让出自己所在的线程给其他协程运行
+        val yieldContext = context[YieldContext]
+        if (yieldContext != null) {
+            yieldContext.dispatcherWasUnconfined = true
+            return
+        }
+        throw UnsupportedOperationException("Dispatchers.Unconfined.dispatch function can only be used by the yield function. " +
+            "If you wrap Unconfined dispatcher in your code, make sure you properly delegate " +
+            "isDispatchNeeded and dispatch calls.")
+    }
+}
+
+```
+每一个协程都有对应的Continuation实例，其中的resumeWith用于协程的恢复，存在于DispatchedContinuation
+
+
+
+
 
 
