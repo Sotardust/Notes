@@ -415,8 +415,86 @@ internal abstract class EventLoop : CoroutineDispatcher() {
 2. rocessUnconfinedEvent方法用于从队列的头部移出Unconfined任务执行
 
 ##### Dispatchers.Main
-kotlin在JVM上的实现 Android就需要引入kotlinx-coroutines-android库，它里面有Android对应的Dispatchers.Main实现，其实就是把任务通过Handler运行在Android的主线程
+kotlin在JVM上的实现 Android就需要引入kotlinx-coroutines-android库，它里面有Android对应的Dispatchers.Main实现，
+
+```
+   public actual val Main: MainCoroutineDispatcher get() = MainDispatcherLoader.dispatcher
+   
+     @JvmField
+    val dispatcher: MainCoroutineDispatcher = loadMainDispatcher()
+
+    private fun loadMainDispatcher(): MainCoroutineDispatcher {
+        return try {
+            val factories = if (FAST_SERVICE_LOADER_ENABLED) {
+                FastServiceLoader.loadMainDispatcherFactory()
+            } else {
+                // We are explicitly using the
+                // `ServiceLoader.load(MyClass::class.java, MyClass::class.java.classLoader).iterator()`
+                // form of the ServiceLoader call to enable R8 optimization when compiled on Android.
+                ServiceLoader.load(
+                        MainDispatcherFactory::class.java,
+                        MainDispatcherFactory::class.java.classLoader
+                ).iterator().asSequence().toList()
+            }
+            factories.maxBy { it.loadPriority }?.tryCreateDispatcher(factories)
+                ?: MissingMainCoroutineDispatcher(null)
+        } catch (e: Throwable) {
+            // Service loader can throw an exception as well
+            MissingMainCoroutineDispatcher(e)
+        }
+    }
+    
+    internal fun loadMainDispatcherFactory(): List<MainDispatcherFactory> {
+        val clz = MainDispatcherFactory::class.java
+        if (!ANDROID_DETECTED) {
+            return load(clz, clz.classLoader)
+        }
+
+        return try {
+            val result = ArrayList<MainDispatcherFactory>(2)
+            createInstanceOf(clz, "kotlinx.coroutines.android.AndroidDispatcherFactory")?.apply { result.add(this) }
+            createInstanceOf(clz, "kotlinx.coroutines.test.internal.TestMainDispatcherFactory")?.apply { result.add(this) }
+            result
+        } catch (e: Throwable) {
+            // Fallback to the regular SL in case of any unexpected exception
+            load(clz, clz.classLoader)
+        }
+    }
+```
+ 通过反射获取AndroidDispatcherFactory 然后根据加载的优先级 去创建Dispatcher
+```
+internal class AndroidDispatcherFactory : MainDispatcherFactory {
+
+    override fun createDispatcher(allFactories: List<MainDispatcherFactory>) =
+        HandlerContext(Looper.getMainLooper().asHandler(async = true), "Main")
+
+    override fun hintOnError(): String? = "For tests Dispatchers.setMain from kotlinx-coroutines-test module can be used"
+
+    override val loadPriority: Int
+        get() = Int.MAX_VALUE / 2
+}
+internal class HandlerContext private constructor(
+    private val handler: Handler,
+    private val name: String?,
+    private val invokeImmediately: Boolean
+) : HandlerDispatcher(), Delay {
+   
+    public constructor(
+        handler: Handler,
+        name: String? = null
+    ) : this(handler, name, false)
+
+   ......
+
+    override fun dispatch(context: CoroutineContext, block: Runnable) {
+        handler.post(block)
+    }
+
+    ......
+}
+```
+而createDispatcher调用HandlerContext 类 通过调用Looper.getMainLooper()获取handler ，最终通过handler来实现在主线程中运行
 
 
-
+Dispatchers.Main 其实就是把任务通过Handler运行在Android的主线程
 
