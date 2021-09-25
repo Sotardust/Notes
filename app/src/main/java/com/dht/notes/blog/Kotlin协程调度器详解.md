@@ -83,6 +83,38 @@ open class ExperimentalCoroutineDispatcher(
 internal object CommonPool : ExecutorCoroutineDispatcher() {}
 
 ```
+如果想使用java类库中的线程池该如何使用呢？也就是修改useCoroutinesScheduler属性为false
+
+```
+internal const val COROUTINES_SCHEDULER_PROPERTY_NAME = "kotlinx.coroutines.scheduler"
+
+internal val useCoroutinesScheduler = systemProp(COROUTINES_SCHEDULER_PROPERTY_NAME).let { value ->
+    when (value) {
+        null, "", "on" -> true
+        "off" -> false
+        else -> error("System property '$COROUTINES_SCHEDULER_PROPERTY_NAME' has unrecognized value '$value'")
+    }
+}
+
+internal actual fun systemProp(
+    propertyName: String
+): String? =
+    try {
+       //获取系统属性
+        System.getProperty(propertyName)
+    } catch (e: SecurityException) {
+        null
+    }
+
+```
+从源码中可以看到,使用过获取系统属性拿到的值，  那我们就可以通过修改系统属性 去改变useCoroutinesScheduler的值,
+具体修改方法为
+```
+ val properties = Properties()
+ properties["kotlinx.coroutines.scheduler"] = "off"
+ System.setProperties(properties)
+```
+
 DefaultScheduler的主要实现都在其父类 ExperimentalCoroutineDispatcher 中
 
 ```
@@ -235,7 +267,7 @@ fun dispatch(block: Runnable, taskContext: TaskContext = NonBlockingContext, tai
 
 ```
 |Type|处理策略|适合场景|
-|-|-|
+|-|-|-|
 |Default|CoroutineScheduler最多有corePoolSize个线程被创建，corePoolSize它的取值为max(2, CPU核心数)，
 即它会尽量的等于CPU核心数|1.CPU密集型任务的特点是执行任务时CPU会处于忙碌状态，任务会消耗大量的CPU资源2.复杂计算、视频解码等，如果此时线程数太多，超过了CPU核心数，那么这些超出来的线程是得不到CPU的执行的，只会浪费内存资源3.因为线程本身也有栈等空间，同时线程过多，频繁的线程切换带来的消耗也会影响线程池的性能4.对于CPU密集型任务，线程池并发线程数等于CPU核心数才能让CPU的执行效率最大化|
 |IO|创建比corePoolSize更多的线程来运行IO型任务，但不能大于maxPoolSize1.公式：max(corePoolSize, min(CPU核心数 * 128, 2^21 - 2))，即大于corePoolSize，小于2^21 - 22.2^21 - 2是一个很大的数约为2M，但是CoroutineScheduler是不可能创建这么多线程的，所以就需要外部限制提交的任务数3.Dispatchers.IO构造时就通过LimitingDispatcher默认限制了最大线程并发数parallelism为max(64, CPU核心数)，即最多只能提交parallelism个任务到CoroutineScheduler中执行，剩余的任务被放进队列中等待。|1.IO密集型任务的特点是执行任务时CPU会处于闲置状态，任务不会消耗大量的CPU资源2.网络请求、IO操作等，线程执行IO密集型任务时大多数处于阻塞状态，处于阻塞状态的线程是不占用CPU的执行时间3.此时CPU就处于闲置状态，为了让CPU忙起来，执行IO密集型任务时理应让线程的创建数量更多一点，理想情况下线程数应该等于提交的任务数，对于这些多创建出来的线程，当它们闲置时，线程池一般会有一个超时回收策略，所以大部分情况下并不会占用大量的内存资源4.但也会有极端情况，所以对于IO密集型任务，线程池并发线程数应尽可能地多才能提高CPU的吞吐量，这个尽可能地多的程度并不是无限大，而是根据业务情况设定，但肯定要大于CPU核心数。|
@@ -264,7 +296,126 @@ internal object Unconfined : CoroutineDispatcher() {
 ```
 每一个协程都有对应的Continuation实例，其中的resumeWith用于协程的恢复，存在于DispatchedContinuation
 
+```
+public abstract class CoroutineDispatcher :
+    AbstractCoroutineContextElement(ContinuationInterceptor), ContinuationInterceptor {
+    ......
+    
+    public final override fun <T> interceptContinuation(continuation: Continuation<T>): Continuation<T> =
+        DispatchedContinuation(this, continuation)
+        
+    ......
+    
+}
+```
 
+重点看resumeWith的实现以及类委托
+
+```
+internal class DispatchedContinuation<in T>(
+    @JvmField val dispatcher: CoroutineDispatcher,
+    @JvmField val continuation: Continuation<T>//协程suspend挂起方法产生的Continuation
+) : DispatchedTask<T>(MODE_UNINITIALIZED), CoroutineStackFrame, Continuation<T> by continuation {
+    .....
+    override fun resumeWith(result: Result<T>) {
+        val context = continuation.context
+        val state = result.toState()
+        if (dispatcher.isDispatchNeeded(context)) {
+            _state = state
+            resumeMode = MODE_ATOMIC
+            dispatcher.dispatch(context, this)
+        } else {
+            executeUnconfined(state, MODE_ATOMIC) {
+                withCoroutineContext(this.context, countOrElement) {
+                    continuation.resumeWith(result)
+                }
+            }
+        }
+    }
+    ....
+}
+
+```
+通过isDispatchNeeded（是否需要dispatch，Unconfined=false，default，IO=true）判断做不同处理
+ + true：调用协程的CoroutineDispatcher的dispatch方法
+ + false：调用executeUnconfined方法
+
+```
+private inline fun DispatchedContinuation<*>.executeUnconfined(
+    contState: Any?, mode: Int, doYield: Boolean = false,
+    block: () -> Unit
+): Boolean {
+    assert { mode != MODE_UNINITIALIZED }
+    val eventLoop = ThreadLocalEventLoop.eventLoop
+    if (doYield && eventLoop.isUnconfinedQueueEmpty) return false
+    return if (eventLoop.isUnconfinedLoopActive) {
+        _state = contState
+        resumeMode = mode
+        eventLoop.dispatchUnconfined(this)
+        true
+    } else {
+        runUnconfinedEventLoop(eventLoop, block = block)
+        false
+    }
+}
+
+```
+从threadlocal中取出eventLoop（eventLoop和当前线程相关的），判断是否在执行Unconfined任务
+
+1. 如果在执行则调用EventLoop的dispatchUnconfined方法把Unconfined任务放进EventLoop中
+2. 如果没有在执行则直接执行
+```
+internal inline fun DispatchedTask<*>.runUnconfinedEventLoop(
+    eventLoop: EventLoop,
+    block: () -> Unit
+) {
+    eventLoop.incrementUseCount(unconfined = true)
+    try {
+        block()
+        while (true) {
+            if (!eventLoop.processUnconfinedEvent()) break
+        }
+    } catch (e: Throwable) {
+        handleFatalException(e, null)
+    } finally {
+        eventLoop.decrementUseCount(unconfined = true)
+    }
+}
+
+```
+1. 执行block()代码块，即上文提到的resumeWith()
+2. 调用processUnconfinedEvent()方法实现执行剩余的Unconfined任务，知道全部执行完毕跳出循环
+
+EventLoop是存放与threadlocal，所以是跟当前线程相关联的，而EventLoop也是CoroutineDispatcher的一个子类
+
+```
+internal abstract class EventLoop : CoroutineDispatcher() {
+  	.....
+    //双端队列实现存放Unconfined任务
+    private var unconfinedQueue: ArrayQueue<DispatchedTask<*>>? = null
+    //从队列的头部移出Unconfined任务执行
+    public fun processUnconfinedEvent(): Boolean {
+        val queue = unconfinedQueue ?: return false
+        val task = queue.removeFirstOrNull() ?: return false
+        task.run()
+        return true
+    }
+    //把Unconfined任务放进队列的尾部
+    public fun dispatchUnconfined(task: DispatchedTask<*>) {
+        val queue = unconfinedQueue ?:
+            ArrayQueue<DispatchedTask<*>>().also { unconfinedQueue = it }
+        queue.addLast(task)
+    }
+    .....
+}
+
+```
+内部通过双端队列实现存放Unconfined任务
+1. EventLoop的dispatchUnconfined方法用于把Unconfined任务放进队列的尾部
+2. rocessUnconfinedEvent方法用于从队列的头部移出Unconfined任务执行
+
+##### Dispatchers.Main
+kotlin在JVM上的实现 Android就需要引入kotlinx-coroutines-android库，它里面有Android对应的Dispatchers.Main实现，其实就是把任务通过Handler运行在Android的主线程
 
 
 

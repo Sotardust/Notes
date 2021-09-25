@@ -25,6 +25,9 @@ class CoroutineUnitTest {
         }
         launch(Dispatchers.Unconfined) { // 不受限的——将工作在主线程中
             println("Unconfined            : I'm working in thread ${Thread.currentThread().name}")
+
+            withContext(Dispatchers.Main){}
+
         }
         launch(Dispatchers.Default) { // 将会获取默认调度器
             println("Default               : I'm working in thread ${Thread.currentThread().name}")
@@ -32,6 +35,9 @@ class CoroutineUnitTest {
         launch(newSingleThreadContext("MyOwnThread")) { // 将使它获得一个新的线程
             println("newSingleThreadContext: I'm working in thread ${Thread.currentThread().name}")
         }
+        val properties = Properties()
+        properties["kotlinx.coroutines.scheduler"] = false
+        System.setProperties(properties)
     }
 
 
