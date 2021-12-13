@@ -4,11 +4,15 @@ import org.junit.Test;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+
+import kotlin.random.Random;
 
 /**
  * created by dht on 2019/5/21 10:23
@@ -85,4 +89,15 @@ public class ExampleUnitTest1 {
         }
 
     }
+
+    @Test
+    public void testBBB(){
+        List<String> list = new ArrayList<>();
+        list.add(Test01.class.getName());
+        list.add(Test02.class.getName());
+
+        System.out.println("list1 = " + list);
+
+    }
+
 }

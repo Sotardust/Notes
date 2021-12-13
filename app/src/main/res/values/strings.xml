@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Notes</string>
+    <string name="height1">Height is %1$2.f cm</string>
+    <string name="height2">Height is %1$s cm</string>
+    <string name="height3">Height is %1$2.2f cm</string>
+    <string name="height4">Height is%1$4s cm</string>
 </resources>

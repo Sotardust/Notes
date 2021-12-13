@@ -6,9 +6,12 @@
         <entry key="../../../../../layout/custom_preview.xml" value="0.19166666666666668" />
         <entry key="app/src/main/res/drawable/ic_news_close.xml" value="0.20092592592592592" />
         <entry key="app/src/main/res/drawable/svg_floating_window.xml" value="0.16822916666666668" />
+        <entry key="app/src/main/res/layout/activity_b.xml" value="0.20364583333333333" />
         <entry key="app/src/main/res/layout/activity_floating_window.xml" value="0.125" />
         <entry key="app/src/main/res/layout/activity_telephony.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_test_toast.xml" value="0.19444444444444445" />
         <entry key="app/src/main/res/layout/activity_wifi_wave.xml" value="0.115625" />
+        <entry key="app/src/main/res/layout/custom_toast.xml" value="0.21979166666666666" />
       </map>
     </option>
   </component>
@@ -78,7 +81,7 @@
       </profile-state>
     </entry>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
 
+import android.os.Process;
 import android.os.RemoteException;
 import android.util.Log;
 
@@ -23,13 +24,13 @@ public class MyService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.d(TAG, "onCreate() called");
     }
 
     @Override
     public void onStart(Intent intent, int startId) {
         super.onStart(intent, startId);
         Log.d(TAG, "onStart: ");
+
     }
 
     @Override
@@ -42,6 +43,8 @@ public class MyService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         //执行多次
+        Log.d(TAG, "onStartCommand() called "+ Process.myPid()+" pro"+ Thread.currentThread().getName());
+
         Log.d(TAG, "onStartCommand() called with: intent = [" + intent + "], flags = [" + flags + "], startId = [" + startId + "]");
         return super.onStartCommand(intent, flags, startId);
     }

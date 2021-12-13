@@ -1,19 +1,19 @@
 package com.dht.notes
 
 import android.app.Activity
-import android.app.IntentService
 import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
-import android.os.HandlerThread
-import android.util.SparseArray
+import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.dht.notes.code.toast.ToastActivity
 import com.dht.notes.code.activity.AActivity
 import com.dht.notes.code.adapter.MainAdapter
 import com.dht.notes.code.animation.AnimationActivity
 import com.dht.notes.code.animation.WifiWaveActivity
 import com.dht.notes.code.coordlayout.CoorActivity
 import com.dht.notes.code.floatingwindow.FloatingWindowActivity
+import com.dht.notes.code.homekey.HomekeyAActivity
 import com.dht.notes.code.lock.ThreadLockActivity
 import com.dht.notes.code.provider.ProviderActivity
 import com.dht.notes.code.service.ServiceActivity
@@ -21,8 +21,12 @@ import com.dht.notes.code.telephony.TelephonyActivity
 import com.dht.notes.code.utils.VerticalDecoration
 import com.dht.notes.code.view.FlowActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 import java.util.*
-import java.util.concurrent.Callable
 import kotlin.reflect.KClass
 
 /**
@@ -30,54 +34,95 @@ import kotlin.reflect.KClass
  */
 class MainActivity : Activity() {
 
+    private val TAG = "TestDispatchers"
     private val activityList: MutableList<KClass<*>> = mutableListOf()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        runBlocking {
+            testDispatchers()
+        }
 
-//        linear.setOnTouchListener { _, event ->
-//            Log.d(Companion.TAG, "onCreate: setOnTouchListener ${event.action}")
-//            false
-//        }
-
-//        linear.setOnClickListener {
-//            Log.d(Companion.TAG, "linear onCreate: setOnClickListener ")
-//
-//        }
-
-//
-//        textClick.setOnClickListener {
-//            Log.d(Companion.TAG, "textClick onCreate: setOnClickListener ")
-//
-//        }
         val list = arrayListOf(
-                "悬浮球测试",
-                "sim卡信息",
-                "Scroll",
-                "水波纹",
-                "自定义View",
-                "线程锁",
-                "activity 生命周期跳转",
-                "Animation 动画属性",
-                "service aidl 服务",
-                "ContentProvider 内容提供者")
+            "toast测试",
+            "HomeKey测试",
+            "悬浮球测试",
+            "sim卡信息",
+            "Scroll",
+            "水波纹",
+            "自定义View",
+            "线程锁",
+            "activity 生命周期跳转",
+            "Animation 动画属性",
+            "service aidl 服务",
+            "ContentProvider 内容提供者"
+        )
         recyclerView.layoutManager = LinearLayoutManager(applicationContext)
         recyclerView.addItemDecoration(VerticalDecoration(5))
         val adapter = MainAdapter(list)
         recyclerView.adapter = adapter
         addActivityList()
-        adapter.setOnItemClickListener { _, _, position ->
+
+        adapter.setOnItemClickListener { adapter, view, position ->
+            // testDispatchers()
             startActivity(Intent(this@MainActivity, activityList[position].java))
         }
-
         val myAsyncTask = MyAsyncTask()
         myAsyncTask.execute("fdsa")
 
-        val text: StringBuffer
+    }
+
+    fun log(msg: String) = println("TestDispatchers [${Thread.currentThread().name}] $msg")
+
+    private fun testDispatchers() = runBlocking {
+
+        Log.d(TAG, "main                 : I'm working in thread ${Thread.currentThread().name} ")
+
+        launch(Dispatchers.IO) {
+            Log.d(TAG, "launch Default       : I'm working in thread ${Thread.currentThread().name}")
+        }
+
+        withContext(Dispatchers.Default) {
+            Log.d(TAG, "withContext Default  : I'm working in thread ${Thread.currentThread().name}")
+        }
+    }
+
+    private fun testDispatchers1() = runBlocking {
+
+        log("main             : I'm working in thread ${Thread.currentThread().name}")
+
+        launch(Dispatchers.IO) {
+
+            log("launch IO        : I'm working in thread ${Thread.currentThread().name}")
+        }
+
+        launch(Dispatchers.Default) {
+            log("launch Default   : I'm working in thread ${Thread.currentThread().name}")
+        }
+
+        withContext(Dispatchers.Unconfined) {
+            log("Unconfined1      : I'm working in thread ${Thread.currentThread().name} ")
+        }
+
+        withContext(Dispatchers.IO) {
+
+            delay(5000)
+            log("IO               : I'm working in thread ${Thread.currentThread().name} ")
+
+            withContext(Dispatchers.Unconfined) {
+                log("Unconfined2      : I'm working in thread ${Thread.currentThread().name}")
+            }
+        }
+
+        withContext(Dispatchers.Default) {
+            log("Default          : I'm working in thread ${Thread.currentThread().name} ")
+        }
     }
 
     private fun addActivityList() {
+        activityList.add(ToastActivity::class)
+        activityList.add(HomekeyAActivity::class)
         activityList.add(FloatingWindowActivity::class)
         activityList.add(TelephonyActivity::class)
         activityList.add(CoorActivity::class)

@@ -4,7 +4,9 @@
     package="com.dht.notes">
 
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.Sys" />
     <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
+
     <application
         android:name=".NoteApplication"
         android:allowBackup="true"
@@ -34,7 +36,9 @@
         <!--        <activity android:name=".testcode.thread.ThreadPoolExecutorTestActivity" />-->
         <!--android:launchMode="singleTask"-->
         <!--android:taskAffinity="com.dht.notes.d"-->
-        <service android:name=".code.service.MyService" />
+        <service
+            android:name=".code.service.MyService"
+            android:process=":work" />
 
         <activity
             android:name=".code.activity.AActivity"
@@ -59,13 +63,18 @@
         <activity android:name=".code.telephony.TelephonyActivity" />
         <activity android:name=".code.floatingwindow.FloatingWindowActivity" />
         <activity android:name=".code.animation.WifiWaveActivity" />
+        <activity android:name=".code.homekey.HomekeyAActivity" />
+        <activity
+            android:name=".code.homekey.HomekeyBActivity"
+            android:process=":work" />
+        <activity android:name=".code.toast.ToastActivity" />
         <!--            android:taskAffinity="com.dht.notes.dfasf"-->
 
-        <provider android:name=".code.provider.MyProvider"
+        <provider
+            android:name=".code.provider.MyProvider"
             android:authorities="com.dht.notes.code.provider">
 
         </provider>
-
 
 
     </application>
@@ -81,7 +90,7 @@
         tools:ignore="ProtectedPermissions" />
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
 
 </manifest>

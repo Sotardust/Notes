@@ -1,9 +1,12 @@
 package com.dht.notes
 
+import android.util.Log
 import kotlinx.coroutines.*
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import java.util.*
+import java.util.concurrent.TimeUnit
+import kotlin.random.Random
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -20,25 +23,72 @@ class CoroutineUnitTest {
 
     @Test
     fun testMain() = runBlocking<Unit> {
-        launch { // 运行在父协程的上下文中，即 runBlocking 主协程
-            println("main runBlocking      : I'm working in thread ${Thread.currentThread().name}")
-        }
-        launch(Dispatchers.Unconfined) { // 不受限的——将工作在主线程中
-            println("Unconfined            : I'm working in thread ${Thread.currentThread().name}")
 
-            withContext(Dispatchers.Main){}
+        println("main runBlocking      : I'm working in thread ${Thread.currentThread().name}")
 
+        launch(Dispatchers.IO) {
+            println("launch(Dispatchers.IO)     : I'm working in thread ${Thread.currentThread().name}")
         }
-        launch(Dispatchers.Default) { // 将会获取默认调度器
-            println("Default               : I'm working in thread ${Thread.currentThread().name}")
+
+        withContext(Dispatchers.Default) {
+            println("Default   : I'm working in thread ${Thread.currentThread().name}")
         }
-        launch(newSingleThreadContext("MyOwnThread")) { // 将使它获得一个新的线程
-            println("newSingleThreadContext: I'm working in thread ${Thread.currentThread().name}")
+
+        withContext(Dispatchers.IO) {
+            println("Default   : I'm working in thread ${Thread.currentThread().name}")
         }
-        val properties = Properties()
-        properties["kotlinx.coroutines.scheduler"] = false
-        System.setProperties(properties)
+
+        withContext(Dispatchers.Unconfined) {
+            println("Unconfined   : I'm working in thread ${Thread.currentThread().name}")
+        }
+
+        withContext(Dispatchers.Main) {
+            println("Main   : I'm working in thread ${Thread.currentThread().name}")
+        }
+    }
+
+    @Test
+    fun testDD() {
+        val sortedMap: SortedMap<Int, String> = TreeMap()
+        sortedMap[10] = "a"
+        sortedMap[25] = "b"
+        sortedMap[12] = "c"
+        sortedMap[33] = "d"
+        sortedMap[20] = "e"
+
+        for (entry in sortedMap.entries.reversed()) {
+            println("entry.key = ${entry.key} entry.value = ${entry.value}")
+        }
     }
 
 
+    @Test
+    fun testDE() = runBlocking {
+
+
+        withContext(Dispatchers.IO){
+
+        }
+
+        println("start ...... = " + System.currentTimeMillis())
+        val value = getValue()
+
+        println("value = ${value} , " + System.currentTimeMillis())
+
+    }
+
+
+    suspend fun getValue(): String {
+        delay(1000)
+        return "测试数据"
+    }
+
+
+    @Test
+    fun testBBB() {
+        val list: MutableList<String> = arrayListOf()
+        list.add(Test01::class.java.name)
+        list.add(Test02::class.java.name)
+        println("list = $list")
+    }
 }
