@@ -14,12 +14,12 @@ android {
         versionCode 1
         versionName "1.0"
     }
-    signingConfigs {
-        debug {
-
-            v2SigningEnabled false
-        }
-    }
+    // signingConfigs {
+    //     debug {
+    //
+    //         v2SigningEnabled false
+    //     }
+    // }
     buildTypes {
         release {
             minifyEnabled false

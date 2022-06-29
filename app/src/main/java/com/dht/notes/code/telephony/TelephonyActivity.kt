@@ -55,10 +55,10 @@ class TelephonyActivity : Activity() {
 
 
             val list2 = SceneAdUtils.adWrapperViewMap["df"]
-            val resul1 = list2?.maxBy { it.ecpm }
-            list2?.remove(resul1)
+            // val resul1 = list2?.maxBy { it.ecpm }
+            // list2?.remove(resul1)
             println("SceneAdUtils list2 = ${list2}")
-            println("SceneAdUtils resul1 = ${resul1}")
+            // println("SceneAdUtils resul1 = ${resul1}")
              val result  = mutableListOf("345","dfa","wdfas")
             val value  =  result[0]
             result.remove(value)

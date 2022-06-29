@@ -22,7 +22,7 @@ class ToastActivity: Activity() {
 
         }
         cancelBtn.setOnClickListener {
-            adToast.cancel()
+            // adToast.cancel()
             // customToast.show(10000)
             // ohter.show("fdafsfsf测试数据",10000)
 

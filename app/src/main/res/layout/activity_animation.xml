@@ -4,7 +4,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.dht.notes.code.animation.MyView
+    <!--    <com.dht.notes.code.animation.MyView-->
+    <!--        android:id="@+id/myView"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent" /> -->
+
+    <com.dht.notes.code.animation.RedPacketView
         android:id="@+id/myView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
