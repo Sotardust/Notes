@@ -32,8 +32,8 @@ public class PointEvaluator implements TypeEvaluator<Point> {
         // 填充二阶贝塞尔曲线的另外两个控制点 B(bx,by) 和 C(cx,cy)，切记顺序不能变
         path.quadTo(bx, by, cx, cy);
         Point point = new Point(200 * fraction * 3, 0.5f * 200 * (fraction * 3) * (fraction * 3));
-        // return new Point(x, y);
-        return;
+        return new Point(x, y);
+        // return;
     }
 
     /**
