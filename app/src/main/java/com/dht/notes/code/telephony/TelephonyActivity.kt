@@ -170,16 +170,16 @@ class TelephonyActivity : Activity() {
                     when (cellInfo) {
                         is CellInfoGsm -> {
                             val cellIdentity: CellIdentityGsm = cellInfo.cellIdentity
-                            list.add(cellIdentity.mobileNetworkOperator)
+                            cellIdentity.mobileNetworkOperator?.let { list.add(it) }
 
                         }
                         is CellInfoWcdma -> {
                             val cellIdentity: CellIdentityWcdma = cellInfo.cellIdentity
-                            list.add(cellIdentity.mobileNetworkOperator)
+                            cellIdentity.mobileNetworkOperator?.let { list.add(it) }
                         }
                         is CellInfoLte -> {
                             val cellIdentity: CellIdentityLte = cellInfo.cellIdentity
-                            list.add(cellIdentity.mobileNetworkOperator)
+                            cellIdentity.mobileNetworkOperator?.let { list.add(it) }
                         }
                     }
                 }

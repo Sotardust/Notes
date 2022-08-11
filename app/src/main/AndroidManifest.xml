@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.Sys" />
     <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:name=".NoteApplication"
@@ -68,6 +69,7 @@
             android:name=".code.homekey.HomekeyBActivity"
             android:process=":work" />
         <activity android:name=".code.toast.ToastActivity" />
+        <activity android:name=".code.shake.ShakeActivity" />
         <!--            android:taskAffinity="com.dht.notes.dfasf"-->
 
         <provider

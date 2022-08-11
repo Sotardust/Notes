@@ -17,6 +17,7 @@ import com.dht.notes.code.homekey.HomekeyAActivity
 import com.dht.notes.code.lock.ThreadLockActivity
 import com.dht.notes.code.provider.ProviderActivity
 import com.dht.notes.code.service.ServiceActivity
+import com.dht.notes.code.shake.ShakeActivity
 import com.dht.notes.code.telephony.TelephonyActivity
 import com.dht.notes.code.utils.VerticalDecoration
 import com.dht.notes.code.view.FlowActivity
@@ -45,6 +46,7 @@ class MainActivity : Activity() {
         }
 
         val list = arrayListOf(
+            "摇一摇",
             "toast测试",
             "HomeKey测试",
             "悬浮球测试",
@@ -121,6 +123,7 @@ class MainActivity : Activity() {
     }
 
     private fun addActivityList() {
+        activityList.add(ShakeActivity::class)
         activityList.add(ToastActivity::class)
         activityList.add(HomekeyAActivity::class)
         activityList.add(FloatingWindowActivity::class)

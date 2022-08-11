@@ -20,6 +20,7 @@ buildscript {
 allprojects {
     repositories {
         maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { url 'https://jitpack.io' }
         google()
         mavenCentral()
     }
@@ -35,9 +36,9 @@ ext {
 
     //统一管理sdk版本
     minSdkVersion = 19
-    compileSdkVersion = 28
-    targetSdkVersion = 28
-    buildToolsVersion = '28.0.3'
+    compileSdkVersion = 30
+    targetSdkVersion = 30
+    buildToolsVersion = '30.0.3'
 
     //三方库版本
     androidxVersion = '1.1.0'

@@ -8,6 +8,7 @@
         <entry key="app/src/main/res/drawable/svg_floating_window.xml" value="0.16822916666666668" />
         <entry key="app/src/main/res/layout/activity_b.xml" value="0.20364583333333333" />
         <entry key="app/src/main/res/layout/activity_floating_window.xml" value="0.125" />
+        <entry key="app/src/main/res/layout/activity_shake.xml" value="0.2078125" />
         <entry key="app/src/main/res/layout/activity_telephony.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_test_toast.xml" value="0.19444444444444445" />
         <entry key="app/src/main/res/layout/activity_wifi_wave.xml" value="0.115625" />

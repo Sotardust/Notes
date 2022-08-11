@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
@@ -63,8 +64,10 @@ public class RedPacketView extends View {
 
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaint.setColor(Color.BLUE);
-
-
+        Path path = new Path();
+        path.moveTo(600, 600);
+        path.quadTo(0, 300, 0, 600);
+        canvas.drawPath(path, null);
         Log.d(TAG, "onDraw drawable.bitmapWidth() = " + bitmapWidth);
         Log.d(TAG, "onDraw drawable.bitmapHeight() = " + bitmapHeight);
 
@@ -79,6 +82,7 @@ public class RedPacketView extends View {
         if (currentPoint == null) {
 
             currentWidth = getMeasuredWidth() - bitmapWidth;
+
             currentHeight = getMeasuredHeight() - bitmapHeight;
 
             Point startPoint = new Point(currentWidth, currentHeight);
@@ -95,6 +99,7 @@ public class RedPacketView extends View {
 
             anim.addUpdateListener(animation -> {
                 currentPoint = (Point) animation.getAnimatedValue();
+
                 System.out.println("MyView.onAnimationUpdate");
                 invalidate();
             });

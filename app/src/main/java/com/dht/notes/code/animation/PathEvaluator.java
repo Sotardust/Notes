@@ -4,36 +4,30 @@ import android.animation.TypeEvaluator;
 import android.graphics.Path;
 import android.graphics.PointF;
 import android.util.Log;
-import androidx.annotation.IntRange;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by dai on 2018/1/22.
  */
 
-public class PointEvaluator implements TypeEvaluator<Point> {
+public class PathEvaluator implements TypeEvaluator<Path> {
 
-    //评估方法
     @Override
-    public Point evaluate(float fraction, Point startValue, Point endValue) {
+    public Path evaluate(float fraction, Path startValue, Path endValue) {
         // 将动画初始值startValue 和 动画结束值endValue 强制类型转换成Point对象
 
         // 根据fraction来计算当前动画的x和y的值
-        // Log.d("RedPacketView", "evaluate: fraction = " + fraction);
-        float x = startValue.getX() + fraction * (endValue.getX() - startValue.getX());
-        float y = startValue.getY() + fraction * (endValue.getY() - startValue.getY());
+        Log.d("RedPacketView", "evaluate: fraction = " + fraction);
+        // float x = startValue.getX() + fraction * (endValue.getX() - startValue.getX());
+        // float y = startValue.getY() + fraction * (endValue.getY() - startValue.getY());
 
         Path path = new Path();
         // 移动至第一个控制点 A(ax,ay)
-        path.moveTo(startValue.getX(), startValue.getY());
+        // path.moveTo(;, startValue.getY());
         // 填充二阶贝塞尔曲线的另外两个控制点 B(bx,by) 和 C(cx,cy)，切记顺序不能变
         // path.quadTo(bx, by, cx, cy);
         Point point = new Point(200 * fraction * 3, 0.5f * 200 * (fraction * 3) * (fraction * 3));
         PointF pointF = new PointF();
-        return new Point(x,y);
-        // return;
+        return path;
     }
 
     // /**
