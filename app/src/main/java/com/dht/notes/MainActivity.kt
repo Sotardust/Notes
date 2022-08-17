@@ -1,7 +1,11 @@
 package com.dht.notes
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorManager
 import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
@@ -18,6 +22,7 @@ import com.dht.notes.code.lock.ThreadLockActivity
 import com.dht.notes.code.provider.ProviderActivity
 import com.dht.notes.code.service.ServiceActivity
 import com.dht.notes.code.shake.ShakeActivity
+import com.dht.notes.code.shake.ShakeSensorListener
 import com.dht.notes.code.telephony.TelephonyActivity
 import com.dht.notes.code.utils.VerticalDecoration
 import com.dht.notes.code.view.FlowActivity
@@ -27,7 +32,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
-import java.util.*
 import kotlin.reflect.KClass
 
 /**
@@ -37,6 +41,20 @@ class MainActivity : Activity() {
 
     private val TAG = "TestDispatchers"
     private val activityList: MutableList<KClass<*>> = mutableListOf()
+
+    private var shakeListener = object : ShakeSensorListener() {
+        override fun onSensorChanged(event: SensorEvent?) {
+
+            Log.d("TAG11", "hook() onSensorChanged() called with: event = $event")
+
+        }
+
+        override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+        }
+
+    }
+    private lateinit var sensorManager: SensorManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -73,6 +91,17 @@ class MainActivity : Activity() {
         val myAsyncTask = MyAsyncTask()
         myAsyncTask.execute("fdsa")
 
+        sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
+
+        sensorManager.registerListener(shakeListener, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
+
+    }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+        //取消注册
+        sensorManager.unregisterListener(shakeListener)
     }
 
     fun log(msg: String) = println("TestDispatchers [${Thread.currentThread().name}] $msg")
@@ -137,6 +166,7 @@ class MainActivity : Activity() {
         activityList.add(ServiceActivity::class)
         activityList.add(ProviderActivity::class)
     }
+
 
     companion object {
         private const val TAG = "dht"

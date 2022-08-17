@@ -6,9 +6,9 @@ import android.hardware.SensorEventListener;
 import android.util.Log;
 
 
-class ShakeSensorListener implements SensorEventListener {
+public class ShakeSensorListener implements SensorEventListener {
 
-    private static final String TAG = "ShakeSensorListener";
+    private static final String TAG = "HookSetOnClickListenerH";
 
     static SensorEvent sensorEvent;
 
@@ -31,7 +31,7 @@ class ShakeSensorListener implements SensorEventListener {
         float y = Math.abs(values[1]);
         float z = Math.abs(values[2]);
 
-        Log.d(TAG, " onSensorChanged() called with: x = [" + x + "]  y = [" + y + "]  z = [" + z + "]");
+        // Log.d(TAG, " onSensorChanged() called with: x = [" + x + "]  y = [" + y + "]  z = [" + z + "]");
         //加速度超过19，摇一摇成功
         // if (x > 19 || y > 19 || z > 19) {
         //     isShake = true;

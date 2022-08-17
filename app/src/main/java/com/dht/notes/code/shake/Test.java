@@ -11,14 +11,19 @@ import java.util.List;
 public class Test {
 
 
-    public Test() {
+    private static int size = 3;
+
+    private static class SystemServiceRegistry {
+
+        static Object[] createServiceCache() {
+
+            return new Object[size++];
+        }
     }
 
-    static final class ABB {
-        private final SensorEventListener mListener;
+    final Object[] mServiceCache = SystemServiceRegistry.createServiceCache();
 
-        public ABB() {
-            mListener = new ShakeSensorListener();
-        }
+    public int getSize() {
+        return mServiceCache.length;
     }
 }
