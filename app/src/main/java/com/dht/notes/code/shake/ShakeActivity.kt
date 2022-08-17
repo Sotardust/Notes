@@ -39,7 +39,7 @@ class ShakeActivity : Activity() {
 
         super.onResume()
 
-        HookSensorManager.reflectSensorListenerList()
+        HookSensorManager.reflectSensorListenerList(this)
     }
 
     override fun onPause() {

@@ -20,8 +20,6 @@ class ShakeHookProxy implements SensorEventListener {
         for (int i = 0; i < floats.length; i++) {
             floats[i] = event.values[i] + 20;
         }
-        // SensorEvent sensorEvent = new SensorEvent(event.values.length);
-        // event.values =floats;
         System.arraycopy(floats, 0, event.values, 0, event.values.length);
         shakeSensorListener.onSensorChanged(event);
 

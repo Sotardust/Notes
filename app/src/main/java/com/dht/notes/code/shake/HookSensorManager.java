@@ -2,6 +2,7 @@ package com.dht.notes.code.shake;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.os.Build;
 import android.util.ArrayMap;
@@ -12,6 +13,8 @@ import androidx.annotation.RequiresApi;
 import java.lang.reflect.Field;
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -60,7 +63,7 @@ public class HookSensorManager {
 
                 Log.d(TAG, "invoke() called with: obj = [" + systemSensorManager + "]");
 
-                return systemSensorManager;//执行被代理的对象的逻辑
+                return systemSensorManager;
             });
 
             arrayMap.put(Context.SENSOR_SERVICE, proxyObject);
@@ -72,12 +75,12 @@ public class HookSensorManager {
         }
     }
 
-    public static void reflectSensorListenerList() {
+    public static void reflectSensorListenerList(Context context) {
         try {
             @SuppressLint("PrivateApi")
             Class<?> systemListenerInfoClz = Class.forName("android.hardware.SystemSensorManager");
 
-            @SuppressLint("SoonBlockedPrivateApi")
+            @SuppressLint({ "SoonBlockedPrivateApi", "PrivateApi" })
             Field f = systemListenerInfoClz.getDeclaredField("mSensorListeners");
             f.setAccessible(true);
 
@@ -85,13 +88,47 @@ public class HookSensorManager {
 
             HashMap<SensorEventListener, Object> hashMap = new HashMap<>();
 
+            @SuppressLint("PrivateApi")
+            Class<?> sensorQueueInfoClz = Class.forName("android.hardware.SystemSensorManager$SensorEventQueue");
+
+
             for (Object object : systemSensorManagers) {
                 hashMap.putAll((HashMap<SensorEventListener, Object>) f.get(object));
             }
 
+
+            @SuppressLint({ "SoonBlockedPrivateApi", "PrivateApi" })
+            Field field = sensorQueueInfoClz.getDeclaredField("mListener");
+            field.setAccessible(true);
+
             for (Map.Entry<SensorEventListener, Object> map : hashMap.entrySet()) {
                 Log.d(TAG, "getSensorEventListener() called key = " + map.getKey() + ", Object = " + map.getValue());
+
+                Object proxyObject = Proxy.newProxyInstance(context.getClass().getClassLoader(), new Class[]{ SensorEventListener.class }, (proxy, method, args) -> {
+
+                    if (method.getName().equals("onSensorChanged")) {
+
+                        SensorEvent event = (SensorEvent) args[0];
+
+                        Log.d(TAG, "reflectSensorListenerList() called event start = [" + print(event.values) + "]");
+
+                        float[] floats = new float[event.values.length];
+                        for (int i = 0; i < floats.length; i++) {
+                            floats[i] = event.values[i] + 20;
+                        }
+                        System.arraycopy(floats, 0, event.values, 0, event.values.length);
+                        Log.d(TAG, "reflectSensorListenerList() called event end = [" + print(event.values) + "]");
+                    }
+
+                    return method.invoke(map.getKey(), args);
+
+                });
+
+                Log.d(TAG, "reflectSensorListenerList() called with: proxyObject = [" + proxyObject + "]");
+
+                field.set(map.getValue(), proxyObject);
             }
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -99,5 +136,13 @@ public class HookSensorManager {
         }
     }
 
+    static String print(float[] values) {
+        StringBuilder sb = new StringBuilder();
+        for (float value : values) {
+            sb.append(value).append(" , ");
+        }
+
+        return sb.toString();
+    }
 
 }
