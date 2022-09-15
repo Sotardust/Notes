@@ -27,7 +27,7 @@ public class SocketTest {
                 Log.d(TAG, "main() called with: args = [" + args + "]");
                 br.newLine();
 //                br.flush();
-                System.out.println("发送数据 i = " + i + socket.isConnected());
+                System.out.println("发送数据 i 111= " + i + socket.isConnected());
             }
 
             br.close();
