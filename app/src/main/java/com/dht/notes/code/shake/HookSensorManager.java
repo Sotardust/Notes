@@ -88,20 +88,20 @@ public class HookSensorManager {
 
             HashMap<SensorEventListener, Object> hashMap = new HashMap<>();
 
-            @SuppressLint("PrivateApi")
-            Class<?> sensorQueueInfoClz = Class.forName("android.hardware.SystemSensorManager$SensorEventQueue");
-
-
             for (Object object : systemSensorManagers) {
                 hashMap.putAll((HashMap<SensorEventListener, Object>) f.get(object));
             }
 
+
+            @SuppressLint("PrivateApi")
+            Class<?> sensorQueueInfoClz = Class.forName("android.hardware.SystemSensorManager$SensorEventQueue");
 
             @SuppressLint({ "SoonBlockedPrivateApi", "PrivateApi" })
             Field field = sensorQueueInfoClz.getDeclaredField("mListener");
             field.setAccessible(true);
 
             for (Map.Entry<SensorEventListener, Object> map : hashMap.entrySet()) {
+
                 Log.d(TAG, "getSensorEventListener() called key = " + map.getKey() + ", Object = " + map.getValue());
 
                 Object proxyObject = Proxy.newProxyInstance(context.getClass().getClassLoader(), new Class[]{ SensorEventListener.class }, (proxy, method, args) -> {

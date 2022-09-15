@@ -9,6 +9,7 @@ import android.hardware.SensorManager
 import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dht.notes.code.toast.ToastActivity
 import com.dht.notes.code.activity.AActivity
@@ -24,6 +25,7 @@ import com.dht.notes.code.service.ServiceActivity
 import com.dht.notes.code.shake.ShakeActivity
 import com.dht.notes.code.shake.ShakeSensorListener
 import com.dht.notes.code.telephony.TelephonyActivity
+import com.dht.notes.code.utils.GridDecoration
 import com.dht.notes.code.utils.VerticalDecoration
 import com.dht.notes.code.view.FlowActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -78,8 +80,8 @@ class MainActivity : Activity() {
             "service aidl 服务",
             "ContentProvider 内容提供者"
         )
-        recyclerView.layoutManager = LinearLayoutManager(applicationContext)
-        recyclerView.addItemDecoration(VerticalDecoration(5))
+        recyclerView.layoutManager = GridLayoutManager(baseContext, 3)
+        recyclerView.addItemDecoration(GridDecoration(10))
         val adapter = MainAdapter(list)
         recyclerView.adapter = adapter
         addActivityList()
