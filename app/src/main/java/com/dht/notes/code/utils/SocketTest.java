@@ -24,6 +24,7 @@ public class SocketTest {
 
                 Thread.sleep(1000);
                 br.write(" i =" + i);
+                Log.d(TAG, "main() called with: args = [" + args + "]");
                 br.newLine();
 //                br.flush();
                 System.out.println("发送数据 i = " + i + socket.isConnected());
