@@ -22,7 +22,6 @@ public class SocketTest {
             BufferedWriter br = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             for (int i = 0; i < 2000; i++) {
 
-                Log.d(TAG, "main: ");
                 Thread.sleep(1000);
                 br.write(" i =" + i);
                 br.newLine();
