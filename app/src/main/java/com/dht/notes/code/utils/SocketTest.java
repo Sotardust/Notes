@@ -22,12 +22,12 @@ public class SocketTest {
             BufferedWriter br = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             for (int i = 0; i < 2000; i++) {
 
-                Log.d(TAG, "main: ");
                 Thread.sleep(1000);
                 br.write(" i =" + i);
+                Log.d(TAG, "main() called 22with: args = [" + args + "]");
                 br.newLine();
 //                br.flush();
-                System.out.println("发送数据 i = " + i + socket.isConnected());
+                System.out.println("发送数据 i 111= " + i + socket.isConnected());
             }
 
             br.close();
