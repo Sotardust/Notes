@@ -28,7 +28,7 @@ class CActivity : Activity() {
 
     override fun onStart() {
         super.onStart()
-        Log.d(TAG, "onStart: ")
+        Log.d(TAG, "onStart: 111")
     }
 
     override fun onRestart() {
