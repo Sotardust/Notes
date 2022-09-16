@@ -41,7 +41,7 @@ class CoorActivity : FragmentActivity() {
                 val value = abs(verticalOffset) / height
                 new_toolbar.alpha = if (value < 0.3f) 0f else value
 
-                Log.d(TAG, "onOffsetChanged() called abs(verticalOffset) % height :${abs(verticalOffset) / height} with:${app_bar_layout.height} toolbar:${new_toolbar.height}  verticalOffset = $verticalOffset")
+                Log.d(TAG, "onOffsetChanged() abs(verticalOffset) % height :${abs(verticalOffset) / height} with:${app_bar_layout.height} toolbar:${new_toolbar.height}  verticalOffset = $verticalOffset")
             }
 
         })
