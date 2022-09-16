@@ -29,7 +29,6 @@ class HomekeyBActivity : Activity() {
         
 
         /**
-         * Home键
          */
         val SYSTEM_HOME_KEY = "homekey"
         registerReceiver(object : BroadcastReceiver() {
