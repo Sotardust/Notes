@@ -20,7 +20,6 @@ class CActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_c)
-        Log.d(TAG, "onCreate: ")
         btnText.text = "C跳转到D"
         btnText.setOnClickListener {
             startActivity(Intent(this, DActivity::class.java))
