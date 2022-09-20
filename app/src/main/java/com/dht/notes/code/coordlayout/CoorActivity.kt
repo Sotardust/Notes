@@ -26,10 +26,6 @@ class CoorActivity : FragmentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_coor)
 
-        // app_bar_layout.addOnOffsetChangedListener { appBarLayout: AppBarLayout?, verticalOffset: Int ->
-        //     Log.d(TAG, "onCreate() called with: appBarLayout = $appBarLayout, verticalOffset = $verticalOffset")
-        // }
-
         var height = 0f
         app_bar_layout.addOnOffsetChangedListener(object : AppBarLayout.BaseOnOffsetChangedListener<AppBarLayout> {
             override fun onOffsetChanged(appBarLayout: AppBarLayout, verticalOffset: Int) {
