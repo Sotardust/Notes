@@ -54,7 +54,7 @@
                         tools:text="10:11" />
 
                     <View
-                        android:id="@+id/line"
+                        android:id="@+id/line33"
                         android:layout_width="1dp"
                         android:layout_height="28dp"
                         android:layout_centerInParent="true"

@@ -10,8 +10,7 @@ import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.dht.notes.code.toast.ToastActivity
+import com.customtracker.dataanalytics.DataAnalytics
 import com.dht.notes.code.activity.AActivity
 import com.dht.notes.code.adapter.MainAdapter
 import com.dht.notes.code.animation.AnimationActivity
@@ -25,9 +24,10 @@ import com.dht.notes.code.service.ServiceActivity
 import com.dht.notes.code.shake.ShakeActivity
 import com.dht.notes.code.shake.ShakeSensorListener
 import com.dht.notes.code.telephony.TelephonyActivity
+import com.dht.notes.code.toast.ToastActivity
 import com.dht.notes.code.utils.GridDecoration
-import com.dht.notes.code.utils.VerticalDecoration
 import com.dht.notes.code.view.FlowActivity
+import com.dht.notes.code.view.TestViewActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -66,6 +66,7 @@ class MainActivity : Activity() {
         }
 
         val list = arrayListOf(
+            "测试View",
             "摇一摇",
             "toast测试",
             "HomeKey测试",
@@ -88,14 +89,18 @@ class MainActivity : Activity() {
 
         adapter.setOnItemClickListener { adapter, view, position ->
             // testDispatchers()
+            // val map:MutableMap<String, Any> = mutableMapOf()
+            // map["key"]= "value"
+            // DataAnalytics.log("app_active", map)
+
             startActivity(Intent(this@MainActivity, activityList[position].java))
         }
         val myAsyncTask = MyAsyncTask()
         myAsyncTask.execute("fdsa")
 
-        sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
-
-        sensorManager.registerListener(shakeListener, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
+        // sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        //
+        // sensorManager.registerListener(shakeListener, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
 
     }
 
@@ -103,7 +108,7 @@ class MainActivity : Activity() {
     override fun onDestroy() {
         super.onDestroy()
         //取消注册
-        sensorManager.unregisterListener(shakeListener)
+        // sensorManager.unregisterListener(shakeListener)
     }
 
     fun log(msg: String) = println("TestDispatchers [${Thread.currentThread().name}] $msg")
@@ -154,6 +159,7 @@ class MainActivity : Activity() {
     }
 
     private fun addActivityList() {
+        activityList.add(TestViewActivity::class)
         activityList.add(ShakeActivity::class)
         activityList.add(ToastActivity::class)
         activityList.add(HomekeyAActivity::class)

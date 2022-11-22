@@ -9,7 +9,7 @@ android {
     // buildToolsVersion "29.0.3"
     defaultConfig {
         applicationId "com.dht.notes"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -33,10 +33,18 @@ android {
 }
 
 dependencies {
+
+    configurations.all {
+        resolutionStrategy {
+            force 'com.customtracker.dataanalytics:tracker:5.4.0.alpha02'
+        }
+    }
+
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.coordinatorlayout:coordinatorlayout:1.1.0'
     implementation 'com.google.android.material:material:1.3.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
 
     testImplementation "junit:junit:$rootProject.junitVersion"
     androidTestImplementation "androidx.test.ext:junit:$rootProject.testRunVersion"
@@ -62,4 +70,14 @@ dependencies {
     implementation 'com.github.zeshaoaaa:OkReflect:master-SNAPSHOT'
 
     implementation 'com.jakewharton:disklrucache:2.0.2'
+
+    debugImplementation "com.customtracker.dataanalytics:tracker:5.4.0.le.alpha02"
+    releaseImplementation "com.customtracker.dataanalytics:tracker:5.4.0.alpha02"
+
+    implementation "com.ia.appframework:libAppframework:5.2.2.cn.alpha05"
+
+    implementation("io.github.thanosfisherman.wifiutils:wifiutils:1.6.6")
+
+    // implementation 'cn.appcloudbox.autopilot:libAutoPilot.gm:6.11.3.cn.gm'
+
 }

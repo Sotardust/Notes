@@ -1,0 +1,24 @@
+[ro.system.build.date]: [Thu Sep 29 01:02:38 CST 2022]
+[ro.system.build.date.utc]: [1664384558]  2022-09-29 01:02:38
+
+[ro.vendor.build.date]: [Thu Sep 29 02:21:22 CST 2022]
+[ro.vendor.build.date.utc]: [1664389282] 2022-09-29 02:21:22
+
+[ro.vendor.build.security_patch]: [2018-06-19]
+
+[ro.build.version.security_patch]: [2020-11-01]
+
+
+[ro.oba.version]: [20220929030422_OBA_VERSION]
+[ro.odm.build.date.utc]: [1664389282]
+
+[ro.bootimage.build.date]: [Thu Sep 29 02:21:22 CST 2022]
+[ro.bootimage.build.date.utc]: [1664389282]  2022-09-29 02:21:22
+[ro.bootimage.build.fingerprint]: [kirin990/kirin990/kirin990:10/QP1A.190711.020/root202209290221:user/test-keys]
+[ro.bootloader]: [unknown]
+[ro.bootmode]: [normal]
+[ro.build.characteristics]: [default]
+[ro.build.date]: [Thu Sep 29 01:02:38 CST 2022]
+
+[ro.build.date.utc]: [1664384558]  2022-09-29 01:02:38 rom
+[ro.bootimage.build.date.utc]: [1664389282]  2022-09-29 02:21:22

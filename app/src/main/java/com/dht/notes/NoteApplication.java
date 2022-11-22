@@ -1,6 +1,7 @@
 package com.dht.notes;
 
 import android.app.Application;
+import android.content.Context;
 import android.os.Build;
 import android.util.Log;
 
@@ -9,11 +10,12 @@ import androidx.annotation.RequiresApi;
 import com.dht.notes.code.other.ontouch.util.ScreenUtil;
 import com.dht.notes.code.shake.HookSensorManager;
 
+import com.ihs.app.framework.HSApplication;
 /**
  * Created by dai on 2018/3/29.
  */
 
-public class NoteApplication extends Application {
+public class NoteApplication extends HSApplication {
 
     private static final String TAG = "dht";
 
@@ -76,5 +78,12 @@ public class NoteApplication extends Application {
         super.registerActivityLifecycleCallbacks(callback);
         Log.d("dht", "registerActivityLifecycleCallbacks: ");
 
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        initMMKV();
+        initLauncherInfo();
     }
 }

@@ -4,14 +4,19 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../../layout/custom_preview.xml" value="0.19166666666666668" />
+        <entry key="../../../Library/Android/sdk/platforms/android-29/data/res/drawable/progress_horizontal.xml" value="0.206" />
         <entry key="app/src/main/res/drawable/ic_news_close.xml" value="0.20092592592592592" />
         <entry key="app/src/main/res/drawable/svg_floating_window.xml" value="0.16822916666666668" />
         <entry key="app/src/main/res/layout/activity_b.xml" value="0.20364583333333333" />
+        <entry key="app/src/main/res/layout/activity_c.xml" value="0.23333333333333334" />
+        <entry key="app/src/main/res/layout/activity_coor_copy.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_floating_window.xml" value="0.125" />
         <entry key="app/src/main/res/layout/activity_shake.xml" value="0.2078125" />
         <entry key="app/src/main/res/layout/activity_telephony.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_test_toast.xml" value="0.19444444444444445" />
+        <entry key="app/src/main/res/layout/activity_text_view.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_wifi_wave.xml" value="0.115625" />
+        <entry key="app/src/main/res/layout/bg_hundred_yuan_progress.xml" value="0.23802083333333332" />
         <entry key="app/src/main/res/layout/custom_toast.xml" value="0.21979166666666666" />
         <entry key="app/src/main/res/layout/item_main.xml" value="0.22395833333333334" />
       </map>

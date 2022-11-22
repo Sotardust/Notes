@@ -7,6 +7,14 @@
     <uses-permission android:name="android.permission.Sys" />
     <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- 以下是使用wifi访问网络所需的权限 -->
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".NoteApplication"
@@ -14,9 +22,9 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-
         android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning">
+        tools:ignore="GoogleAppIndexingWarning"
+        tools:overrideLibrary="com.thanosfisherman.wifiutils">
         <activity android:name=".MainActivity">
             <!--android:taskAffinity="com.dht.notes.task01"-->
             <intent-filter>
@@ -29,6 +37,12 @@
         <!--            android:name="com.dht.notes.testcode.other.ontouch.TestActivity"-->
         <!--            android:launchMode="singleTask" />-->
         <!--android:taskAffinity="com.dht.notes.task02"-->
+
+        <!--        <provider-->
+        <!--            android:name="com.customtracker.dataanalytics.db.EventProvider"-->
+        <!--            android:authorities="${applicationId}.com.customtracker.dataanalytics"-->
+        <!--            android:enabled="true"-->
+        <!--            android:exported="false" />-->
 
         <activity android:name=".code.view.FlowActivity" />
         <activity android:name=".code.lock.ThreadLockActivity" />
@@ -70,6 +84,7 @@
             android:process=":work" />
         <activity android:name=".code.toast.ToastActivity" />
         <activity android:name=".code.shake.ShakeActivity" />
+        <activity android:name=".code.view.TestViewActivity" />
         <!--            android:taskAffinity="com.dht.notes.dfasf"-->
 
         <provider
