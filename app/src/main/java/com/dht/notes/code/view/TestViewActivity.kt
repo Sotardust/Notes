@@ -18,10 +18,9 @@ import android.text.TextUtils
 import android.util.Log
 import android.view.Display
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import com.dht.notes.R
-import com.ihs.app.framework.HSApplication
-import com.thanosfisherman.wifiutils.WifiUtils
 import kotlinx.android.synthetic.main.activity_text_view.*
 import kotlinx.android.synthetic.main.activity_text_view.view.*
 import java.io.BufferedReader
@@ -37,6 +36,7 @@ class TestViewActivity : Activity() {
 
     private lateinit var wifiManager: WifiManager
 
+    @RequiresApi(Build.VERSION_CODES.M)
     @SuppressLint("MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,13 +49,9 @@ class TestViewActivity : Activity() {
 
         button.setOnClickListener { v ->
             Log.d("TAG", "onClick() called with: v = [$v]")
-            test2.text = getHandSetInfo()
-            // test2.text ="""
-            //     ${ getProp("ro.build.date")}
-            //     ${ getProp("ro.build.date.utc")}
-            //     ${ getProp("ro.com.android.date")}
-            //     ${ getProp("ro.com.android.dateformat")}
-            // """
+            bloodView.setProgress(0.8f)
+            pressureView.setProgress(0.5f)
+            energyView.setProgress(0.2f)
 
         }
         getDetailsWifiInfo()
@@ -66,10 +62,6 @@ class TestViewActivity : Activity() {
 
         wifiManager.startScan()
 
-
-
-
-        WifiUtils.withContext(getApplicationContext()).scanWifi(this::getScanResults).start();
 
     }
 
@@ -95,8 +87,8 @@ class TestViewActivity : Activity() {
             分辨率:${dis.getWidth()}×${dis.getHeight()}
             版本显示:${Build.DISPLAY}
             时间:${Build.TIME}
-            时间1:${getProp("ro.build.date")}}
-            时间2:${getProp("ro.build.date.utc")}
+            时间1:${getProp("ro.system.build.date.utc")}
+            时间2:${getProp("ro.bootimage.build.date.utc")}
             时间3:${getProp("ro.com.android.date")}
             时间4:${System.getProperty("ro.com.android.dateformat")}
          

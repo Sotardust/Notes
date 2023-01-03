@@ -102,7 +102,7 @@ class WifiWaveView : View {
             this.duration = waveDuration.toLong()
             this.start()
             this.addListener(object : AnimatorListenerAdapter() {
-                override fun onAnimationEnd(animation: Animator?) {
+                override fun onAnimationEnd(animation: Animator) {
                     if (running) {
                         waveList.remove(this@Wave)
                     }

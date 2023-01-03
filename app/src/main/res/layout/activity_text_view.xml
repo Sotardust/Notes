@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     android:orientation="vertical">
 
     <TextView
@@ -10,16 +11,27 @@
         android:layout_width="200dp"
         android:layout_height="100dp"
         android:background="@color/line_E8E8E8"
-        android:textColor="@color/white"
         android:text="点击按钮"
+        android:textColor="#BF360C"
         android:textSize="16sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
-    <TextView
-        android:id="@+id/test2"
+    <com.dht.notes.code.view.BloodOxygenView
+        android:id="@+id/bloodView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="200dp"
+        android:background="@color/line_E8E8E8" />
 
-</androidx.appcompat.widget.LinearLayoutCompat>
+    <com.dht.notes.code.view.PressureView
+        android:id="@+id/pressureView"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/line_E8E8E8" />
+
+    <com.dht.notes.code.view.EnergyView
+        android:id="@+id/energyView"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/line_E8E8E8" />
+</LinearLayout>

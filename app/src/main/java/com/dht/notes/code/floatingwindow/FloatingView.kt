@@ -168,7 +168,7 @@ class FloatingView : View {
             this.duration = duration
             this.start()
             this.addListener(object : AnimatorListenerAdapter() {
-                override fun onAnimationEnd(animation: Animator?) {
+                override fun onAnimationEnd(animation: Animator) {
 
                 }
             })
