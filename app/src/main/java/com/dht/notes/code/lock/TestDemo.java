@@ -10,8 +10,11 @@ public class TestDemo {
         AThread at = new AThread(bt);
         try {
             bt.start();
-//            Thread.sleep(2000);
             at.start();
+
+            Thread.sleep(2000);
+            bt.stop();
+            bt.interrupt();
             at.join();
         } catch (Exception e) {
             System.out.println("Exception from main");

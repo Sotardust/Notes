@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <FrameLayout
+        android:id="@+id/frameA"
+        android:layout_width="140dp"
+        android:layout_height="240dp"
+        android:background="@color/color_8A8A8A" />
+
+    <FrameLayout
+        android:id="@+id/frameB"
+        android:layout_width="100dp"
+        android:layout_height="200dp"
+        android:background="@drawable/bg_text" />
+
+
+    <FrameLayout
+        android:id="@+id/frameC"
+        android:layout_width="80dp"
+        android:layout_height="150dp"
+        android:background="@color/color_2f73f3" />
+
+
+    <com.dht.notes.code.view.MyLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+
+        android:background="@color/color_43C4C5"
+        android:layout_marginTop="240dp">
+
+        <com.dht.notes.code.view.MyTextView
+            android:id="@+id/text"
+            android:layout_width="160dp"
+            android:layout_height="200dp"
+            android:background="@color/color_6F6F70"
+            android:text="测试数据" />
+    </com.dht.notes.code.view.MyLinearLayout>
+
+
+</RelativeLayout>

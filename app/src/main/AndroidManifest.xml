@@ -39,7 +39,14 @@
         <!--android:taskAffinity="com.dht.notes.d"-->
         <service
             android:name=".code.service.MyService"
+            android:exported="true"
             android:process=":work" />
+
+        <service
+            android:name=".code.service.MyRemoteService"
+            android:exported="true"
+            android:process=":remote" />
+<!--            android:process=":work" />-->
 
         <activity
             android:name=".code.activity.AActivity"
@@ -70,14 +77,15 @@
             android:process=":work" />
         <activity android:name=".code.toast.ToastActivity" />
         <activity android:name=".code.shake.ShakeActivity" />
+        <activity android:name=".code.view.TouchEventActivity" />
         <!--            android:taskAffinity="com.dht.notes.dfasf"-->
 
         <provider
             android:name=".code.provider.MyProvider"
+
             android:authorities="com.dht.notes.code.provider">
 
         </provider>
-
 
     </application>
 

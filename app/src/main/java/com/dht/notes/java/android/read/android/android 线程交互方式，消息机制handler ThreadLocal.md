@@ -7,6 +7,9 @@
 ### 多线程的实现方法
     1、继承Thread
     2、实现Runnable接口
+    3、Callable
+    4、线程池 
+
 ### 二、handler执行过程图片展示
     handler 图片.png
 ### 三、Handler机制

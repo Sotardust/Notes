@@ -21,7 +21,9 @@ import android.widget.Toast;
 import com.dht.notes.R;
 
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * created by Administrator on 2019/10/11 11:05
@@ -34,7 +36,6 @@ public class ServiceActivity extends Activity {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             myBinder = ((MyService.MyBinder) service);
-
             Log.d(TAG, "onServiceConnected() called with: name = [" + name + "], service = [" + service + "]");
         }
 
@@ -62,6 +63,7 @@ public class ServiceActivity extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), MyService.class);
                 startService(intent);
+                bindService(new Intent(getApplicationContext(),MyRemoteService.class),connection,BIND_AUTO_CREATE);
             }
         });
 
@@ -113,6 +115,10 @@ public class ServiceActivity extends Activity {
 
             }
         });
+        Hashtable<String,String> map = new Hashtable<>();
+        map.put(null,"");
 
     }
+
+
 }

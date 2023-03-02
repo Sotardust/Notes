@@ -98,6 +98,14 @@ public class ExampleUnitTest1 {
 
         System.out.println("list1 = " + list);
 
+        for(;;){
+
+             String  str = null;
+             if (str ==null){
+                 System.out.println("str = " + str);
+                 return;
+             }
+        }
     }
 
 }

@@ -23,14 +23,14 @@ ObjectAnimation类
 3个重要方法
     ValueAnimation.ofInt(int values) 作用：将初始值以整形数值的形式过渡到结束值
         插值器：interpolator 作用 设置值的变化模式：比如 匀速，加速等 
-        估值器：IntEvaluator 作用 设置值的具体数值（系统默认）
+        估值器：Evaluator 作用 设置值的具体数值（系统默认）
     ValueAnimation.ofFloat(float values) （同上）
     ValueAnimation.ofObject(object values)
-        估值器：IntEvaluator 作用 设置值的具体变化数值（自定义）
+        估值器：Evaluator 作用 设置值的具体变化数值（自定义）
 ### ObjectAnimation类
 实现原理：直接对对象的属性值进行改变操作，从而实现动画效果
          直接改变view的alpha属性从而实现透明度的动画效果
-         继承自ViewAnimation类，即底层的动画实现机制是基于ValueAnimation类
+         继承自ValueAnimator类，即底层的动画实现机制是基于ValueAnimation类
 本质原理：通过不断控制值的变化，在不断自动赋给对象的属性，从而实现动画效果
 ### ValueAnimation类与ObjectAnimation类的区别
 ValueAnimation类是先改变值，然后手动赋值给对象的属性从而实现动画；是间接对对象属性进行操作；

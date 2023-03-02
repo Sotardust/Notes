@@ -245,3 +245,8 @@ bindService 是否每次都会执行 onBind
 
 19 BroadcastReceiver 
 在 onReceiver 方法里开启线程的缺点
+
+这就带来了一个问题：当响应一个广播信息的处理十分耗时的时候，那么就应该把这个处理放在一个单独的线程里去执行，
+来保证主线程里的其他用户交互组件能够继续运行，而一旦这么做，当onReceive()唤起一个线程后就会马上返 回，这时就会把Receiver进程放到被终止的境地
+。解决这个问题的方案是在onReceive()里开始一个Service，让这个Service去 做这件事情，那么系统就会认为这个进程里还有活动正在进行。
+推荐使用IntentService。

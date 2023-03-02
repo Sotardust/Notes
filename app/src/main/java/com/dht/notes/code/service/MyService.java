@@ -69,6 +69,8 @@ public class MyService extends Service {
     public void onDestroy() {
         super.onDestroy();
         Log.d(TAG, "onDestroy() called");
+        Intent intent = new Intent(getApplicationContext(), MyService.class);
+        startService(intent);
     }
 
     static class MyBinder extends ServiceAidlInterface.Stub {

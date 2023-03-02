@@ -9,6 +9,8 @@ import androidx.annotation.RequiresApi;
 import com.dht.notes.code.other.ontouch.util.ScreenUtil;
 import com.dht.notes.code.shake.HookSensorManager;
 
+import leakcanary.AppWatcher;
+
 /**
  * Created by dai on 2018/3/29.
  */
@@ -30,7 +32,8 @@ public class NoteApplication extends Application {
         application = this;
         ScreenUtil.setScreenWidthHeight(getApplicationContext());
 
-        HookSensorManager.hook(this);
+        AppWatcher.INSTANCE.manualInstall(this);
+//        HookSensorManager.hook(this);
 
         //        registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
         //            @Override

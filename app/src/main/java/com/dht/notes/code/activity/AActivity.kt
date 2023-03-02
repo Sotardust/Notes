@@ -22,6 +22,7 @@ class AActivity : Activity() {
         setContentView(R.layout.activity_a)
         btnText.text = "A跳转到B"
         btnText.setOnClickListener {
+            Intent.ACTION_SCREEN_ON
             val value  = UUID.randomUUID()
             Log.d(TAG, "onCreate() called value =$value")
             val intent = Intent(this, BActivity::class.java)

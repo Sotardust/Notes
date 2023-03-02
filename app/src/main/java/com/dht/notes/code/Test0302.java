@@ -8,7 +8,14 @@ public class Test0302 {
         System.out.println("(1 << 30) = " + (MAXIMUM_CAPACITY));
         System.out.println("(MAXIMUM_CAPACITY >>> 1) = " + (MAXIMUM_CAPACITY >>> 1));
         System.out.println("(MAXIMUM_CAPACITY *2) = " + ((MAXIMUM_CAPACITY >>> 1) *2));
+
+        test();
     }
 
-
+    private static void test(){
+        Object object = new Object();
+        synchronized (object){
+            System.out.println("object = " + object);
+        }
+    }
 }

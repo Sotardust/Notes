@@ -8,10 +8,14 @@ import android.hardware.SensorEvent
 import android.hardware.SensorManager
 import android.os.AsyncTask
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.os.Message
 import android.util.Log
+import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.dht.notes.code.toast.ToastActivity
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.ViewCacheExtension
 import com.dht.notes.code.activity.AActivity
 import com.dht.notes.code.adapter.MainAdapter
 import com.dht.notes.code.animation.AnimationActivity
@@ -21,20 +25,23 @@ import com.dht.notes.code.floatingwindow.FloatingWindowActivity
 import com.dht.notes.code.homekey.HomekeyAActivity
 import com.dht.notes.code.lock.ThreadLockActivity
 import com.dht.notes.code.provider.ProviderActivity
+import com.dht.notes.code.retrofit.GitHubService
 import com.dht.notes.code.service.ServiceActivity
 import com.dht.notes.code.shake.ShakeActivity
 import com.dht.notes.code.shake.ShakeSensorListener
 import com.dht.notes.code.telephony.TelephonyActivity
+import com.dht.notes.code.toast.ToastActivity
 import com.dht.notes.code.utils.GridDecoration
-import com.dht.notes.code.utils.VerticalDecoration
 import com.dht.notes.code.view.FlowActivity
+import com.dht.notes.code.view.TouchEventActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
 import kotlin.reflect.KClass
+
 
 /**
  * created by Administrator on 2019/5/28 18:46
@@ -47,6 +54,7 @@ class MainActivity : Activity() {
     private var shakeListener = object : ShakeSensorListener() {
         override fun onSensorChanged(event: SensorEvent?) {
 
+            //ZygotePreload
             Log.d("TAG11", "hook() onSensorChanged() called with: event = $event")
 
         }
@@ -57,15 +65,18 @@ class MainActivity : Activity() {
     }
     private lateinit var sensorManager: SensorManager
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         runBlocking {
-            testDispatchers()
+
         }
 
         val list = arrayListOf(
+            "事件分发处理",
             "摇一摇",
             "toast测试",
             "HomeKey测试",
@@ -86,6 +97,17 @@ class MainActivity : Activity() {
         recyclerView.adapter = adapter
         addActivityList()
 
+        recyclerView.setViewCacheExtension(object :ViewCacheExtension(){
+            override fun getViewForPositionAndType(
+                recycler: RecyclerView.Recycler,
+                position: Int,
+                type: Int
+            ): View? {
+                TODO("Not yet implemented")
+            }
+
+        })
+
         adapter.setOnItemClickListener { adapter, view, position ->
             // testDispatchers()
             startActivity(Intent(this@MainActivity, activityList[position].java))
@@ -93,9 +115,33 @@ class MainActivity : Activity() {
         val myAsyncTask = MyAsyncTask()
         myAsyncTask.execute("fdsa")
 
-        sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
-        sensorManager.registerListener(shakeListener, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
+//        sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
+//
+//        sensorManager.registerListener(shakeListener, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
+
+//        val retrofit = Retrofit.Builder()
+//            .baseUrl("https://api.github.com/")
+//            .addCallAdapterFactory()
+//            .addConverterFactory()
+//            .addConverterFactory()
+//            .build()
+//        val service = retrofit.create(GitHubService::class.java)
+//
+//        val repos: Call<List<String>> = service.listRepos("octocat")
+//
+//        val call  =repos.cancel()
+//        repos.enqueue(object :Callback<List<String>>{
+//
+//            override fun onResponse(call: Call<List<String>>, response: Response<List<String>>) {
+//
+//            }
+//
+//            override fun onFailure(call: Call<List<String>>, t: Throwable) {
+//
+//            }
+//
+//        })
 
     }
 
@@ -103,57 +149,10 @@ class MainActivity : Activity() {
     override fun onDestroy() {
         super.onDestroy()
         //取消注册
-        sensorManager.unregisterListener(shakeListener)
+//        sensorManager.unregisterListener(shakeListener)
     }
-
-    fun log(msg: String) = println("TestDispatchers [${Thread.currentThread().name}] $msg")
-
-    private fun testDispatchers() = runBlocking {
-
-        Log.d(TAG, "main                 : I'm working in thread ${Thread.currentThread().name} ")
-
-        launch(Dispatchers.IO) {
-            Log.d(TAG, "launch Default       : I'm working in thread ${Thread.currentThread().name}")
-        }
-
-        withContext(Dispatchers.Default) {
-            Log.d(TAG, "withContext Default  : I'm working in thread ${Thread.currentThread().name}")
-        }
-    }
-
-    private fun testDispatchers1() = runBlocking {
-
-        log("main             : I'm working in thread ${Thread.currentThread().name}")
-
-        launch(Dispatchers.IO) {
-
-            log("launch IO        : I'm working in thread ${Thread.currentThread().name}")
-        }
-
-        launch(Dispatchers.Default) {
-            log("launch Default   : I'm working in thread ${Thread.currentThread().name}")
-        }
-
-        withContext(Dispatchers.Unconfined) {
-            log("Unconfined1      : I'm working in thread ${Thread.currentThread().name} ")
-        }
-
-        withContext(Dispatchers.IO) {
-
-            delay(5000)
-            log("IO               : I'm working in thread ${Thread.currentThread().name} ")
-
-            withContext(Dispatchers.Unconfined) {
-                log("Unconfined2      : I'm working in thread ${Thread.currentThread().name}")
-            }
-        }
-
-        withContext(Dispatchers.Default) {
-            log("Default          : I'm working in thread ${Thread.currentThread().name} ")
-        }
-    }
-
     private fun addActivityList() {
+        activityList.add(TouchEventActivity::class)
         activityList.add(ShakeActivity::class)
         activityList.add(ToastActivity::class)
         activityList.add(HomekeyAActivity::class)
@@ -196,5 +195,6 @@ class MainActivity : Activity() {
             return ""
         }
     }
+
 
 }
