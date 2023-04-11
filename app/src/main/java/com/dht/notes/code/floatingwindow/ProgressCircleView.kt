@@ -90,7 +90,7 @@ class ProgressCircleView : View {
     private fun getPaint(): Paint {
         return Paint().apply {
             isAntiAlias = true
-            style = Paint.Style.FILL
+            style = Paint.Style.STROKE
             strokeWidth = 10f
         }
     }
@@ -107,7 +107,7 @@ class ProgressCircleView : View {
         circleX = circleRadius
         circleY = circleRadius
         innerCircleRadius = circleRadius - circleWidth
-        bgPaint.color = bgColor
+//        bgPaint.color = bgColor
         grayPaint.color = grayColor
         circlePaint.color = startColor
     }
@@ -115,10 +115,10 @@ class ProgressCircleView : View {
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
-        canvas.drawCircle(circleX, circleY, circleRadius, bgPaint)
-        canvas.drawArc(rectF, -90f, -450f, true, grayPaint)
-        canvas.drawArc(rectF, -90f, sweepAngle, true, circlePaint)
-        canvas.drawCircle(circleX, circleY, innerCircleRadius - circleWidth * 2 / 3, bgPaint)
+//        canvas.drawCircle(circleX, circleY, circleRadius, bgPaint)
+        canvas.drawArc(rectF, -90f, -450f, false, grayPaint)
+        canvas.drawArc(rectF, -90f, sweepAngle, false, circlePaint)
+//        canvas.drawCircle(circleX, circleY, innerCircleRadius - circleWidth * 2 / 3, bgPaint)
 
     }
 

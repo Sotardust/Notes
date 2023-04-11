@@ -32,7 +32,7 @@ public class NoteApplication extends Application {
         application = this;
         ScreenUtil.setScreenWidthHeight(getApplicationContext());
 
-        AppWatcher.INSTANCE.manualInstall(this);
+//        AppWatcher.INSTANCE.manualInstall(this);
 //        HookSensorManager.hook(this);
 
         //        registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {

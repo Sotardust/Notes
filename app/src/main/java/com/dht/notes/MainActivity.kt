@@ -97,16 +97,6 @@ class MainActivity : Activity() {
         recyclerView.adapter = adapter
         addActivityList()
 
-        recyclerView.setViewCacheExtension(object :ViewCacheExtension(){
-            override fun getViewForPositionAndType(
-                recycler: RecyclerView.Recycler,
-                position: Int,
-                type: Int
-            ): View? {
-                TODO("Not yet implemented")
-            }
-
-        })
 
         adapter.setOnItemClickListener { adapter, view, position ->
             // testDispatchers()
