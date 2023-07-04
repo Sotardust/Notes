@@ -7,18 +7,30 @@
     android:orientation="vertical">
 <!--    android:background="@color/color_276ef3"-->
 
-    <!--    <com.dht.notes.code.animation.WaveView-->
-    <!--        android:id="@+id/waveView"-->
-    <!--        android:layout_width="300dp"-->
-    <!--        android:layout_height="300dp"-->
-    <!--        app:center_color="@color/white"-->
-    <!--        app:center_radius="50dp"-->
-    <!--        app:max_radius="100dp"-->
-    <!--        app:wave_duration="1500"-->
-    <!--        app:wave_interval_time="500"-->
-    <!--        app:wave_width="1dp" />-->
+<!--        <com.dht.notes.code.animation.WaveView-->
+<!--            android:id="@+id/waveView"-->
+<!--            android:layout_width="300dp"-->
+<!--            android:layout_height="300dp"-->
+<!--            app:center_color="@color/white"-->
+<!--            app:center_radius="50dp"-->
+<!--            app:max_radius="100dp"-->
+<!--            app:wave_duration="1500"-->
+<!--            app:wave_interval_time="500"-->
+<!--            app:wave_width="1dp" />-->
 
 
+
+    <Button
+        android:id="@+id/btn"
+        android:text="暂停"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/startbtn"
+        android:text="开始"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
     <com.dht.notes.code.animation.WifiWaveView
         android:id="@+id/wifi_wave"
         android:layout_width="wrap_content"

@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="@color/white"
     android:layout_height="match_parent"
+    android:background="@color/color_333333"
     android:orientation="vertical">
+    <!--    android:background="@color/line_E8E8E8"-->
 
-<!--    <com.dht.notes.code.view.FlowView-->
-<!--        android:id="@+id/flow_view"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent" />-->
-<!--    -->
+    <!--    <com.dht.notes.code.view.FlowView-->
+    <!--        android:id="@+id/flow_view"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent" />-->
+    <!--    -->
 
-    <com.dht.notes.code.view.LinearProgressView
+    <!--    <com.dht.notes.code.view.LinearProgressView-->
+    <!--        android:layout_width="100dp"-->
+    <!--        android:layout_height="10dp"/>-->
+
+    <com.dht.notes.code.view.LoadingView
         android:layout_width="100dp"
-        android:layout_height="10dp"/>
+        android:layout_height="100dp" />
 
 </LinearLayout>

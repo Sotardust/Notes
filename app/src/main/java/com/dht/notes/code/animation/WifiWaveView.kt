@@ -2,19 +2,14 @@ package com.dht.notes.code.animation
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
-import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Canvas
-import android.graphics.Color
 import android.graphics.Paint
-import android.graphics.SweepGradient
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
 import android.view.animation.LinearInterpolator
-import androidx.annotation.Keep
 import androidx.core.content.ContextCompat
 import com.dht.notes.R
 
@@ -39,9 +34,9 @@ class WifiWaveView : View {
 
 
     constructor(context: Context, attributeSet: AttributeSet?, defStyleAttr: Int) : super(
-            context,
-            attributeSet,
-            defStyleAttr
+        context,
+        attributeSet,
+        defStyleAttr
     ) {
         val typedArray = context.obtainStyledAttributes(attributeSet, R.styleable.WifiWaveView, defStyleAttr, 0)
         centerRadius = typedArray.getDimension(R.styleable.WifiWaveView_center_radius, centerRadius.toFloat()).toInt()
@@ -52,8 +47,8 @@ class WifiWaveView : View {
         wavePaint.strokeWidth = typedArray.getDimension(R.styleable.WifiWaveView_wave_width, 1.0f)
         wavePaint.style = Paint.Style.STROKE
         wavePaint.color = typedArray.getColor(
-                R.styleable.WifiWaveView_wave_side_color,
-                ContextCompat.getColor(context, R.color.colorAccent)
+            R.styleable.WifiWaveView_wave_side_color,
+            ContextCompat.getColor(context, R.color.colorAccent)
         )
         typedArray.recycle()
     }
@@ -91,6 +86,7 @@ class WifiWaveView : View {
     fun stop() {
         running = false
         waveList.forEach { it.cancelAnimation() }
+        waveList.clear()
     }
 
     private inner class Wave {
@@ -138,6 +134,10 @@ class WifiWaveView : View {
 
         fun cancelAnimation() {
             createWaveAnimation.cancel()
+        }
+
+        fun release() {
+
         }
 
         fun getAlpha(): Int {

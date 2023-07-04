@@ -46,5 +46,4 @@ class LinearProgressView @JvmOverloads constructor(context: Context,
         canvas.drawRoundRect(rect, 10f, 10f, paint)
     }
 
-
 }

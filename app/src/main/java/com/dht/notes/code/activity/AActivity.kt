@@ -6,6 +6,7 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import com.dht.notes.R
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_a.*
 import java.util.*
 
@@ -23,12 +24,28 @@ class AActivity : Activity() {
         btnText.text = "A跳转到B"
         btnText.setOnClickListener {
             Intent.ACTION_SCREEN_ON
-            val value  = UUID.randomUUID()
+            val value = UUID.randomUUID()
             Log.d(TAG, "onCreate() called value =$value")
             val intent = Intent(this, BActivity::class.java)
-            intent.putExtra("value",value)
+            intent.putExtra("value", value)
             startActivity(intent)
+            finish()
         }
+
+        var count = 0
+        btnText1.setOnClickListener {
+            WebSocketManager.INSTANCE.dest = "测试" + count++
+            println("WebSocketManager.INSTANCE.dest = ${WebSocketManager.INSTANCE.dest}")
+        }
+
+        btnText2.setOnClickListener {
+
+            val message = Gson().toJson(WebSocketRequestBean<String>().apply {
+                payload = "fda"
+            })
+            println("message = ${message}")
+        }
+
     }
 
     override fun onStart() {
