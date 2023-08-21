@@ -5,6 +5,7 @@ import android.content.ContentValues
 import android.database.ContentObservable
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import com.dht.notes.R
 import kotlinx.android.synthetic.main.activity_provider.*
 
@@ -19,7 +20,7 @@ class ProviderActivity : Activity() {
         val values = ContentValues()
         values.put("姓名", "代海涛")
         values.put("年龄", 23)
-        val uri = Uri.parse("content://com.dht.notes.code.provider/*")
+        val uri = Uri.parse("content://com.dht.notes.code.provider/user")
         val sb = StringBuilder()
         providerInsert.setOnClickListener {
             contentResolver.insert(uri, values)
@@ -32,6 +33,8 @@ class ProviderActivity : Activity() {
         }
         providerQuery.setOnClickListener {
             val result = contentResolver.query(uri, null, null, null, null)
+
+            Log.d(TAG, "onCreate: ${result?.moveToNext()}")
 
         }
 

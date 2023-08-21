@@ -105,34 +105,6 @@ class MainActivity : Activity() {
         val myAsyncTask = MyAsyncTask()
         myAsyncTask.execute("fdsa")
 
-
-//        sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
-//
-//        sensorManager.registerListener(shakeListener, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
-
-//        val retrofit = Retrofit.Builder()
-//            .baseUrl("https://api.github.com/")
-//            .addCallAdapterFactory()
-//            .addConverterFactory()
-//            .addConverterFactory()
-//            .build()
-//        val service = retrofit.create(GitHubService::class.java)
-//
-//        val repos: Call<List<String>> = service.listRepos("octocat")
-//
-//        val call  =repos.cancel()
-//        repos.enqueue(object :Callback<List<String>>{
-//
-//            override fun onResponse(call: Call<List<String>>, response: Response<List<String>>) {
-//
-//            }
-//
-//            override fun onFailure(call: Call<List<String>>, t: Throwable) {
-//
-//            }
-//
-//        })
-
     }
 
 

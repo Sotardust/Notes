@@ -64,10 +64,10 @@ public class RedPacketView extends View {
 
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaint.setColor(Color.BLUE);
-        Path path = new Path();
-        path.moveTo(600, 600);
-        path.quadTo(0, 300, 0, 600);
-        canvas.drawPath(path, null);
+//        Path path = new Path();
+//        path.moveTo(600, 600);
+//        path.quadTo(0, 300, 0, 600);
+//        canvas.drawPath(path, null);
         Log.d(TAG, "onDraw drawable.bitmapWidth() = " + bitmapWidth);
         Log.d(TAG, "onDraw drawable.bitmapHeight() = " + bitmapHeight);
 
