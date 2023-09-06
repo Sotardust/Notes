@@ -69,5 +69,6 @@ dependencies {
 
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.10'
 
+    implementation 'com.licheedev:android-serialport:2.1.3'
 
 }

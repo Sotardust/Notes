@@ -1,0 +1,64 @@
+apply plugin: 'java-gradle-plugin'
+
+apply plugin: 'kotlin'
+
+apply plugin: 'maven-publish'
+
+gradlePlugin {
+    plugins {
+        shadow {
+            id = "com.dht.notes.plugin"
+            implementationClass = "com.dht.gradleplugin.NotesPlugin"
+        }
+    }
+}
+
+task sourceJar(type: Jar) {
+    archiveClassifier.set('sources')
+    from sourceSets.main.java.srcDirs
+}
+
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+def publicationVersion = "1.0.0"
+def coreGroupId = 'com.dht.note'
+def corePath = 'gradle-plugin'
+
+publishing {
+    publications {
+        gradlePlugin(MavenPublication) {
+            groupId coreGroupId
+            artifactId 'gradle-plugin'
+            version publicationVersion
+            artifact("$corePath/gradle-plugin/build/libs/gradle-plugin.jar")
+//            artifact sourceJar("gradlePlugin")
+        }
+    }
+    repositories {
+
+        maven {
+            name = "GitHubPackages"
+            credentials {
+                username = "Sotardust"
+                password = "smbbDHT212"
+            }
+//            url "https://maven.pkg.github.com/${user}/shadow"
+            url "https://gitee.com/sotardust/Notes"
+
+        }
+    }
+}
+dependencies {
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.6.10"
+    implementation "com.android.tools.build:gradle:7.0.3"
+}

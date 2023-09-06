@@ -1,21 +1,14 @@
 package com.dht.notes
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorManager
 import android.os.AsyncTask
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.os.Message
 import android.util.Log
-import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewCacheExtension
 import com.dht.notes.code.activity.AActivity
 import com.dht.notes.code.adapter.MainAdapter
 import com.dht.notes.code.animation.AnimationActivity
@@ -25,7 +18,7 @@ import com.dht.notes.code.floatingwindow.FloatingWindowActivity
 import com.dht.notes.code.homekey.HomekeyAActivity
 import com.dht.notes.code.lock.ThreadLockActivity
 import com.dht.notes.code.provider.ProviderActivity
-import com.dht.notes.code.retrofit.GitHubService
+import com.dht.notes.code.serial.SerialActivity
 import com.dht.notes.code.service.ServiceActivity
 import com.dht.notes.code.shake.ShakeActivity
 import com.dht.notes.code.shake.ShakeSensorListener
@@ -35,11 +28,7 @@ import com.dht.notes.code.utils.GridDecoration
 import com.dht.notes.code.view.FlowActivity
 import com.dht.notes.code.view.TouchEventActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
+import kotlinx.coroutines.runBlocking
 import kotlin.reflect.KClass
 
 
@@ -66,7 +55,6 @@ class MainActivity : Activity() {
     private lateinit var sensorManager: SensorManager
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -89,7 +77,8 @@ class MainActivity : Activity() {
             "activity 生命周期跳转",
             "Animation 动画属性",
             "service aidl 服务",
-            "ContentProvider 内容提供者"
+            "ContentProvider 内容提供者",
+            "获取串口数据"
         )
         recyclerView.layoutManager = GridLayoutManager(baseContext, 3)
         recyclerView.addItemDecoration(GridDecoration(10))
@@ -113,6 +102,7 @@ class MainActivity : Activity() {
         //取消注册
 //        sensorManager.unregisterListener(shakeListener)
     }
+
     private fun addActivityList() {
         activityList.add(TouchEventActivity::class)
         activityList.add(ShakeActivity::class)
@@ -128,6 +118,7 @@ class MainActivity : Activity() {
         activityList.add(AnimationActivity::class)
         activityList.add(ServiceActivity::class)
         activityList.add(ProviderActivity::class)
+        activityList.add(SerialActivity::class)
     }
 
 
